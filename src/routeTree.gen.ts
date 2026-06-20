@@ -12,6 +12,8 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as SchoolRouteImport } from './routes/school'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SchoolIndexRouteImport } from './routes/school.index'
+import { Route as SchoolProfileRouteImport } from './routes/school.profile'
+import { Route as SchoolPreviewRouteImport } from './routes/school.preview'
 import { Route as SchoolOnboardingRouteImport } from './routes/school.onboarding'
 
 const SchoolRoute = SchoolRouteImport.update({
@@ -29,6 +31,16 @@ const SchoolIndexRoute = SchoolIndexRouteImport.update({
   path: '/',
   getParentRoute: () => SchoolRoute,
 } as any)
+const SchoolProfileRoute = SchoolProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => SchoolRoute,
+} as any)
+const SchoolPreviewRoute = SchoolPreviewRouteImport.update({
+  id: '/preview',
+  path: '/preview',
+  getParentRoute: () => SchoolRoute,
+} as any)
 const SchoolOnboardingRoute = SchoolOnboardingRouteImport.update({
   id: '/onboarding',
   path: '/onboarding',
@@ -39,11 +51,15 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/school': typeof SchoolRouteWithChildren
   '/school/onboarding': typeof SchoolOnboardingRoute
+  '/school/preview': typeof SchoolPreviewRoute
+  '/school/profile': typeof SchoolProfileRoute
   '/school/': typeof SchoolIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/school/onboarding': typeof SchoolOnboardingRoute
+  '/school/preview': typeof SchoolPreviewRoute
+  '/school/profile': typeof SchoolProfileRoute
   '/school': typeof SchoolIndexRoute
 }
 export interface FileRoutesById {
@@ -51,14 +67,34 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/school': typeof SchoolRouteWithChildren
   '/school/onboarding': typeof SchoolOnboardingRoute
+  '/school/preview': typeof SchoolPreviewRoute
+  '/school/profile': typeof SchoolProfileRoute
   '/school/': typeof SchoolIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/school' | '/school/onboarding' | '/school/'
+  fullPaths:
+    | '/'
+    | '/school'
+    | '/school/onboarding'
+    | '/school/preview'
+    | '/school/profile'
+    | '/school/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/school/onboarding' | '/school'
-  id: '__root__' | '/' | '/school' | '/school/onboarding' | '/school/'
+  to:
+    | '/'
+    | '/school/onboarding'
+    | '/school/preview'
+    | '/school/profile'
+    | '/school'
+  id:
+    | '__root__'
+    | '/'
+    | '/school'
+    | '/school/onboarding'
+    | '/school/preview'
+    | '/school/profile'
+    | '/school/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -89,6 +125,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SchoolIndexRouteImport
       parentRoute: typeof SchoolRoute
     }
+    '/school/profile': {
+      id: '/school/profile'
+      path: '/profile'
+      fullPath: '/school/profile'
+      preLoaderRoute: typeof SchoolProfileRouteImport
+      parentRoute: typeof SchoolRoute
+    }
+    '/school/preview': {
+      id: '/school/preview'
+      path: '/preview'
+      fullPath: '/school/preview'
+      preLoaderRoute: typeof SchoolPreviewRouteImport
+      parentRoute: typeof SchoolRoute
+    }
     '/school/onboarding': {
       id: '/school/onboarding'
       path: '/onboarding'
@@ -101,11 +151,15 @@ declare module '@tanstack/react-router' {
 
 interface SchoolRouteChildren {
   SchoolOnboardingRoute: typeof SchoolOnboardingRoute
+  SchoolPreviewRoute: typeof SchoolPreviewRoute
+  SchoolProfileRoute: typeof SchoolProfileRoute
   SchoolIndexRoute: typeof SchoolIndexRoute
 }
 
 const SchoolRouteChildren: SchoolRouteChildren = {
   SchoolOnboardingRoute: SchoolOnboardingRoute,
+  SchoolPreviewRoute: SchoolPreviewRoute,
+  SchoolProfileRoute: SchoolProfileRoute,
   SchoolIndexRoute: SchoolIndexRoute,
 }
 
