@@ -12,9 +12,15 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as SchoolRouteImport } from './routes/school'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SchoolIndexRouteImport } from './routes/school.index'
+import { Route as SchoolSettingsRouteImport } from './routes/school.settings'
+import { Route as SchoolRequirementsRouteImport } from './routes/school.requirements'
+import { Route as SchoolReportsRouteImport } from './routes/school.reports'
 import { Route as SchoolProfileRouteImport } from './routes/school.profile'
 import { Route as SchoolPreviewRouteImport } from './routes/school.preview'
+import { Route as SchoolPipelineRouteImport } from './routes/school.pipeline'
 import { Route as SchoolOnboardingRouteImport } from './routes/school.onboarding'
+import { Route as SchoolGalleryRouteImport } from './routes/school.gallery'
+import { Route as SchoolClassesRouteImport } from './routes/school.classes'
 import { Route as SchoolApplicationsRouteImport } from './routes/school.applications'
 import { Route as SchoolApplicationsIdRouteImport } from './routes/school.applications.$id'
 
@@ -33,6 +39,21 @@ const SchoolIndexRoute = SchoolIndexRouteImport.update({
   path: '/',
   getParentRoute: () => SchoolRoute,
 } as any)
+const SchoolSettingsRoute = SchoolSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => SchoolRoute,
+} as any)
+const SchoolRequirementsRoute = SchoolRequirementsRouteImport.update({
+  id: '/requirements',
+  path: '/requirements',
+  getParentRoute: () => SchoolRoute,
+} as any)
+const SchoolReportsRoute = SchoolReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => SchoolRoute,
+} as any)
 const SchoolProfileRoute = SchoolProfileRouteImport.update({
   id: '/profile',
   path: '/profile',
@@ -43,9 +64,24 @@ const SchoolPreviewRoute = SchoolPreviewRouteImport.update({
   path: '/preview',
   getParentRoute: () => SchoolRoute,
 } as any)
+const SchoolPipelineRoute = SchoolPipelineRouteImport.update({
+  id: '/pipeline',
+  path: '/pipeline',
+  getParentRoute: () => SchoolRoute,
+} as any)
 const SchoolOnboardingRoute = SchoolOnboardingRouteImport.update({
   id: '/onboarding',
   path: '/onboarding',
+  getParentRoute: () => SchoolRoute,
+} as any)
+const SchoolGalleryRoute = SchoolGalleryRouteImport.update({
+  id: '/gallery',
+  path: '/gallery',
+  getParentRoute: () => SchoolRoute,
+} as any)
+const SchoolClassesRoute = SchoolClassesRouteImport.update({
+  id: '/classes',
+  path: '/classes',
   getParentRoute: () => SchoolRoute,
 } as any)
 const SchoolApplicationsRoute = SchoolApplicationsRouteImport.update({
@@ -63,18 +99,30 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/school': typeof SchoolRouteWithChildren
   '/school/applications': typeof SchoolApplicationsRouteWithChildren
+  '/school/classes': typeof SchoolClassesRoute
+  '/school/gallery': typeof SchoolGalleryRoute
   '/school/onboarding': typeof SchoolOnboardingRoute
+  '/school/pipeline': typeof SchoolPipelineRoute
   '/school/preview': typeof SchoolPreviewRoute
   '/school/profile': typeof SchoolProfileRoute
+  '/school/reports': typeof SchoolReportsRoute
+  '/school/requirements': typeof SchoolRequirementsRoute
+  '/school/settings': typeof SchoolSettingsRoute
   '/school/': typeof SchoolIndexRoute
   '/school/applications/$id': typeof SchoolApplicationsIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/school/applications': typeof SchoolApplicationsRouteWithChildren
+  '/school/classes': typeof SchoolClassesRoute
+  '/school/gallery': typeof SchoolGalleryRoute
   '/school/onboarding': typeof SchoolOnboardingRoute
+  '/school/pipeline': typeof SchoolPipelineRoute
   '/school/preview': typeof SchoolPreviewRoute
   '/school/profile': typeof SchoolProfileRoute
+  '/school/reports': typeof SchoolReportsRoute
+  '/school/requirements': typeof SchoolRequirementsRoute
+  '/school/settings': typeof SchoolSettingsRoute
   '/school': typeof SchoolIndexRoute
   '/school/applications/$id': typeof SchoolApplicationsIdRoute
 }
@@ -83,9 +131,15 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/school': typeof SchoolRouteWithChildren
   '/school/applications': typeof SchoolApplicationsRouteWithChildren
+  '/school/classes': typeof SchoolClassesRoute
+  '/school/gallery': typeof SchoolGalleryRoute
   '/school/onboarding': typeof SchoolOnboardingRoute
+  '/school/pipeline': typeof SchoolPipelineRoute
   '/school/preview': typeof SchoolPreviewRoute
   '/school/profile': typeof SchoolProfileRoute
+  '/school/reports': typeof SchoolReportsRoute
+  '/school/requirements': typeof SchoolRequirementsRoute
+  '/school/settings': typeof SchoolSettingsRoute
   '/school/': typeof SchoolIndexRoute
   '/school/applications/$id': typeof SchoolApplicationsIdRoute
 }
@@ -95,18 +149,30 @@ export interface FileRouteTypes {
     | '/'
     | '/school'
     | '/school/applications'
+    | '/school/classes'
+    | '/school/gallery'
     | '/school/onboarding'
+    | '/school/pipeline'
     | '/school/preview'
     | '/school/profile'
+    | '/school/reports'
+    | '/school/requirements'
+    | '/school/settings'
     | '/school/'
     | '/school/applications/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/school/applications'
+    | '/school/classes'
+    | '/school/gallery'
     | '/school/onboarding'
+    | '/school/pipeline'
     | '/school/preview'
     | '/school/profile'
+    | '/school/reports'
+    | '/school/requirements'
+    | '/school/settings'
     | '/school'
     | '/school/applications/$id'
   id:
@@ -114,9 +180,15 @@ export interface FileRouteTypes {
     | '/'
     | '/school'
     | '/school/applications'
+    | '/school/classes'
+    | '/school/gallery'
     | '/school/onboarding'
+    | '/school/pipeline'
     | '/school/preview'
     | '/school/profile'
+    | '/school/reports'
+    | '/school/requirements'
+    | '/school/settings'
     | '/school/'
     | '/school/applications/$id'
   fileRoutesById: FileRoutesById
@@ -149,6 +221,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SchoolIndexRouteImport
       parentRoute: typeof SchoolRoute
     }
+    '/school/settings': {
+      id: '/school/settings'
+      path: '/settings'
+      fullPath: '/school/settings'
+      preLoaderRoute: typeof SchoolSettingsRouteImport
+      parentRoute: typeof SchoolRoute
+    }
+    '/school/requirements': {
+      id: '/school/requirements'
+      path: '/requirements'
+      fullPath: '/school/requirements'
+      preLoaderRoute: typeof SchoolRequirementsRouteImport
+      parentRoute: typeof SchoolRoute
+    }
+    '/school/reports': {
+      id: '/school/reports'
+      path: '/reports'
+      fullPath: '/school/reports'
+      preLoaderRoute: typeof SchoolReportsRouteImport
+      parentRoute: typeof SchoolRoute
+    }
     '/school/profile': {
       id: '/school/profile'
       path: '/profile'
@@ -163,11 +256,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SchoolPreviewRouteImport
       parentRoute: typeof SchoolRoute
     }
+    '/school/pipeline': {
+      id: '/school/pipeline'
+      path: '/pipeline'
+      fullPath: '/school/pipeline'
+      preLoaderRoute: typeof SchoolPipelineRouteImport
+      parentRoute: typeof SchoolRoute
+    }
     '/school/onboarding': {
       id: '/school/onboarding'
       path: '/onboarding'
       fullPath: '/school/onboarding'
       preLoaderRoute: typeof SchoolOnboardingRouteImport
+      parentRoute: typeof SchoolRoute
+    }
+    '/school/gallery': {
+      id: '/school/gallery'
+      path: '/gallery'
+      fullPath: '/school/gallery'
+      preLoaderRoute: typeof SchoolGalleryRouteImport
+      parentRoute: typeof SchoolRoute
+    }
+    '/school/classes': {
+      id: '/school/classes'
+      path: '/classes'
+      fullPath: '/school/classes'
+      preLoaderRoute: typeof SchoolClassesRouteImport
       parentRoute: typeof SchoolRoute
     }
     '/school/applications': {
@@ -200,17 +314,29 @@ const SchoolApplicationsRouteWithChildren =
 
 interface SchoolRouteChildren {
   SchoolApplicationsRoute: typeof SchoolApplicationsRouteWithChildren
+  SchoolClassesRoute: typeof SchoolClassesRoute
+  SchoolGalleryRoute: typeof SchoolGalleryRoute
   SchoolOnboardingRoute: typeof SchoolOnboardingRoute
+  SchoolPipelineRoute: typeof SchoolPipelineRoute
   SchoolPreviewRoute: typeof SchoolPreviewRoute
   SchoolProfileRoute: typeof SchoolProfileRoute
+  SchoolReportsRoute: typeof SchoolReportsRoute
+  SchoolRequirementsRoute: typeof SchoolRequirementsRoute
+  SchoolSettingsRoute: typeof SchoolSettingsRoute
   SchoolIndexRoute: typeof SchoolIndexRoute
 }
 
 const SchoolRouteChildren: SchoolRouteChildren = {
   SchoolApplicationsRoute: SchoolApplicationsRouteWithChildren,
+  SchoolClassesRoute: SchoolClassesRoute,
+  SchoolGalleryRoute: SchoolGalleryRoute,
   SchoolOnboardingRoute: SchoolOnboardingRoute,
+  SchoolPipelineRoute: SchoolPipelineRoute,
   SchoolPreviewRoute: SchoolPreviewRoute,
   SchoolProfileRoute: SchoolProfileRoute,
+  SchoolReportsRoute: SchoolReportsRoute,
+  SchoolRequirementsRoute: SchoolRequirementsRoute,
+  SchoolSettingsRoute: SchoolSettingsRoute,
   SchoolIndexRoute: SchoolIndexRoute,
 }
 
