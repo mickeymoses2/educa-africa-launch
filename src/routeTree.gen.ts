@@ -15,6 +15,8 @@ import { Route as SchoolIndexRouteImport } from './routes/school.index'
 import { Route as SchoolProfileRouteImport } from './routes/school.profile'
 import { Route as SchoolPreviewRouteImport } from './routes/school.preview'
 import { Route as SchoolOnboardingRouteImport } from './routes/school.onboarding'
+import { Route as SchoolApplicationsRouteImport } from './routes/school.applications'
+import { Route as SchoolApplicationsIdRouteImport } from './routes/school.applications.$id'
 
 const SchoolRoute = SchoolRouteImport.update({
   id: '/school',
@@ -46,55 +48,77 @@ const SchoolOnboardingRoute = SchoolOnboardingRouteImport.update({
   path: '/onboarding',
   getParentRoute: () => SchoolRoute,
 } as any)
+const SchoolApplicationsRoute = SchoolApplicationsRouteImport.update({
+  id: '/applications',
+  path: '/applications',
+  getParentRoute: () => SchoolRoute,
+} as any)
+const SchoolApplicationsIdRoute = SchoolApplicationsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => SchoolApplicationsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/school': typeof SchoolRouteWithChildren
+  '/school/applications': typeof SchoolApplicationsRouteWithChildren
   '/school/onboarding': typeof SchoolOnboardingRoute
   '/school/preview': typeof SchoolPreviewRoute
   '/school/profile': typeof SchoolProfileRoute
   '/school/': typeof SchoolIndexRoute
+  '/school/applications/$id': typeof SchoolApplicationsIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/school/applications': typeof SchoolApplicationsRouteWithChildren
   '/school/onboarding': typeof SchoolOnboardingRoute
   '/school/preview': typeof SchoolPreviewRoute
   '/school/profile': typeof SchoolProfileRoute
   '/school': typeof SchoolIndexRoute
+  '/school/applications/$id': typeof SchoolApplicationsIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/school': typeof SchoolRouteWithChildren
+  '/school/applications': typeof SchoolApplicationsRouteWithChildren
   '/school/onboarding': typeof SchoolOnboardingRoute
   '/school/preview': typeof SchoolPreviewRoute
   '/school/profile': typeof SchoolProfileRoute
   '/school/': typeof SchoolIndexRoute
+  '/school/applications/$id': typeof SchoolApplicationsIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/school'
+    | '/school/applications'
     | '/school/onboarding'
     | '/school/preview'
     | '/school/profile'
     | '/school/'
+    | '/school/applications/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/school/applications'
     | '/school/onboarding'
     | '/school/preview'
     | '/school/profile'
     | '/school'
+    | '/school/applications/$id'
   id:
     | '__root__'
     | '/'
     | '/school'
+    | '/school/applications'
     | '/school/onboarding'
     | '/school/preview'
     | '/school/profile'
     | '/school/'
+    | '/school/applications/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -146,10 +170,36 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SchoolOnboardingRouteImport
       parentRoute: typeof SchoolRoute
     }
+    '/school/applications': {
+      id: '/school/applications'
+      path: '/applications'
+      fullPath: '/school/applications'
+      preLoaderRoute: typeof SchoolApplicationsRouteImport
+      parentRoute: typeof SchoolRoute
+    }
+    '/school/applications/$id': {
+      id: '/school/applications/$id'
+      path: '/$id'
+      fullPath: '/school/applications/$id'
+      preLoaderRoute: typeof SchoolApplicationsIdRouteImport
+      parentRoute: typeof SchoolApplicationsRoute
+    }
   }
 }
 
+interface SchoolApplicationsRouteChildren {
+  SchoolApplicationsIdRoute: typeof SchoolApplicationsIdRoute
+}
+
+const SchoolApplicationsRouteChildren: SchoolApplicationsRouteChildren = {
+  SchoolApplicationsIdRoute: SchoolApplicationsIdRoute,
+}
+
+const SchoolApplicationsRouteWithChildren =
+  SchoolApplicationsRoute._addFileChildren(SchoolApplicationsRouteChildren)
+
 interface SchoolRouteChildren {
+  SchoolApplicationsRoute: typeof SchoolApplicationsRouteWithChildren
   SchoolOnboardingRoute: typeof SchoolOnboardingRoute
   SchoolPreviewRoute: typeof SchoolPreviewRoute
   SchoolProfileRoute: typeof SchoolProfileRoute
@@ -157,6 +207,7 @@ interface SchoolRouteChildren {
 }
 
 const SchoolRouteChildren: SchoolRouteChildren = {
+  SchoolApplicationsRoute: SchoolApplicationsRouteWithChildren,
   SchoolOnboardingRoute: SchoolOnboardingRoute,
   SchoolPreviewRoute: SchoolPreviewRoute,
   SchoolProfileRoute: SchoolProfileRoute,
