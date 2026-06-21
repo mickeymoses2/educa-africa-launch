@@ -26,10 +26,18 @@ import { Route as SchoolOnboardingRouteImport } from './routes/school.onboarding
 import { Route as SchoolGalleryRouteImport } from './routes/school.gallery'
 import { Route as SchoolClassesRouteImport } from './routes/school.classes'
 import { Route as SchoolApplicationsRouteImport } from './routes/school.applications'
+import { Route as ParentSettingsRouteImport } from './routes/parent.settings'
+import { Route as ParentSchoolsRouteImport } from './routes/parent.schools'
+import { Route as ParentNotificationsRouteImport } from './routes/parent.notifications'
+import { Route as ParentDocumentsRouteImport } from './routes/parent.documents'
 import { Route as ParentChildrenRouteImport } from './routes/parent.children'
+import { Route as ParentApplyRouteImport } from './routes/parent.apply'
+import { Route as ParentApplicationsRouteImport } from './routes/parent.applications'
 import { Route as SchoolApplicationsIdRouteImport } from './routes/school.applications.$id'
+import { Route as ParentSchoolsIdRouteImport } from './routes/parent.schools.$id'
 import { Route as ParentChildrenNewRouteImport } from './routes/parent.children.new'
 import { Route as ParentChildrenIdRouteImport } from './routes/parent.children.$id'
+import { Route as ParentApplicationsIdRouteImport } from './routes/parent.applications.$id'
 
 const StudentRoute = StudentRouteImport.update({
   id: '/student',
@@ -116,15 +124,50 @@ const SchoolApplicationsRoute = SchoolApplicationsRouteImport.update({
   path: '/applications',
   getParentRoute: () => SchoolRoute,
 } as any)
+const ParentSettingsRoute = ParentSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => ParentRoute,
+} as any)
+const ParentSchoolsRoute = ParentSchoolsRouteImport.update({
+  id: '/schools',
+  path: '/schools',
+  getParentRoute: () => ParentRoute,
+} as any)
+const ParentNotificationsRoute = ParentNotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => ParentRoute,
+} as any)
+const ParentDocumentsRoute = ParentDocumentsRouteImport.update({
+  id: '/documents',
+  path: '/documents',
+  getParentRoute: () => ParentRoute,
+} as any)
 const ParentChildrenRoute = ParentChildrenRouteImport.update({
   id: '/children',
   path: '/children',
+  getParentRoute: () => ParentRoute,
+} as any)
+const ParentApplyRoute = ParentApplyRouteImport.update({
+  id: '/apply',
+  path: '/apply',
+  getParentRoute: () => ParentRoute,
+} as any)
+const ParentApplicationsRoute = ParentApplicationsRouteImport.update({
+  id: '/applications',
+  path: '/applications',
   getParentRoute: () => ParentRoute,
 } as any)
 const SchoolApplicationsIdRoute = SchoolApplicationsIdRouteImport.update({
   id: '/$id',
   path: '/$id',
   getParentRoute: () => SchoolApplicationsRoute,
+} as any)
+const ParentSchoolsIdRoute = ParentSchoolsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => ParentSchoolsRoute,
 } as any)
 const ParentChildrenNewRoute = ParentChildrenNewRouteImport.update({
   id: '/new',
@@ -136,6 +179,11 @@ const ParentChildrenIdRoute = ParentChildrenIdRouteImport.update({
   path: '/$id',
   getParentRoute: () => ParentChildrenRoute,
 } as any)
+const ParentApplicationsIdRoute = ParentApplicationsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => ParentApplicationsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -143,7 +191,13 @@ export interface FileRoutesByFullPath {
   '/register': typeof RegisterRoute
   '/school': typeof SchoolRouteWithChildren
   '/student': typeof StudentRoute
+  '/parent/applications': typeof ParentApplicationsRouteWithChildren
+  '/parent/apply': typeof ParentApplyRoute
   '/parent/children': typeof ParentChildrenRouteWithChildren
+  '/parent/documents': typeof ParentDocumentsRoute
+  '/parent/notifications': typeof ParentNotificationsRoute
+  '/parent/schools': typeof ParentSchoolsRouteWithChildren
+  '/parent/settings': typeof ParentSettingsRoute
   '/school/applications': typeof SchoolApplicationsRouteWithChildren
   '/school/classes': typeof SchoolClassesRoute
   '/school/gallery': typeof SchoolGalleryRoute
@@ -156,15 +210,23 @@ export interface FileRoutesByFullPath {
   '/school/settings': typeof SchoolSettingsRoute
   '/parent/': typeof ParentIndexRoute
   '/school/': typeof SchoolIndexRoute
+  '/parent/applications/$id': typeof ParentApplicationsIdRoute
   '/parent/children/$id': typeof ParentChildrenIdRoute
   '/parent/children/new': typeof ParentChildrenNewRoute
+  '/parent/schools/$id': typeof ParentSchoolsIdRoute
   '/school/applications/$id': typeof SchoolApplicationsIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/register': typeof RegisterRoute
   '/student': typeof StudentRoute
+  '/parent/applications': typeof ParentApplicationsRouteWithChildren
+  '/parent/apply': typeof ParentApplyRoute
   '/parent/children': typeof ParentChildrenRouteWithChildren
+  '/parent/documents': typeof ParentDocumentsRoute
+  '/parent/notifications': typeof ParentNotificationsRoute
+  '/parent/schools': typeof ParentSchoolsRouteWithChildren
+  '/parent/settings': typeof ParentSettingsRoute
   '/school/applications': typeof SchoolApplicationsRouteWithChildren
   '/school/classes': typeof SchoolClassesRoute
   '/school/gallery': typeof SchoolGalleryRoute
@@ -177,8 +239,10 @@ export interface FileRoutesByTo {
   '/school/settings': typeof SchoolSettingsRoute
   '/parent': typeof ParentIndexRoute
   '/school': typeof SchoolIndexRoute
+  '/parent/applications/$id': typeof ParentApplicationsIdRoute
   '/parent/children/$id': typeof ParentChildrenIdRoute
   '/parent/children/new': typeof ParentChildrenNewRoute
+  '/parent/schools/$id': typeof ParentSchoolsIdRoute
   '/school/applications/$id': typeof SchoolApplicationsIdRoute
 }
 export interface FileRoutesById {
@@ -188,7 +252,13 @@ export interface FileRoutesById {
   '/register': typeof RegisterRoute
   '/school': typeof SchoolRouteWithChildren
   '/student': typeof StudentRoute
+  '/parent/applications': typeof ParentApplicationsRouteWithChildren
+  '/parent/apply': typeof ParentApplyRoute
   '/parent/children': typeof ParentChildrenRouteWithChildren
+  '/parent/documents': typeof ParentDocumentsRoute
+  '/parent/notifications': typeof ParentNotificationsRoute
+  '/parent/schools': typeof ParentSchoolsRouteWithChildren
+  '/parent/settings': typeof ParentSettingsRoute
   '/school/applications': typeof SchoolApplicationsRouteWithChildren
   '/school/classes': typeof SchoolClassesRoute
   '/school/gallery': typeof SchoolGalleryRoute
@@ -201,8 +271,10 @@ export interface FileRoutesById {
   '/school/settings': typeof SchoolSettingsRoute
   '/parent/': typeof ParentIndexRoute
   '/school/': typeof SchoolIndexRoute
+  '/parent/applications/$id': typeof ParentApplicationsIdRoute
   '/parent/children/$id': typeof ParentChildrenIdRoute
   '/parent/children/new': typeof ParentChildrenNewRoute
+  '/parent/schools/$id': typeof ParentSchoolsIdRoute
   '/school/applications/$id': typeof SchoolApplicationsIdRoute
 }
 export interface FileRouteTypes {
@@ -213,7 +285,13 @@ export interface FileRouteTypes {
     | '/register'
     | '/school'
     | '/student'
+    | '/parent/applications'
+    | '/parent/apply'
     | '/parent/children'
+    | '/parent/documents'
+    | '/parent/notifications'
+    | '/parent/schools'
+    | '/parent/settings'
     | '/school/applications'
     | '/school/classes'
     | '/school/gallery'
@@ -226,15 +304,23 @@ export interface FileRouteTypes {
     | '/school/settings'
     | '/parent/'
     | '/school/'
+    | '/parent/applications/$id'
     | '/parent/children/$id'
     | '/parent/children/new'
+    | '/parent/schools/$id'
     | '/school/applications/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/register'
     | '/student'
+    | '/parent/applications'
+    | '/parent/apply'
     | '/parent/children'
+    | '/parent/documents'
+    | '/parent/notifications'
+    | '/parent/schools'
+    | '/parent/settings'
     | '/school/applications'
     | '/school/classes'
     | '/school/gallery'
@@ -247,8 +333,10 @@ export interface FileRouteTypes {
     | '/school/settings'
     | '/parent'
     | '/school'
+    | '/parent/applications/$id'
     | '/parent/children/$id'
     | '/parent/children/new'
+    | '/parent/schools/$id'
     | '/school/applications/$id'
   id:
     | '__root__'
@@ -257,7 +345,13 @@ export interface FileRouteTypes {
     | '/register'
     | '/school'
     | '/student'
+    | '/parent/applications'
+    | '/parent/apply'
     | '/parent/children'
+    | '/parent/documents'
+    | '/parent/notifications'
+    | '/parent/schools'
+    | '/parent/settings'
     | '/school/applications'
     | '/school/classes'
     | '/school/gallery'
@@ -270,8 +364,10 @@ export interface FileRouteTypes {
     | '/school/settings'
     | '/parent/'
     | '/school/'
+    | '/parent/applications/$id'
     | '/parent/children/$id'
     | '/parent/children/new'
+    | '/parent/schools/$id'
     | '/school/applications/$id'
   fileRoutesById: FileRoutesById
 }
@@ -404,11 +500,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SchoolApplicationsRouteImport
       parentRoute: typeof SchoolRoute
     }
+    '/parent/settings': {
+      id: '/parent/settings'
+      path: '/settings'
+      fullPath: '/parent/settings'
+      preLoaderRoute: typeof ParentSettingsRouteImport
+      parentRoute: typeof ParentRoute
+    }
+    '/parent/schools': {
+      id: '/parent/schools'
+      path: '/schools'
+      fullPath: '/parent/schools'
+      preLoaderRoute: typeof ParentSchoolsRouteImport
+      parentRoute: typeof ParentRoute
+    }
+    '/parent/notifications': {
+      id: '/parent/notifications'
+      path: '/notifications'
+      fullPath: '/parent/notifications'
+      preLoaderRoute: typeof ParentNotificationsRouteImport
+      parentRoute: typeof ParentRoute
+    }
+    '/parent/documents': {
+      id: '/parent/documents'
+      path: '/documents'
+      fullPath: '/parent/documents'
+      preLoaderRoute: typeof ParentDocumentsRouteImport
+      parentRoute: typeof ParentRoute
+    }
     '/parent/children': {
       id: '/parent/children'
       path: '/children'
       fullPath: '/parent/children'
       preLoaderRoute: typeof ParentChildrenRouteImport
+      parentRoute: typeof ParentRoute
+    }
+    '/parent/apply': {
+      id: '/parent/apply'
+      path: '/apply'
+      fullPath: '/parent/apply'
+      preLoaderRoute: typeof ParentApplyRouteImport
+      parentRoute: typeof ParentRoute
+    }
+    '/parent/applications': {
+      id: '/parent/applications'
+      path: '/applications'
+      fullPath: '/parent/applications'
+      preLoaderRoute: typeof ParentApplicationsRouteImport
       parentRoute: typeof ParentRoute
     }
     '/school/applications/$id': {
@@ -417,6 +555,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/school/applications/$id'
       preLoaderRoute: typeof SchoolApplicationsIdRouteImport
       parentRoute: typeof SchoolApplicationsRoute
+    }
+    '/parent/schools/$id': {
+      id: '/parent/schools/$id'
+      path: '/$id'
+      fullPath: '/parent/schools/$id'
+      preLoaderRoute: typeof ParentSchoolsIdRouteImport
+      parentRoute: typeof ParentSchoolsRoute
     }
     '/parent/children/new': {
       id: '/parent/children/new'
@@ -432,8 +577,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ParentChildrenIdRouteImport
       parentRoute: typeof ParentChildrenRoute
     }
+    '/parent/applications/$id': {
+      id: '/parent/applications/$id'
+      path: '/$id'
+      fullPath: '/parent/applications/$id'
+      preLoaderRoute: typeof ParentApplicationsIdRouteImport
+      parentRoute: typeof ParentApplicationsRoute
+    }
   }
 }
+
+interface ParentApplicationsRouteChildren {
+  ParentApplicationsIdRoute: typeof ParentApplicationsIdRoute
+}
+
+const ParentApplicationsRouteChildren: ParentApplicationsRouteChildren = {
+  ParentApplicationsIdRoute: ParentApplicationsIdRoute,
+}
+
+const ParentApplicationsRouteWithChildren =
+  ParentApplicationsRoute._addFileChildren(ParentApplicationsRouteChildren)
 
 interface ParentChildrenRouteChildren {
   ParentChildrenIdRoute: typeof ParentChildrenIdRoute
@@ -449,13 +612,37 @@ const ParentChildrenRouteWithChildren = ParentChildrenRoute._addFileChildren(
   ParentChildrenRouteChildren,
 )
 
+interface ParentSchoolsRouteChildren {
+  ParentSchoolsIdRoute: typeof ParentSchoolsIdRoute
+}
+
+const ParentSchoolsRouteChildren: ParentSchoolsRouteChildren = {
+  ParentSchoolsIdRoute: ParentSchoolsIdRoute,
+}
+
+const ParentSchoolsRouteWithChildren = ParentSchoolsRoute._addFileChildren(
+  ParentSchoolsRouteChildren,
+)
+
 interface ParentRouteChildren {
+  ParentApplicationsRoute: typeof ParentApplicationsRouteWithChildren
+  ParentApplyRoute: typeof ParentApplyRoute
   ParentChildrenRoute: typeof ParentChildrenRouteWithChildren
+  ParentDocumentsRoute: typeof ParentDocumentsRoute
+  ParentNotificationsRoute: typeof ParentNotificationsRoute
+  ParentSchoolsRoute: typeof ParentSchoolsRouteWithChildren
+  ParentSettingsRoute: typeof ParentSettingsRoute
   ParentIndexRoute: typeof ParentIndexRoute
 }
 
 const ParentRouteChildren: ParentRouteChildren = {
+  ParentApplicationsRoute: ParentApplicationsRouteWithChildren,
+  ParentApplyRoute: ParentApplyRoute,
   ParentChildrenRoute: ParentChildrenRouteWithChildren,
+  ParentDocumentsRoute: ParentDocumentsRoute,
+  ParentNotificationsRoute: ParentNotificationsRoute,
+  ParentSchoolsRoute: ParentSchoolsRouteWithChildren,
+  ParentSettingsRoute: ParentSettingsRoute,
   ParentIndexRoute: ParentIndexRoute,
 }
 
