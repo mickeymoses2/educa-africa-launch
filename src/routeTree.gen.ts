@@ -9,7 +9,10 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as StudentRouteImport } from './routes/student'
 import { Route as SchoolRouteImport } from './routes/school'
+import { Route as RegisterRouteImport } from './routes/register'
+import { Route as ParentRouteImport } from './routes/parent'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SchoolIndexRouteImport } from './routes/school.index'
 import { Route as SchoolSettingsRouteImport } from './routes/school.settings'
@@ -24,9 +27,24 @@ import { Route as SchoolClassesRouteImport } from './routes/school.classes'
 import { Route as SchoolApplicationsRouteImport } from './routes/school.applications'
 import { Route as SchoolApplicationsIdRouteImport } from './routes/school.applications.$id'
 
+const StudentRoute = StudentRouteImport.update({
+  id: '/student',
+  path: '/student',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SchoolRoute = SchoolRouteImport.update({
   id: '/school',
   path: '/school',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegisterRoute = RegisterRouteImport.update({
+  id: '/register',
+  path: '/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ParentRoute = ParentRouteImport.update({
+  id: '/parent',
+  path: '/parent',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -97,7 +115,10 @@ const SchoolApplicationsIdRoute = SchoolApplicationsIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/parent': typeof ParentRoute
+  '/register': typeof RegisterRoute
   '/school': typeof SchoolRouteWithChildren
+  '/student': typeof StudentRoute
   '/school/applications': typeof SchoolApplicationsRouteWithChildren
   '/school/classes': typeof SchoolClassesRoute
   '/school/gallery': typeof SchoolGalleryRoute
@@ -113,6 +134,9 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/parent': typeof ParentRoute
+  '/register': typeof RegisterRoute
+  '/student': typeof StudentRoute
   '/school/applications': typeof SchoolApplicationsRouteWithChildren
   '/school/classes': typeof SchoolClassesRoute
   '/school/gallery': typeof SchoolGalleryRoute
@@ -129,7 +153,10 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/parent': typeof ParentRoute
+  '/register': typeof RegisterRoute
   '/school': typeof SchoolRouteWithChildren
+  '/student': typeof StudentRoute
   '/school/applications': typeof SchoolApplicationsRouteWithChildren
   '/school/classes': typeof SchoolClassesRoute
   '/school/gallery': typeof SchoolGalleryRoute
@@ -147,7 +174,10 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/parent'
+    | '/register'
     | '/school'
+    | '/student'
     | '/school/applications'
     | '/school/classes'
     | '/school/gallery'
@@ -163,6 +193,9 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/parent'
+    | '/register'
+    | '/student'
     | '/school/applications'
     | '/school/classes'
     | '/school/gallery'
@@ -178,7 +211,10 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/parent'
+    | '/register'
     | '/school'
+    | '/student'
     | '/school/applications'
     | '/school/classes'
     | '/school/gallery'
@@ -195,16 +231,40 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ParentRoute: typeof ParentRoute
+  RegisterRoute: typeof RegisterRoute
   SchoolRoute: typeof SchoolRouteWithChildren
+  StudentRoute: typeof StudentRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/student': {
+      id: '/student'
+      path: '/student'
+      fullPath: '/student'
+      preLoaderRoute: typeof StudentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/school': {
       id: '/school'
       path: '/school'
       fullPath: '/school'
       preLoaderRoute: typeof SchoolRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/register': {
+      id: '/register'
+      path: '/register'
+      fullPath: '/register'
+      preLoaderRoute: typeof RegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/parent': {
+      id: '/parent'
+      path: '/parent'
+      fullPath: '/parent'
+      preLoaderRoute: typeof ParentRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -345,7 +405,10 @@ const SchoolRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ParentRoute: ParentRoute,
+  RegisterRoute: RegisterRoute,
   SchoolRoute: SchoolRouteWithChildren,
+  StudentRoute: StudentRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
