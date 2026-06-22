@@ -30,9 +30,10 @@ type NavItem = {
 const parentNav: NavItem[] = [
   { label: "Dashboard", to: "/parent", icon: LayoutDashboard, exact: true },
   { label: "My Children", to: "/parent/children", icon: Users },
-  { label: "Find Schools", to: "/parent/schools", icon: Search },
+  { label: "Find Schools", to: "/schools", icon: Search },
   { label: "Applications", to: "/parent/applications", icon: Inbox, badge: 3 },
   { label: "Documents", to: "/parent/documents", icon: FileText },
+  { label: "Fees", to: "/parent/fees", icon: FileText },
   { label: "Notifications", to: "/parent/notifications", icon: Bell, badge: 2 },
   { label: "Settings", to: "/parent/settings", icon: Settings },
 ];
@@ -40,15 +41,16 @@ const parentNav: NavItem[] = [
 const studentNav: NavItem[] = [
   { label: "Dashboard", to: "/student", icon: LayoutDashboard, exact: true },
   { label: "My Profile", to: "/student/profile", icon: IdCard },
-  { label: "Find Schools", to: "/student/schools", icon: Search },
+  { label: "Find Schools", to: "/schools", icon: Search },
   { label: "Applications", to: "/student/applications", icon: Inbox },
   { label: "Documents", to: "/student/documents", icon: FileText },
+  { label: "Fees", to: "/student/fees", icon: FileText },
   { label: "Notifications", to: "/student/notifications", icon: Bell, badge: 2 },
 ];
 
 const parentMobileTabs: NavItem[] = [
   { label: "Home", to: "/parent", icon: Home, exact: true },
-  { label: "Schools", to: "/parent/schools", icon: Search },
+  { label: "Schools", to: "/schools", icon: Search },
   { label: "Children", to: "/parent/children", icon: Users },
   { label: "Apps", to: "/parent/applications", icon: Inbox },
   { label: "Profile", to: "/parent/settings", icon: Settings },
@@ -56,7 +58,7 @@ const parentMobileTabs: NavItem[] = [
 
 const studentMobileTabs: NavItem[] = [
   { label: "Home", to: "/student", icon: Home, exact: true },
-  { label: "Schools", to: "/student/schools", icon: Search },
+  { label: "Schools", to: "/schools", icon: Search },
   { label: "ID", to: "/student/profile", icon: IdCard },
   { label: "Apps", to: "/student/applications", icon: Inbox },
   { label: "Docs", to: "/student/documents", icon: FileText },

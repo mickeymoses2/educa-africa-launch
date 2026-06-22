@@ -1,4 +1,5 @@
 import { MapPin, ArrowRight } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 
 export interface SchoolCardData {
   name: string;
@@ -12,6 +13,7 @@ export interface SchoolCardData {
 }
 
 export function SchoolCard({ school }: { school: SchoolCardData }) {
+  const id = school.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
   return (
     <article className="group overflow-hidden rounded-3xl bg-card shadow-card hover:-translate-y-1 transition-all duration-300 border border-border/60">
       <div className="relative h-44 overflow-hidden">
@@ -38,9 +40,13 @@ export function SchoolCard({ school }: { school: SchoolCardData }) {
           <span className="rounded-full bg-teal/15 text-teal-foreground px-2.5 py-0.5 text-[11px] font-medium">{school.curriculum}</span>
         </div>
         <p className="mt-3 text-sm text-muted-foreground line-clamp-2">{school.description}</p>
-        <button className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary group-hover:gap-2.5 transition-all">
+        <Link
+          to="/schools/$id"
+          params={{ id }}
+          className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary group-hover:gap-2.5 transition-all"
+        >
           View School <ArrowRight className="h-4 w-4" />
-        </button>
+        </Link>
       </div>
     </article>
   );

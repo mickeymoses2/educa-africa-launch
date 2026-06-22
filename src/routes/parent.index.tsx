@@ -68,7 +68,7 @@ function ParentDashboard() {
               />
             </div>
             <Link
-              to="/parent/schools"
+              to="/schools"
               className="rounded-xl bg-gold text-gold-foreground px-5 py-2.5 text-sm font-semibold hover:brightness-105 transition"
             >
               Search
@@ -90,7 +90,7 @@ function ParentDashboard() {
           icon={Search}
           title="Find School"
           description="Discover vetted schools across Africa."
-          to="/parent/schools"
+          to="/schools"
           tone="teal"
         />
         <QuickActionCard

@@ -10,18 +10,24 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as StudentRouteImport } from './routes/student'
+import { Route as SchoolsRouteImport } from './routes/schools'
 import { Route as SchoolRouteImport } from './routes/school'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as ParentRouteImport } from './routes/parent'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as GetStartedRouteImport } from './routes/get-started'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as StudentIndexRouteImport } from './routes/student.index'
+import { Route as SchoolsIndexRouteImport } from './routes/schools.index'
 import { Route as SchoolIndexRouteImport } from './routes/school.index'
 import { Route as ParentIndexRouteImport } from './routes/parent.index'
 import { Route as StudentSchoolsRouteImport } from './routes/student.schools'
 import { Route as StudentProfileRouteImport } from './routes/student.profile'
 import { Route as StudentNotificationsRouteImport } from './routes/student.notifications'
+import { Route as StudentFeesRouteImport } from './routes/student.fees'
 import { Route as StudentDocumentsRouteImport } from './routes/student.documents'
 import { Route as StudentApplicationsRouteImport } from './routes/student.applications'
+import { Route as SchoolsIdRouteImport } from './routes/schools.$id'
 import { Route as SchoolSettingsRouteImport } from './routes/school.settings'
 import { Route as SchoolRequirementsRouteImport } from './routes/school.requirements'
 import { Route as SchoolReportsRouteImport } from './routes/school.reports'
@@ -30,11 +36,13 @@ import { Route as SchoolPreviewRouteImport } from './routes/school.preview'
 import { Route as SchoolPipelineRouteImport } from './routes/school.pipeline'
 import { Route as SchoolOnboardingRouteImport } from './routes/school.onboarding'
 import { Route as SchoolGalleryRouteImport } from './routes/school.gallery'
+import { Route as SchoolFeesRouteImport } from './routes/school.fees'
 import { Route as SchoolClassesRouteImport } from './routes/school.classes'
 import { Route as SchoolApplicationsRouteImport } from './routes/school.applications'
 import { Route as ParentSettingsRouteImport } from './routes/parent.settings'
 import { Route as ParentSchoolsRouteImport } from './routes/parent.schools'
 import { Route as ParentNotificationsRouteImport } from './routes/parent.notifications'
+import { Route as ParentFeesRouteImport } from './routes/parent.fees'
 import { Route as ParentDocumentsRouteImport } from './routes/parent.documents'
 import { Route as ParentChildrenRouteImport } from './routes/parent.children'
 import { Route as ParentApplyRouteImport } from './routes/parent.apply'
@@ -42,12 +50,18 @@ import { Route as ParentApplicationsRouteImport } from './routes/parent.applicat
 import { Route as SchoolApplicationsIdRouteImport } from './routes/school.applications.$id'
 import { Route as ParentSchoolsIdRouteImport } from './routes/parent.schools.$id'
 import { Route as ParentChildrenNewRouteImport } from './routes/parent.children.new'
+import { Route as ParentChildrenLinkRouteImport } from './routes/parent.children.link'
 import { Route as ParentChildrenIdRouteImport } from './routes/parent.children.$id'
 import { Route as ParentApplicationsIdRouteImport } from './routes/parent.applications.$id'
 
 const StudentRoute = StudentRouteImport.update({
   id: '/student',
   path: '/student',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SchoolsRoute = SchoolsRouteImport.update({
+  id: '/schools',
+  path: '/schools',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SchoolRoute = SchoolRouteImport.update({
@@ -65,6 +79,16 @@ const ParentRoute = ParentRouteImport.update({
   path: '/parent',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GetStartedRoute = GetStartedRouteImport.update({
+  id: '/get-started',
+  path: '/get-started',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -74,6 +98,11 @@ const StudentIndexRoute = StudentIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => StudentRoute,
+} as any)
+const SchoolsIndexRoute = SchoolsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => SchoolsRoute,
 } as any)
 const SchoolIndexRoute = SchoolIndexRouteImport.update({
   id: '/',
@@ -100,6 +129,11 @@ const StudentNotificationsRoute = StudentNotificationsRouteImport.update({
   path: '/notifications',
   getParentRoute: () => StudentRoute,
 } as any)
+const StudentFeesRoute = StudentFeesRouteImport.update({
+  id: '/fees',
+  path: '/fees',
+  getParentRoute: () => StudentRoute,
+} as any)
 const StudentDocumentsRoute = StudentDocumentsRouteImport.update({
   id: '/documents',
   path: '/documents',
@@ -109,6 +143,11 @@ const StudentApplicationsRoute = StudentApplicationsRouteImport.update({
   id: '/applications',
   path: '/applications',
   getParentRoute: () => StudentRoute,
+} as any)
+const SchoolsIdRoute = SchoolsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => SchoolsRoute,
 } as any)
 const SchoolSettingsRoute = SchoolSettingsRouteImport.update({
   id: '/settings',
@@ -150,6 +189,11 @@ const SchoolGalleryRoute = SchoolGalleryRouteImport.update({
   path: '/gallery',
   getParentRoute: () => SchoolRoute,
 } as any)
+const SchoolFeesRoute = SchoolFeesRouteImport.update({
+  id: '/fees',
+  path: '/fees',
+  getParentRoute: () => SchoolRoute,
+} as any)
 const SchoolClassesRoute = SchoolClassesRouteImport.update({
   id: '/classes',
   path: '/classes',
@@ -173,6 +217,11 @@ const ParentSchoolsRoute = ParentSchoolsRouteImport.update({
 const ParentNotificationsRoute = ParentNotificationsRouteImport.update({
   id: '/notifications',
   path: '/notifications',
+  getParentRoute: () => ParentRoute,
+} as any)
+const ParentFeesRoute = ParentFeesRouteImport.update({
+  id: '/fees',
+  path: '/fees',
   getParentRoute: () => ParentRoute,
 } as any)
 const ParentDocumentsRoute = ParentDocumentsRouteImport.update({
@@ -210,6 +259,11 @@ const ParentChildrenNewRoute = ParentChildrenNewRouteImport.update({
   path: '/new',
   getParentRoute: () => ParentChildrenRoute,
 } as any)
+const ParentChildrenLinkRoute = ParentChildrenLinkRouteImport.update({
+  id: '/link',
+  path: '/link',
+  getParentRoute: () => ParentChildrenRoute,
+} as any)
 const ParentChildrenIdRoute = ParentChildrenIdRouteImport.update({
   id: '/$id',
   path: '/$id',
@@ -223,19 +277,24 @@ const ParentApplicationsIdRoute = ParentApplicationsIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/get-started': typeof GetStartedRoute
+  '/login': typeof LoginRoute
   '/parent': typeof ParentRouteWithChildren
   '/register': typeof RegisterRoute
   '/school': typeof SchoolRouteWithChildren
+  '/schools': typeof SchoolsRouteWithChildren
   '/student': typeof StudentRouteWithChildren
   '/parent/applications': typeof ParentApplicationsRouteWithChildren
   '/parent/apply': typeof ParentApplyRoute
   '/parent/children': typeof ParentChildrenRouteWithChildren
   '/parent/documents': typeof ParentDocumentsRoute
+  '/parent/fees': typeof ParentFeesRoute
   '/parent/notifications': typeof ParentNotificationsRoute
   '/parent/schools': typeof ParentSchoolsRouteWithChildren
   '/parent/settings': typeof ParentSettingsRoute
   '/school/applications': typeof SchoolApplicationsRouteWithChildren
   '/school/classes': typeof SchoolClassesRoute
+  '/school/fees': typeof SchoolFeesRoute
   '/school/gallery': typeof SchoolGalleryRoute
   '/school/onboarding': typeof SchoolOnboardingRoute
   '/school/pipeline': typeof SchoolPipelineRoute
@@ -244,32 +303,40 @@ export interface FileRoutesByFullPath {
   '/school/reports': typeof SchoolReportsRoute
   '/school/requirements': typeof SchoolRequirementsRoute
   '/school/settings': typeof SchoolSettingsRoute
+  '/schools/$id': typeof SchoolsIdRoute
   '/student/applications': typeof StudentApplicationsRoute
   '/student/documents': typeof StudentDocumentsRoute
+  '/student/fees': typeof StudentFeesRoute
   '/student/notifications': typeof StudentNotificationsRoute
   '/student/profile': typeof StudentProfileRoute
   '/student/schools': typeof StudentSchoolsRoute
   '/parent/': typeof ParentIndexRoute
   '/school/': typeof SchoolIndexRoute
+  '/schools/': typeof SchoolsIndexRoute
   '/student/': typeof StudentIndexRoute
   '/parent/applications/$id': typeof ParentApplicationsIdRoute
   '/parent/children/$id': typeof ParentChildrenIdRoute
+  '/parent/children/link': typeof ParentChildrenLinkRoute
   '/parent/children/new': typeof ParentChildrenNewRoute
   '/parent/schools/$id': typeof ParentSchoolsIdRoute
   '/school/applications/$id': typeof SchoolApplicationsIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/get-started': typeof GetStartedRoute
+  '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/parent/applications': typeof ParentApplicationsRouteWithChildren
   '/parent/apply': typeof ParentApplyRoute
   '/parent/children': typeof ParentChildrenRouteWithChildren
   '/parent/documents': typeof ParentDocumentsRoute
+  '/parent/fees': typeof ParentFeesRoute
   '/parent/notifications': typeof ParentNotificationsRoute
   '/parent/schools': typeof ParentSchoolsRouteWithChildren
   '/parent/settings': typeof ParentSettingsRoute
   '/school/applications': typeof SchoolApplicationsRouteWithChildren
   '/school/classes': typeof SchoolClassesRoute
+  '/school/fees': typeof SchoolFeesRoute
   '/school/gallery': typeof SchoolGalleryRoute
   '/school/onboarding': typeof SchoolOnboardingRoute
   '/school/pipeline': typeof SchoolPipelineRoute
@@ -278,16 +345,20 @@ export interface FileRoutesByTo {
   '/school/reports': typeof SchoolReportsRoute
   '/school/requirements': typeof SchoolRequirementsRoute
   '/school/settings': typeof SchoolSettingsRoute
+  '/schools/$id': typeof SchoolsIdRoute
   '/student/applications': typeof StudentApplicationsRoute
   '/student/documents': typeof StudentDocumentsRoute
+  '/student/fees': typeof StudentFeesRoute
   '/student/notifications': typeof StudentNotificationsRoute
   '/student/profile': typeof StudentProfileRoute
   '/student/schools': typeof StudentSchoolsRoute
   '/parent': typeof ParentIndexRoute
   '/school': typeof SchoolIndexRoute
+  '/schools': typeof SchoolsIndexRoute
   '/student': typeof StudentIndexRoute
   '/parent/applications/$id': typeof ParentApplicationsIdRoute
   '/parent/children/$id': typeof ParentChildrenIdRoute
+  '/parent/children/link': typeof ParentChildrenLinkRoute
   '/parent/children/new': typeof ParentChildrenNewRoute
   '/parent/schools/$id': typeof ParentSchoolsIdRoute
   '/school/applications/$id': typeof SchoolApplicationsIdRoute
@@ -295,19 +366,24 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/get-started': typeof GetStartedRoute
+  '/login': typeof LoginRoute
   '/parent': typeof ParentRouteWithChildren
   '/register': typeof RegisterRoute
   '/school': typeof SchoolRouteWithChildren
+  '/schools': typeof SchoolsRouteWithChildren
   '/student': typeof StudentRouteWithChildren
   '/parent/applications': typeof ParentApplicationsRouteWithChildren
   '/parent/apply': typeof ParentApplyRoute
   '/parent/children': typeof ParentChildrenRouteWithChildren
   '/parent/documents': typeof ParentDocumentsRoute
+  '/parent/fees': typeof ParentFeesRoute
   '/parent/notifications': typeof ParentNotificationsRoute
   '/parent/schools': typeof ParentSchoolsRouteWithChildren
   '/parent/settings': typeof ParentSettingsRoute
   '/school/applications': typeof SchoolApplicationsRouteWithChildren
   '/school/classes': typeof SchoolClassesRoute
+  '/school/fees': typeof SchoolFeesRoute
   '/school/gallery': typeof SchoolGalleryRoute
   '/school/onboarding': typeof SchoolOnboardingRoute
   '/school/pipeline': typeof SchoolPipelineRoute
@@ -316,16 +392,20 @@ export interface FileRoutesById {
   '/school/reports': typeof SchoolReportsRoute
   '/school/requirements': typeof SchoolRequirementsRoute
   '/school/settings': typeof SchoolSettingsRoute
+  '/schools/$id': typeof SchoolsIdRoute
   '/student/applications': typeof StudentApplicationsRoute
   '/student/documents': typeof StudentDocumentsRoute
+  '/student/fees': typeof StudentFeesRoute
   '/student/notifications': typeof StudentNotificationsRoute
   '/student/profile': typeof StudentProfileRoute
   '/student/schools': typeof StudentSchoolsRoute
   '/parent/': typeof ParentIndexRoute
   '/school/': typeof SchoolIndexRoute
+  '/schools/': typeof SchoolsIndexRoute
   '/student/': typeof StudentIndexRoute
   '/parent/applications/$id': typeof ParentApplicationsIdRoute
   '/parent/children/$id': typeof ParentChildrenIdRoute
+  '/parent/children/link': typeof ParentChildrenLinkRoute
   '/parent/children/new': typeof ParentChildrenNewRoute
   '/parent/schools/$id': typeof ParentSchoolsIdRoute
   '/school/applications/$id': typeof SchoolApplicationsIdRoute
@@ -334,19 +414,24 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/get-started'
+    | '/login'
     | '/parent'
     | '/register'
     | '/school'
+    | '/schools'
     | '/student'
     | '/parent/applications'
     | '/parent/apply'
     | '/parent/children'
     | '/parent/documents'
+    | '/parent/fees'
     | '/parent/notifications'
     | '/parent/schools'
     | '/parent/settings'
     | '/school/applications'
     | '/school/classes'
+    | '/school/fees'
     | '/school/gallery'
     | '/school/onboarding'
     | '/school/pipeline'
@@ -355,32 +440,40 @@ export interface FileRouteTypes {
     | '/school/reports'
     | '/school/requirements'
     | '/school/settings'
+    | '/schools/$id'
     | '/student/applications'
     | '/student/documents'
+    | '/student/fees'
     | '/student/notifications'
     | '/student/profile'
     | '/student/schools'
     | '/parent/'
     | '/school/'
+    | '/schools/'
     | '/student/'
     | '/parent/applications/$id'
     | '/parent/children/$id'
+    | '/parent/children/link'
     | '/parent/children/new'
     | '/parent/schools/$id'
     | '/school/applications/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/get-started'
+    | '/login'
     | '/register'
     | '/parent/applications'
     | '/parent/apply'
     | '/parent/children'
     | '/parent/documents'
+    | '/parent/fees'
     | '/parent/notifications'
     | '/parent/schools'
     | '/parent/settings'
     | '/school/applications'
     | '/school/classes'
+    | '/school/fees'
     | '/school/gallery'
     | '/school/onboarding'
     | '/school/pipeline'
@@ -389,35 +482,44 @@ export interface FileRouteTypes {
     | '/school/reports'
     | '/school/requirements'
     | '/school/settings'
+    | '/schools/$id'
     | '/student/applications'
     | '/student/documents'
+    | '/student/fees'
     | '/student/notifications'
     | '/student/profile'
     | '/student/schools'
     | '/parent'
     | '/school'
+    | '/schools'
     | '/student'
     | '/parent/applications/$id'
     | '/parent/children/$id'
+    | '/parent/children/link'
     | '/parent/children/new'
     | '/parent/schools/$id'
     | '/school/applications/$id'
   id:
     | '__root__'
     | '/'
+    | '/get-started'
+    | '/login'
     | '/parent'
     | '/register'
     | '/school'
+    | '/schools'
     | '/student'
     | '/parent/applications'
     | '/parent/apply'
     | '/parent/children'
     | '/parent/documents'
+    | '/parent/fees'
     | '/parent/notifications'
     | '/parent/schools'
     | '/parent/settings'
     | '/school/applications'
     | '/school/classes'
+    | '/school/fees'
     | '/school/gallery'
     | '/school/onboarding'
     | '/school/pipeline'
@@ -426,16 +528,20 @@ export interface FileRouteTypes {
     | '/school/reports'
     | '/school/requirements'
     | '/school/settings'
+    | '/schools/$id'
     | '/student/applications'
     | '/student/documents'
+    | '/student/fees'
     | '/student/notifications'
     | '/student/profile'
     | '/student/schools'
     | '/parent/'
     | '/school/'
+    | '/schools/'
     | '/student/'
     | '/parent/applications/$id'
     | '/parent/children/$id'
+    | '/parent/children/link'
     | '/parent/children/new'
     | '/parent/schools/$id'
     | '/school/applications/$id'
@@ -443,9 +549,12 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  GetStartedRoute: typeof GetStartedRoute
+  LoginRoute: typeof LoginRoute
   ParentRoute: typeof ParentRouteWithChildren
   RegisterRoute: typeof RegisterRoute
   SchoolRoute: typeof SchoolRouteWithChildren
+  SchoolsRoute: typeof SchoolsRouteWithChildren
   StudentRoute: typeof StudentRouteWithChildren
 }
 
@@ -456,6 +565,13 @@ declare module '@tanstack/react-router' {
       path: '/student'
       fullPath: '/student'
       preLoaderRoute: typeof StudentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/schools': {
+      id: '/schools'
+      path: '/schools'
+      fullPath: '/schools'
+      preLoaderRoute: typeof SchoolsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/school': {
@@ -479,6 +595,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ParentRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/get-started': {
+      id: '/get-started'
+      path: '/get-started'
+      fullPath: '/get-started'
+      preLoaderRoute: typeof GetStartedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -492,6 +622,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/student/'
       preLoaderRoute: typeof StudentIndexRouteImport
       parentRoute: typeof StudentRoute
+    }
+    '/schools/': {
+      id: '/schools/'
+      path: '/'
+      fullPath: '/schools/'
+      preLoaderRoute: typeof SchoolsIndexRouteImport
+      parentRoute: typeof SchoolsRoute
     }
     '/school/': {
       id: '/school/'
@@ -528,6 +665,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StudentNotificationsRouteImport
       parentRoute: typeof StudentRoute
     }
+    '/student/fees': {
+      id: '/student/fees'
+      path: '/fees'
+      fullPath: '/student/fees'
+      preLoaderRoute: typeof StudentFeesRouteImport
+      parentRoute: typeof StudentRoute
+    }
     '/student/documents': {
       id: '/student/documents'
       path: '/documents'
@@ -541,6 +685,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/student/applications'
       preLoaderRoute: typeof StudentApplicationsRouteImport
       parentRoute: typeof StudentRoute
+    }
+    '/schools/$id': {
+      id: '/schools/$id'
+      path: '/$id'
+      fullPath: '/schools/$id'
+      preLoaderRoute: typeof SchoolsIdRouteImport
+      parentRoute: typeof SchoolsRoute
     }
     '/school/settings': {
       id: '/school/settings'
@@ -598,6 +749,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SchoolGalleryRouteImport
       parentRoute: typeof SchoolRoute
     }
+    '/school/fees': {
+      id: '/school/fees'
+      path: '/fees'
+      fullPath: '/school/fees'
+      preLoaderRoute: typeof SchoolFeesRouteImport
+      parentRoute: typeof SchoolRoute
+    }
     '/school/classes': {
       id: '/school/classes'
       path: '/classes'
@@ -631,6 +789,13 @@ declare module '@tanstack/react-router' {
       path: '/notifications'
       fullPath: '/parent/notifications'
       preLoaderRoute: typeof ParentNotificationsRouteImport
+      parentRoute: typeof ParentRoute
+    }
+    '/parent/fees': {
+      id: '/parent/fees'
+      path: '/fees'
+      fullPath: '/parent/fees'
+      preLoaderRoute: typeof ParentFeesRouteImport
       parentRoute: typeof ParentRoute
     }
     '/parent/documents': {
@@ -682,6 +847,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ParentChildrenNewRouteImport
       parentRoute: typeof ParentChildrenRoute
     }
+    '/parent/children/link': {
+      id: '/parent/children/link'
+      path: '/link'
+      fullPath: '/parent/children/link'
+      preLoaderRoute: typeof ParentChildrenLinkRouteImport
+      parentRoute: typeof ParentChildrenRoute
+    }
     '/parent/children/$id': {
       id: '/parent/children/$id'
       path: '/$id'
@@ -712,11 +884,13 @@ const ParentApplicationsRouteWithChildren =
 
 interface ParentChildrenRouteChildren {
   ParentChildrenIdRoute: typeof ParentChildrenIdRoute
+  ParentChildrenLinkRoute: typeof ParentChildrenLinkRoute
   ParentChildrenNewRoute: typeof ParentChildrenNewRoute
 }
 
 const ParentChildrenRouteChildren: ParentChildrenRouteChildren = {
   ParentChildrenIdRoute: ParentChildrenIdRoute,
+  ParentChildrenLinkRoute: ParentChildrenLinkRoute,
   ParentChildrenNewRoute: ParentChildrenNewRoute,
 }
 
@@ -741,6 +915,7 @@ interface ParentRouteChildren {
   ParentApplyRoute: typeof ParentApplyRoute
   ParentChildrenRoute: typeof ParentChildrenRouteWithChildren
   ParentDocumentsRoute: typeof ParentDocumentsRoute
+  ParentFeesRoute: typeof ParentFeesRoute
   ParentNotificationsRoute: typeof ParentNotificationsRoute
   ParentSchoolsRoute: typeof ParentSchoolsRouteWithChildren
   ParentSettingsRoute: typeof ParentSettingsRoute
@@ -752,6 +927,7 @@ const ParentRouteChildren: ParentRouteChildren = {
   ParentApplyRoute: ParentApplyRoute,
   ParentChildrenRoute: ParentChildrenRouteWithChildren,
   ParentDocumentsRoute: ParentDocumentsRoute,
+  ParentFeesRoute: ParentFeesRoute,
   ParentNotificationsRoute: ParentNotificationsRoute,
   ParentSchoolsRoute: ParentSchoolsRouteWithChildren,
   ParentSettingsRoute: ParentSettingsRoute,
@@ -775,6 +951,7 @@ const SchoolApplicationsRouteWithChildren =
 interface SchoolRouteChildren {
   SchoolApplicationsRoute: typeof SchoolApplicationsRouteWithChildren
   SchoolClassesRoute: typeof SchoolClassesRoute
+  SchoolFeesRoute: typeof SchoolFeesRoute
   SchoolGalleryRoute: typeof SchoolGalleryRoute
   SchoolOnboardingRoute: typeof SchoolOnboardingRoute
   SchoolPipelineRoute: typeof SchoolPipelineRoute
@@ -789,6 +966,7 @@ interface SchoolRouteChildren {
 const SchoolRouteChildren: SchoolRouteChildren = {
   SchoolApplicationsRoute: SchoolApplicationsRouteWithChildren,
   SchoolClassesRoute: SchoolClassesRoute,
+  SchoolFeesRoute: SchoolFeesRoute,
   SchoolGalleryRoute: SchoolGalleryRoute,
   SchoolOnboardingRoute: SchoolOnboardingRoute,
   SchoolPipelineRoute: SchoolPipelineRoute,
@@ -803,9 +981,23 @@ const SchoolRouteChildren: SchoolRouteChildren = {
 const SchoolRouteWithChildren =
   SchoolRoute._addFileChildren(SchoolRouteChildren)
 
+interface SchoolsRouteChildren {
+  SchoolsIdRoute: typeof SchoolsIdRoute
+  SchoolsIndexRoute: typeof SchoolsIndexRoute
+}
+
+const SchoolsRouteChildren: SchoolsRouteChildren = {
+  SchoolsIdRoute: SchoolsIdRoute,
+  SchoolsIndexRoute: SchoolsIndexRoute,
+}
+
+const SchoolsRouteWithChildren =
+  SchoolsRoute._addFileChildren(SchoolsRouteChildren)
+
 interface StudentRouteChildren {
   StudentApplicationsRoute: typeof StudentApplicationsRoute
   StudentDocumentsRoute: typeof StudentDocumentsRoute
+  StudentFeesRoute: typeof StudentFeesRoute
   StudentNotificationsRoute: typeof StudentNotificationsRoute
   StudentProfileRoute: typeof StudentProfileRoute
   StudentSchoolsRoute: typeof StudentSchoolsRoute
@@ -815,6 +1007,7 @@ interface StudentRouteChildren {
 const StudentRouteChildren: StudentRouteChildren = {
   StudentApplicationsRoute: StudentApplicationsRoute,
   StudentDocumentsRoute: StudentDocumentsRoute,
+  StudentFeesRoute: StudentFeesRoute,
   StudentNotificationsRoute: StudentNotificationsRoute,
   StudentProfileRoute: StudentProfileRoute,
   StudentSchoolsRoute: StudentSchoolsRoute,
@@ -826,9 +1019,12 @@ const StudentRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  GetStartedRoute: GetStartedRoute,
+  LoginRoute: LoginRoute,
   ParentRoute: ParentRouteWithChildren,
   RegisterRoute: RegisterRoute,
   SchoolRoute: SchoolRouteWithChildren,
+  SchoolsRoute: SchoolsRouteWithChildren,
   StudentRoute: StudentRouteWithChildren,
 }
 export const routeTree = rootRouteImport

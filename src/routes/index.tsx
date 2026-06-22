@@ -95,18 +95,24 @@ function Hero() {
           </p>
 
           <div className="mt-9 flex flex-wrap items-center gap-3">
-            <button className="group inline-flex items-center gap-2 rounded-full bg-gold text-gold-foreground px-6 py-3.5 text-sm font-semibold shadow-glow hover:brightness-105 transition">
-              <Search className="h-4 w-4" /> Find a School
-            </button>
             <Link
-              to="/school"
+              to="/schools"
+              className="group inline-flex items-center gap-2 rounded-full bg-gold text-gold-foreground px-6 py-3.5 text-sm font-semibold shadow-glow hover:brightness-105 transition"
+            >
+              <Search className="h-4 w-4" /> Find a School
+            </Link>
+            <Link
+              to="/school/onboarding"
               className="group inline-flex items-center gap-2 rounded-full bg-white text-navy px-6 py-3.5 text-sm font-semibold hover:bg-white/90 transition"
             >
               <Building2 className="h-4 w-4" /> Join as a School
             </Link>
-            <button className="group inline-flex items-center gap-2 rounded-full ring-1 ring-white/20 hover:bg-white/5 text-white px-5 py-3.5 text-sm font-medium transition">
-              <Play className="h-3.5 w-3.5" /> Explore the Platform
-            </button>
+            <Link
+              to="/get-started"
+              className="group inline-flex items-center gap-2 rounded-full ring-1 ring-white/20 hover:bg-white/5 text-white px-5 py-3.5 text-sm font-medium transition"
+            >
+              <Play className="h-3.5 w-3.5" /> Get Started
+            </Link>
           </div>
 
           {/* Stats */}

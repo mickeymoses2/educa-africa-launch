@@ -26,6 +26,7 @@ const nav = [
   { label: "Admission Requirements", to: "/school/requirements" as const, icon: ClipboardList },
   { label: "Classes & Levels", to: "/school/classes" as const, icon: GraduationCap },
   { label: "Applications", to: "/school/applications" as const, icon: Inbox, badge: 12 },
+  { label: "Fees", to: "/school/fees" as const, icon: BarChart3 },
   { label: "Reports", to: "/school/reports" as const, icon: BarChart3 },
   { label: "Settings", to: "/school/settings" as const, icon: Settings },
 ];
@@ -101,7 +102,7 @@ export function DashboardShell({
                 </div>
                 <div className="leading-tight">
                   <p className="text-sm font-semibold text-navy">Kilimani Academy</p>
-                  <p className="text-[11px] text-muted-foreground">Admin · Nairobi</p>
+                  <p className="text-[11px] text-muted-foreground">Admissions Officer · Nairobi</p>
                 </div>
                 <ChevronDown className="h-4 w-4 text-muted-foreground" />
               </div>
