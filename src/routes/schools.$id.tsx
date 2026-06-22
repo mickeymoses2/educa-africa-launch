@@ -25,16 +25,10 @@ import { Footer } from "@/components/educa/Footer";
 import { featuredSchools } from "@/data/educa";
 
 export const Route = createFileRoute("/schools/$id")({
-  head: ({ loaderData }) => ({
+  head: () => ({
     meta: [
-      { title: `${loaderData?.school.name ?? "School"} · EDUCA Africa` },
-      {
-        name: "description",
-        content: loaderData?.school.description ?? "Explore school profile on EDUCA Africa.",
-      },
-      { property: "og:title", content: `${loaderData?.school.name ?? "School"} · EDUCA Africa` },
-      { property: "og:description", content: loaderData?.school.description ?? "" },
-      { property: "og:image", content: loaderData?.school.image ?? "" },
+      { title: "School Profile · EDUCA Africa" },
+      { name: "description", content: "Explore a verified school profile on EDUCA Africa." },
     ],
   }),
   loader: ({ params }) => {
