@@ -5,10 +5,10 @@ import { Logo } from "./Logo";
 
 const links = [
   { label: "Home", to: "/" as const },
-  { label: "Schools", to: "/school" as const },
+  { label: "Browse Schools", to: "/schools" as const },
+  { label: "For Schools", to: "/school/onboarding" as const },
   { label: "Parents", to: "/parent" as const },
   { label: "Students", to: "/student" as const },
-  { label: "About", to: "/" as const },
 ];
 
 export function Navbar() {
@@ -46,11 +46,11 @@ export function Navbar() {
         </nav>
 
         <div className="hidden lg:flex items-center gap-3">
-          <Link to="/register" className="text-sm font-medium text-white/90 hover:text-white px-4 py-2 transition">
+          <Link to="/login" className="text-sm font-medium text-white/90 hover:text-white px-4 py-2 transition">
             Login
           </Link>
           <Link
-            to="/register"
+            to="/get-started"
             className="inline-flex items-center gap-2 rounded-full bg-gold text-gold-foreground px-5 py-2.5 text-sm font-semibold shadow-glow hover:brightness-105 transition"
           >
             Get Started
@@ -79,11 +79,11 @@ export function Navbar() {
             </Link>
           ))}
           <div className="flex gap-2 pt-2 border-t border-white/10 mt-2">
-            <Link to="/register" onClick={() => setOpen(false)} className="flex-1 text-center text-sm font-medium text-white/90 px-4 py-2.5 rounded-lg bg-white/5">
+            <Link to="/login" onClick={() => setOpen(false)} className="flex-1 text-center text-sm font-medium text-white/90 px-4 py-2.5 rounded-lg bg-white/5">
               Login
             </Link>
             <Link
-              to="/register"
+              to="/get-started"
               onClick={() => setOpen(false)}
               className="flex-1 text-center rounded-lg bg-gold text-gold-foreground px-4 py-2.5 text-sm font-semibold"
             >
