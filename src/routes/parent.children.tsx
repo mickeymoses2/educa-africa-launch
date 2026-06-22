@@ -26,26 +26,42 @@ function ChildrenList() {
       title="My Children"
       subtitle="Create and manage learner profiles connected to your account."
       actions={
-        <Link
-          to="/parent/children/new"
-          className="inline-flex items-center gap-2 rounded-full bg-gold text-gold-foreground px-5 py-2.5 text-sm font-semibold shadow-glow hover:brightness-105 transition"
-        >
-          <UserPlus className="h-4 w-4" /> Add Child
-        </Link>
+        <>
+          <Link
+            to="/parent/children/link"
+            className="inline-flex items-center gap-2 rounded-xl bg-white ring-1 ring-border text-navy px-4 py-2.5 text-sm font-semibold hover:bg-muted transition"
+          >
+            Link Student
+          </Link>
+          <Link
+            to="/parent/children/new"
+            className="inline-flex items-center gap-2 rounded-full bg-gold text-gold-foreground px-5 py-2.5 text-sm font-semibold shadow-glow hover:brightness-105 transition"
+          >
+            <UserPlus className="h-4 w-4" /> Add Child
+          </Link>
+        </>
       }
     >
       {children.length === 0 ? (
         <EmptyState
           icon={Users}
-          title="No child profile added yet"
-          description="Add your first child to begin searching and applying to schools."
+          title="No student profiles added yet"
+          description="Link an existing student using their EDUCA ID, or create a new student profile."
           action={
-            <Link
-              to="/parent/children/new"
-              className="inline-flex items-center gap-2 rounded-xl bg-gold text-gold-foreground px-5 py-2.5 text-sm font-semibold shadow-glow"
-            >
-              <UserPlus className="h-4 w-4" /> Add Child Profile
-            </Link>
+            <div className="flex flex-wrap gap-2 justify-center">
+              <Link
+                to="/parent/children/link"
+                className="inline-flex items-center gap-2 rounded-xl bg-white ring-1 ring-border text-navy px-5 py-2.5 text-sm font-semibold"
+              >
+                Link Existing Student
+              </Link>
+              <Link
+                to="/parent/children/new"
+                className="inline-flex items-center gap-2 rounded-xl bg-gold text-gold-foreground px-5 py-2.5 text-sm font-semibold shadow-glow"
+              >
+                <UserPlus className="h-4 w-4" /> Add Student Manually
+              </Link>
+            </div>
           }
         />
       ) : (
