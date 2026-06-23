@@ -15,6 +15,9 @@ import {
   X,
   ChevronDown,
   Plus,
+  Wallet,
+  Shirt,
+  Store,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Logo } from "./Logo";
@@ -26,7 +29,10 @@ const nav = [
   { label: "Admission Requirements", to: "/school/requirements" as const, icon: ClipboardList },
   { label: "Classes & Levels", to: "/school/classes" as const, icon: GraduationCap },
   { label: "Applications", to: "/school/applications" as const, icon: Inbox, badge: 12 },
-  { label: "Fees", to: "/school/fees" as const, icon: BarChart3 },
+  { label: "Fee Structures", to: "/school/fees" as const, icon: BarChart3 },
+  { label: "Payments", to: "/school/payments" as const, icon: Wallet },
+  { label: "Uniform Requirements", to: "/school/uniforms" as const, icon: Shirt },
+  { label: "Approved Suppliers", to: "/school/suppliers" as const, icon: Store },
   { label: "Reports", to: "/school/reports" as const, icon: BarChart3 },
   { label: "Settings", to: "/school/settings" as const, icon: Settings },
 ];
