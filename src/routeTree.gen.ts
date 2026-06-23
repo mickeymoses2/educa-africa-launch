@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SupplierRouteImport } from './routes/supplier'
 import { Route as StudentRouteImport } from './routes/student'
 import { Route as SchoolsRouteImport } from './routes/schools'
 import { Route as SchoolRouteImport } from './routes/school'
@@ -18,11 +19,17 @@ import { Route as MarketplaceRouteImport } from './routes/marketplace'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as GetStartedRouteImport } from './routes/get-started'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SupplierIndexRouteImport } from './routes/supplier.index'
 import { Route as StudentIndexRouteImport } from './routes/student.index'
 import { Route as SchoolsIndexRouteImport } from './routes/schools.index'
 import { Route as SchoolIndexRouteImport } from './routes/school.index'
 import { Route as ParentIndexRouteImport } from './routes/parent.index'
 import { Route as MarketplaceIndexRouteImport } from './routes/marketplace.index'
+import { Route as SupplierSettingsRouteImport } from './routes/supplier.settings'
+import { Route as SupplierSalesRouteImport } from './routes/supplier.sales'
+import { Route as SupplierProductsRouteImport } from './routes/supplier.products'
+import { Route as SupplierOrdersRouteImport } from './routes/supplier.orders'
+import { Route as SupplierInventoryRouteImport } from './routes/supplier.inventory'
 import { Route as StudentUniformsRouteImport } from './routes/student.uniforms'
 import { Route as StudentSchoolsRouteImport } from './routes/student.schools'
 import { Route as StudentScholarshipsRouteImport } from './routes/student.scholarships'
@@ -64,6 +71,8 @@ import { Route as ParentApplyRouteImport } from './routes/parent.apply'
 import { Route as ParentApplicationsRouteImport } from './routes/parent.applications'
 import { Route as MarketplaceCheckoutRouteImport } from './routes/marketplace.checkout'
 import { Route as MarketplaceCartRouteImport } from './routes/marketplace.cart'
+import { Route as SupplierProductsNewRouteImport } from './routes/supplier.products.new'
+import { Route as SupplierOrdersIdRouteImport } from './routes/supplier.orders.$id'
 import { Route as StudentScholarshipsSavedRouteImport } from './routes/student.scholarships.saved'
 import { Route as StudentScholarshipsIdRouteImport } from './routes/student.scholarships.$id'
 import { Route as StudentOrdersIdRouteImport } from './routes/student.orders.$id'
@@ -80,6 +89,11 @@ import { Route as ParentChildrenIdRouteImport } from './routes/parent.children.$
 import { Route as ParentApplicationsIdRouteImport } from './routes/parent.applications.$id'
 import { Route as MarketplaceProductsIdRouteImport } from './routes/marketplace.products.$id'
 
+const SupplierRoute = SupplierRouteImport.update({
+  id: '/supplier',
+  path: '/supplier',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const StudentRoute = StudentRouteImport.update({
   id: '/student',
   path: '/student',
@@ -125,6 +139,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SupplierIndexRoute = SupplierIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => SupplierRoute,
+} as any)
 const StudentIndexRoute = StudentIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -149,6 +168,31 @@ const MarketplaceIndexRoute = MarketplaceIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => MarketplaceRoute,
+} as any)
+const SupplierSettingsRoute = SupplierSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => SupplierRoute,
+} as any)
+const SupplierSalesRoute = SupplierSalesRouteImport.update({
+  id: '/sales',
+  path: '/sales',
+  getParentRoute: () => SupplierRoute,
+} as any)
+const SupplierProductsRoute = SupplierProductsRouteImport.update({
+  id: '/products',
+  path: '/products',
+  getParentRoute: () => SupplierRoute,
+} as any)
+const SupplierOrdersRoute = SupplierOrdersRouteImport.update({
+  id: '/orders',
+  path: '/orders',
+  getParentRoute: () => SupplierRoute,
+} as any)
+const SupplierInventoryRoute = SupplierInventoryRouteImport.update({
+  id: '/inventory',
+  path: '/inventory',
+  getParentRoute: () => SupplierRoute,
 } as any)
 const StudentUniformsRoute = StudentUniformsRouteImport.update({
   id: '/uniforms',
@@ -355,6 +399,16 @@ const MarketplaceCartRoute = MarketplaceCartRouteImport.update({
   path: '/cart',
   getParentRoute: () => MarketplaceRoute,
 } as any)
+const SupplierProductsNewRoute = SupplierProductsNewRouteImport.update({
+  id: '/new',
+  path: '/new',
+  getParentRoute: () => SupplierProductsRoute,
+} as any)
+const SupplierOrdersIdRoute = SupplierOrdersIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => SupplierOrdersRoute,
+} as any)
 const StudentScholarshipsSavedRoute =
   StudentScholarshipsSavedRouteImport.update({
     id: '/saved',
@@ -442,6 +496,7 @@ export interface FileRoutesByFullPath {
   '/school': typeof SchoolRouteWithChildren
   '/schools': typeof SchoolsRouteWithChildren
   '/student': typeof StudentRouteWithChildren
+  '/supplier': typeof SupplierRouteWithChildren
   '/marketplace/cart': typeof MarketplaceCartRoute
   '/marketplace/checkout': typeof MarketplaceCheckoutRoute
   '/parent/applications': typeof ParentApplicationsRouteWithChildren
@@ -483,11 +538,17 @@ export interface FileRoutesByFullPath {
   '/student/scholarships': typeof StudentScholarshipsRouteWithChildren
   '/student/schools': typeof StudentSchoolsRoute
   '/student/uniforms': typeof StudentUniformsRoute
+  '/supplier/inventory': typeof SupplierInventoryRoute
+  '/supplier/orders': typeof SupplierOrdersRouteWithChildren
+  '/supplier/products': typeof SupplierProductsRouteWithChildren
+  '/supplier/sales': typeof SupplierSalesRoute
+  '/supplier/settings': typeof SupplierSettingsRoute
   '/marketplace/': typeof MarketplaceIndexRoute
   '/parent/': typeof ParentIndexRoute
   '/school/': typeof SchoolIndexRoute
   '/schools/': typeof SchoolsIndexRoute
   '/student/': typeof StudentIndexRoute
+  '/supplier/': typeof SupplierIndexRoute
   '/marketplace/products/$id': typeof MarketplaceProductsIdRoute
   '/parent/applications/$id': typeof ParentApplicationsIdRoute
   '/parent/children/$id': typeof ParentChildrenIdRoute
@@ -503,6 +564,8 @@ export interface FileRoutesByFullPath {
   '/student/orders/$id': typeof StudentOrdersIdRoute
   '/student/scholarships/$id': typeof StudentScholarshipsIdRoute
   '/student/scholarships/saved': typeof StudentScholarshipsSavedRoute
+  '/supplier/orders/$id': typeof SupplierOrdersIdRoute
+  '/supplier/products/new': typeof SupplierProductsNewRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -550,11 +613,17 @@ export interface FileRoutesByTo {
   '/student/scholarships': typeof StudentScholarshipsRouteWithChildren
   '/student/schools': typeof StudentSchoolsRoute
   '/student/uniforms': typeof StudentUniformsRoute
+  '/supplier/inventory': typeof SupplierInventoryRoute
+  '/supplier/orders': typeof SupplierOrdersRouteWithChildren
+  '/supplier/products': typeof SupplierProductsRouteWithChildren
+  '/supplier/sales': typeof SupplierSalesRoute
+  '/supplier/settings': typeof SupplierSettingsRoute
   '/marketplace': typeof MarketplaceIndexRoute
   '/parent': typeof ParentIndexRoute
   '/school': typeof SchoolIndexRoute
   '/schools': typeof SchoolsIndexRoute
   '/student': typeof StudentIndexRoute
+  '/supplier': typeof SupplierIndexRoute
   '/marketplace/products/$id': typeof MarketplaceProductsIdRoute
   '/parent/applications/$id': typeof ParentApplicationsIdRoute
   '/parent/children/$id': typeof ParentChildrenIdRoute
@@ -570,6 +639,8 @@ export interface FileRoutesByTo {
   '/student/orders/$id': typeof StudentOrdersIdRoute
   '/student/scholarships/$id': typeof StudentScholarshipsIdRoute
   '/student/scholarships/saved': typeof StudentScholarshipsSavedRoute
+  '/supplier/orders/$id': typeof SupplierOrdersIdRoute
+  '/supplier/products/new': typeof SupplierProductsNewRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -582,6 +653,7 @@ export interface FileRoutesById {
   '/school': typeof SchoolRouteWithChildren
   '/schools': typeof SchoolsRouteWithChildren
   '/student': typeof StudentRouteWithChildren
+  '/supplier': typeof SupplierRouteWithChildren
   '/marketplace/cart': typeof MarketplaceCartRoute
   '/marketplace/checkout': typeof MarketplaceCheckoutRoute
   '/parent/applications': typeof ParentApplicationsRouteWithChildren
@@ -623,11 +695,17 @@ export interface FileRoutesById {
   '/student/scholarships': typeof StudentScholarshipsRouteWithChildren
   '/student/schools': typeof StudentSchoolsRoute
   '/student/uniforms': typeof StudentUniformsRoute
+  '/supplier/inventory': typeof SupplierInventoryRoute
+  '/supplier/orders': typeof SupplierOrdersRouteWithChildren
+  '/supplier/products': typeof SupplierProductsRouteWithChildren
+  '/supplier/sales': typeof SupplierSalesRoute
+  '/supplier/settings': typeof SupplierSettingsRoute
   '/marketplace/': typeof MarketplaceIndexRoute
   '/parent/': typeof ParentIndexRoute
   '/school/': typeof SchoolIndexRoute
   '/schools/': typeof SchoolsIndexRoute
   '/student/': typeof StudentIndexRoute
+  '/supplier/': typeof SupplierIndexRoute
   '/marketplace/products/$id': typeof MarketplaceProductsIdRoute
   '/parent/applications/$id': typeof ParentApplicationsIdRoute
   '/parent/children/$id': typeof ParentChildrenIdRoute
@@ -643,6 +721,8 @@ export interface FileRoutesById {
   '/student/orders/$id': typeof StudentOrdersIdRoute
   '/student/scholarships/$id': typeof StudentScholarshipsIdRoute
   '/student/scholarships/saved': typeof StudentScholarshipsSavedRoute
+  '/supplier/orders/$id': typeof SupplierOrdersIdRoute
+  '/supplier/products/new': typeof SupplierProductsNewRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -656,6 +736,7 @@ export interface FileRouteTypes {
     | '/school'
     | '/schools'
     | '/student'
+    | '/supplier'
     | '/marketplace/cart'
     | '/marketplace/checkout'
     | '/parent/applications'
@@ -697,11 +778,17 @@ export interface FileRouteTypes {
     | '/student/scholarships'
     | '/student/schools'
     | '/student/uniforms'
+    | '/supplier/inventory'
+    | '/supplier/orders'
+    | '/supplier/products'
+    | '/supplier/sales'
+    | '/supplier/settings'
     | '/marketplace/'
     | '/parent/'
     | '/school/'
     | '/schools/'
     | '/student/'
+    | '/supplier/'
     | '/marketplace/products/$id'
     | '/parent/applications/$id'
     | '/parent/children/$id'
@@ -717,6 +804,8 @@ export interface FileRouteTypes {
     | '/student/orders/$id'
     | '/student/scholarships/$id'
     | '/student/scholarships/saved'
+    | '/supplier/orders/$id'
+    | '/supplier/products/new'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -764,11 +853,17 @@ export interface FileRouteTypes {
     | '/student/scholarships'
     | '/student/schools'
     | '/student/uniforms'
+    | '/supplier/inventory'
+    | '/supplier/orders'
+    | '/supplier/products'
+    | '/supplier/sales'
+    | '/supplier/settings'
     | '/marketplace'
     | '/parent'
     | '/school'
     | '/schools'
     | '/student'
+    | '/supplier'
     | '/marketplace/products/$id'
     | '/parent/applications/$id'
     | '/parent/children/$id'
@@ -784,6 +879,8 @@ export interface FileRouteTypes {
     | '/student/orders/$id'
     | '/student/scholarships/$id'
     | '/student/scholarships/saved'
+    | '/supplier/orders/$id'
+    | '/supplier/products/new'
   id:
     | '__root__'
     | '/'
@@ -795,6 +892,7 @@ export interface FileRouteTypes {
     | '/school'
     | '/schools'
     | '/student'
+    | '/supplier'
     | '/marketplace/cart'
     | '/marketplace/checkout'
     | '/parent/applications'
@@ -836,11 +934,17 @@ export interface FileRouteTypes {
     | '/student/scholarships'
     | '/student/schools'
     | '/student/uniforms'
+    | '/supplier/inventory'
+    | '/supplier/orders'
+    | '/supplier/products'
+    | '/supplier/sales'
+    | '/supplier/settings'
     | '/marketplace/'
     | '/parent/'
     | '/school/'
     | '/schools/'
     | '/student/'
+    | '/supplier/'
     | '/marketplace/products/$id'
     | '/parent/applications/$id'
     | '/parent/children/$id'
@@ -856,6 +960,8 @@ export interface FileRouteTypes {
     | '/student/orders/$id'
     | '/student/scholarships/$id'
     | '/student/scholarships/saved'
+    | '/supplier/orders/$id'
+    | '/supplier/products/new'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -868,10 +974,18 @@ export interface RootRouteChildren {
   SchoolRoute: typeof SchoolRouteWithChildren
   SchoolsRoute: typeof SchoolsRouteWithChildren
   StudentRoute: typeof StudentRouteWithChildren
+  SupplierRoute: typeof SupplierRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/supplier': {
+      id: '/supplier'
+      path: '/supplier'
+      fullPath: '/supplier'
+      preLoaderRoute: typeof SupplierRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/student': {
       id: '/student'
       path: '/student'
@@ -935,6 +1049,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/supplier/': {
+      id: '/supplier/'
+      path: '/'
+      fullPath: '/supplier/'
+      preLoaderRoute: typeof SupplierIndexRouteImport
+      parentRoute: typeof SupplierRoute
+    }
     '/student/': {
       id: '/student/'
       path: '/'
@@ -969,6 +1090,41 @@ declare module '@tanstack/react-router' {
       fullPath: '/marketplace/'
       preLoaderRoute: typeof MarketplaceIndexRouteImport
       parentRoute: typeof MarketplaceRoute
+    }
+    '/supplier/settings': {
+      id: '/supplier/settings'
+      path: '/settings'
+      fullPath: '/supplier/settings'
+      preLoaderRoute: typeof SupplierSettingsRouteImport
+      parentRoute: typeof SupplierRoute
+    }
+    '/supplier/sales': {
+      id: '/supplier/sales'
+      path: '/sales'
+      fullPath: '/supplier/sales'
+      preLoaderRoute: typeof SupplierSalesRouteImport
+      parentRoute: typeof SupplierRoute
+    }
+    '/supplier/products': {
+      id: '/supplier/products'
+      path: '/products'
+      fullPath: '/supplier/products'
+      preLoaderRoute: typeof SupplierProductsRouteImport
+      parentRoute: typeof SupplierRoute
+    }
+    '/supplier/orders': {
+      id: '/supplier/orders'
+      path: '/orders'
+      fullPath: '/supplier/orders'
+      preLoaderRoute: typeof SupplierOrdersRouteImport
+      parentRoute: typeof SupplierRoute
+    }
+    '/supplier/inventory': {
+      id: '/supplier/inventory'
+      path: '/inventory'
+      fullPath: '/supplier/inventory'
+      preLoaderRoute: typeof SupplierInventoryRouteImport
+      parentRoute: typeof SupplierRoute
     }
     '/student/uniforms': {
       id: '/student/uniforms'
@@ -1256,6 +1412,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/marketplace/cart'
       preLoaderRoute: typeof MarketplaceCartRouteImport
       parentRoute: typeof MarketplaceRoute
+    }
+    '/supplier/products/new': {
+      id: '/supplier/products/new'
+      path: '/new'
+      fullPath: '/supplier/products/new'
+      preLoaderRoute: typeof SupplierProductsNewRouteImport
+      parentRoute: typeof SupplierProductsRoute
+    }
+    '/supplier/orders/$id': {
+      id: '/supplier/orders/$id'
+      path: '/$id'
+      fullPath: '/supplier/orders/$id'
+      preLoaderRoute: typeof SupplierOrdersIdRouteImport
+      parentRoute: typeof SupplierOrdersRoute
     }
     '/student/scholarships/saved': {
       id: '/student/scholarships/saved'
@@ -1629,6 +1799,51 @@ const StudentRouteChildren: StudentRouteChildren = {
 const StudentRouteWithChildren =
   StudentRoute._addFileChildren(StudentRouteChildren)
 
+interface SupplierOrdersRouteChildren {
+  SupplierOrdersIdRoute: typeof SupplierOrdersIdRoute
+}
+
+const SupplierOrdersRouteChildren: SupplierOrdersRouteChildren = {
+  SupplierOrdersIdRoute: SupplierOrdersIdRoute,
+}
+
+const SupplierOrdersRouteWithChildren = SupplierOrdersRoute._addFileChildren(
+  SupplierOrdersRouteChildren,
+)
+
+interface SupplierProductsRouteChildren {
+  SupplierProductsNewRoute: typeof SupplierProductsNewRoute
+}
+
+const SupplierProductsRouteChildren: SupplierProductsRouteChildren = {
+  SupplierProductsNewRoute: SupplierProductsNewRoute,
+}
+
+const SupplierProductsRouteWithChildren =
+  SupplierProductsRoute._addFileChildren(SupplierProductsRouteChildren)
+
+interface SupplierRouteChildren {
+  SupplierInventoryRoute: typeof SupplierInventoryRoute
+  SupplierOrdersRoute: typeof SupplierOrdersRouteWithChildren
+  SupplierProductsRoute: typeof SupplierProductsRouteWithChildren
+  SupplierSalesRoute: typeof SupplierSalesRoute
+  SupplierSettingsRoute: typeof SupplierSettingsRoute
+  SupplierIndexRoute: typeof SupplierIndexRoute
+}
+
+const SupplierRouteChildren: SupplierRouteChildren = {
+  SupplierInventoryRoute: SupplierInventoryRoute,
+  SupplierOrdersRoute: SupplierOrdersRouteWithChildren,
+  SupplierProductsRoute: SupplierProductsRouteWithChildren,
+  SupplierSalesRoute: SupplierSalesRoute,
+  SupplierSettingsRoute: SupplierSettingsRoute,
+  SupplierIndexRoute: SupplierIndexRoute,
+}
+
+const SupplierRouteWithChildren = SupplierRoute._addFileChildren(
+  SupplierRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   GetStartedRoute: GetStartedRoute,
@@ -1639,6 +1854,7 @@ const rootRouteChildren: RootRouteChildren = {
   SchoolRoute: SchoolRouteWithChildren,
   SchoolsRoute: SchoolsRouteWithChildren,
   StudentRoute: StudentRouteWithChildren,
+  SupplierRoute: SupplierRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
