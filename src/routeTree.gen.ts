@@ -41,6 +41,9 @@ import { Route as SchoolClassesRouteImport } from './routes/school.classes'
 import { Route as SchoolApplicationsRouteImport } from './routes/school.applications'
 import { Route as ParentSettingsRouteImport } from './routes/parent.settings'
 import { Route as ParentSchoolsRouteImport } from './routes/parent.schools'
+import { Route as ParentScholarshipsRouteImport } from './routes/parent.scholarships'
+import { Route as ParentReceiptsRouteImport } from './routes/parent.receipts'
+import { Route as ParentPaymentsRouteImport } from './routes/parent.payments'
 import { Route as ParentNotificationsRouteImport } from './routes/parent.notifications'
 import { Route as ParentFeesRouteImport } from './routes/parent.fees'
 import { Route as ParentDocumentsRouteImport } from './routes/parent.documents'
@@ -49,6 +52,10 @@ import { Route as ParentApplyRouteImport } from './routes/parent.apply'
 import { Route as ParentApplicationsRouteImport } from './routes/parent.applications'
 import { Route as SchoolApplicationsIdRouteImport } from './routes/school.applications.$id'
 import { Route as ParentSchoolsIdRouteImport } from './routes/parent.schools.$id'
+import { Route as ParentScholarshipsSavedRouteImport } from './routes/parent.scholarships.saved'
+import { Route as ParentScholarshipsIdRouteImport } from './routes/parent.scholarships.$id'
+import { Route as ParentReceiptsIdRouteImport } from './routes/parent.receipts.$id'
+import { Route as ParentPaymentsPayRouteImport } from './routes/parent.payments.pay'
 import { Route as ParentChildrenNewRouteImport } from './routes/parent.children.new'
 import { Route as ParentChildrenLinkRouteImport } from './routes/parent.children.link'
 import { Route as ParentChildrenIdRouteImport } from './routes/parent.children.$id'
@@ -214,6 +221,21 @@ const ParentSchoolsRoute = ParentSchoolsRouteImport.update({
   path: '/schools',
   getParentRoute: () => ParentRoute,
 } as any)
+const ParentScholarshipsRoute = ParentScholarshipsRouteImport.update({
+  id: '/scholarships',
+  path: '/scholarships',
+  getParentRoute: () => ParentRoute,
+} as any)
+const ParentReceiptsRoute = ParentReceiptsRouteImport.update({
+  id: '/receipts',
+  path: '/receipts',
+  getParentRoute: () => ParentRoute,
+} as any)
+const ParentPaymentsRoute = ParentPaymentsRouteImport.update({
+  id: '/payments',
+  path: '/payments',
+  getParentRoute: () => ParentRoute,
+} as any)
 const ParentNotificationsRoute = ParentNotificationsRouteImport.update({
   id: '/notifications',
   path: '/notifications',
@@ -254,6 +276,26 @@ const ParentSchoolsIdRoute = ParentSchoolsIdRouteImport.update({
   path: '/$id',
   getParentRoute: () => ParentSchoolsRoute,
 } as any)
+const ParentScholarshipsSavedRoute = ParentScholarshipsSavedRouteImport.update({
+  id: '/saved',
+  path: '/saved',
+  getParentRoute: () => ParentScholarshipsRoute,
+} as any)
+const ParentScholarshipsIdRoute = ParentScholarshipsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => ParentScholarshipsRoute,
+} as any)
+const ParentReceiptsIdRoute = ParentReceiptsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => ParentReceiptsRoute,
+} as any)
+const ParentPaymentsPayRoute = ParentPaymentsPayRouteImport.update({
+  id: '/pay',
+  path: '/pay',
+  getParentRoute: () => ParentPaymentsRoute,
+} as any)
 const ParentChildrenNewRoute = ParentChildrenNewRouteImport.update({
   id: '/new',
   path: '/new',
@@ -290,6 +332,9 @@ export interface FileRoutesByFullPath {
   '/parent/documents': typeof ParentDocumentsRoute
   '/parent/fees': typeof ParentFeesRoute
   '/parent/notifications': typeof ParentNotificationsRoute
+  '/parent/payments': typeof ParentPaymentsRouteWithChildren
+  '/parent/receipts': typeof ParentReceiptsRouteWithChildren
+  '/parent/scholarships': typeof ParentScholarshipsRouteWithChildren
   '/parent/schools': typeof ParentSchoolsRouteWithChildren
   '/parent/settings': typeof ParentSettingsRoute
   '/school/applications': typeof SchoolApplicationsRouteWithChildren
@@ -318,6 +363,10 @@ export interface FileRoutesByFullPath {
   '/parent/children/$id': typeof ParentChildrenIdRoute
   '/parent/children/link': typeof ParentChildrenLinkRoute
   '/parent/children/new': typeof ParentChildrenNewRoute
+  '/parent/payments/pay': typeof ParentPaymentsPayRoute
+  '/parent/receipts/$id': typeof ParentReceiptsIdRoute
+  '/parent/scholarships/$id': typeof ParentScholarshipsIdRoute
+  '/parent/scholarships/saved': typeof ParentScholarshipsSavedRoute
   '/parent/schools/$id': typeof ParentSchoolsIdRoute
   '/school/applications/$id': typeof SchoolApplicationsIdRoute
 }
@@ -332,6 +381,9 @@ export interface FileRoutesByTo {
   '/parent/documents': typeof ParentDocumentsRoute
   '/parent/fees': typeof ParentFeesRoute
   '/parent/notifications': typeof ParentNotificationsRoute
+  '/parent/payments': typeof ParentPaymentsRouteWithChildren
+  '/parent/receipts': typeof ParentReceiptsRouteWithChildren
+  '/parent/scholarships': typeof ParentScholarshipsRouteWithChildren
   '/parent/schools': typeof ParentSchoolsRouteWithChildren
   '/parent/settings': typeof ParentSettingsRoute
   '/school/applications': typeof SchoolApplicationsRouteWithChildren
@@ -360,6 +412,10 @@ export interface FileRoutesByTo {
   '/parent/children/$id': typeof ParentChildrenIdRoute
   '/parent/children/link': typeof ParentChildrenLinkRoute
   '/parent/children/new': typeof ParentChildrenNewRoute
+  '/parent/payments/pay': typeof ParentPaymentsPayRoute
+  '/parent/receipts/$id': typeof ParentReceiptsIdRoute
+  '/parent/scholarships/$id': typeof ParentScholarshipsIdRoute
+  '/parent/scholarships/saved': typeof ParentScholarshipsSavedRoute
   '/parent/schools/$id': typeof ParentSchoolsIdRoute
   '/school/applications/$id': typeof SchoolApplicationsIdRoute
 }
@@ -379,6 +435,9 @@ export interface FileRoutesById {
   '/parent/documents': typeof ParentDocumentsRoute
   '/parent/fees': typeof ParentFeesRoute
   '/parent/notifications': typeof ParentNotificationsRoute
+  '/parent/payments': typeof ParentPaymentsRouteWithChildren
+  '/parent/receipts': typeof ParentReceiptsRouteWithChildren
+  '/parent/scholarships': typeof ParentScholarshipsRouteWithChildren
   '/parent/schools': typeof ParentSchoolsRouteWithChildren
   '/parent/settings': typeof ParentSettingsRoute
   '/school/applications': typeof SchoolApplicationsRouteWithChildren
@@ -407,6 +466,10 @@ export interface FileRoutesById {
   '/parent/children/$id': typeof ParentChildrenIdRoute
   '/parent/children/link': typeof ParentChildrenLinkRoute
   '/parent/children/new': typeof ParentChildrenNewRoute
+  '/parent/payments/pay': typeof ParentPaymentsPayRoute
+  '/parent/receipts/$id': typeof ParentReceiptsIdRoute
+  '/parent/scholarships/$id': typeof ParentScholarshipsIdRoute
+  '/parent/scholarships/saved': typeof ParentScholarshipsSavedRoute
   '/parent/schools/$id': typeof ParentSchoolsIdRoute
   '/school/applications/$id': typeof SchoolApplicationsIdRoute
 }
@@ -427,6 +490,9 @@ export interface FileRouteTypes {
     | '/parent/documents'
     | '/parent/fees'
     | '/parent/notifications'
+    | '/parent/payments'
+    | '/parent/receipts'
+    | '/parent/scholarships'
     | '/parent/schools'
     | '/parent/settings'
     | '/school/applications'
@@ -455,6 +521,10 @@ export interface FileRouteTypes {
     | '/parent/children/$id'
     | '/parent/children/link'
     | '/parent/children/new'
+    | '/parent/payments/pay'
+    | '/parent/receipts/$id'
+    | '/parent/scholarships/$id'
+    | '/parent/scholarships/saved'
     | '/parent/schools/$id'
     | '/school/applications/$id'
   fileRoutesByTo: FileRoutesByTo
@@ -469,6 +539,9 @@ export interface FileRouteTypes {
     | '/parent/documents'
     | '/parent/fees'
     | '/parent/notifications'
+    | '/parent/payments'
+    | '/parent/receipts'
+    | '/parent/scholarships'
     | '/parent/schools'
     | '/parent/settings'
     | '/school/applications'
@@ -497,6 +570,10 @@ export interface FileRouteTypes {
     | '/parent/children/$id'
     | '/parent/children/link'
     | '/parent/children/new'
+    | '/parent/payments/pay'
+    | '/parent/receipts/$id'
+    | '/parent/scholarships/$id'
+    | '/parent/scholarships/saved'
     | '/parent/schools/$id'
     | '/school/applications/$id'
   id:
@@ -515,6 +592,9 @@ export interface FileRouteTypes {
     | '/parent/documents'
     | '/parent/fees'
     | '/parent/notifications'
+    | '/parent/payments'
+    | '/parent/receipts'
+    | '/parent/scholarships'
     | '/parent/schools'
     | '/parent/settings'
     | '/school/applications'
@@ -543,6 +623,10 @@ export interface FileRouteTypes {
     | '/parent/children/$id'
     | '/parent/children/link'
     | '/parent/children/new'
+    | '/parent/payments/pay'
+    | '/parent/receipts/$id'
+    | '/parent/scholarships/$id'
+    | '/parent/scholarships/saved'
     | '/parent/schools/$id'
     | '/school/applications/$id'
   fileRoutesById: FileRoutesById
@@ -784,6 +868,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ParentSchoolsRouteImport
       parentRoute: typeof ParentRoute
     }
+    '/parent/scholarships': {
+      id: '/parent/scholarships'
+      path: '/scholarships'
+      fullPath: '/parent/scholarships'
+      preLoaderRoute: typeof ParentScholarshipsRouteImport
+      parentRoute: typeof ParentRoute
+    }
+    '/parent/receipts': {
+      id: '/parent/receipts'
+      path: '/receipts'
+      fullPath: '/parent/receipts'
+      preLoaderRoute: typeof ParentReceiptsRouteImport
+      parentRoute: typeof ParentRoute
+    }
+    '/parent/payments': {
+      id: '/parent/payments'
+      path: '/payments'
+      fullPath: '/parent/payments'
+      preLoaderRoute: typeof ParentPaymentsRouteImport
+      parentRoute: typeof ParentRoute
+    }
     '/parent/notifications': {
       id: '/parent/notifications'
       path: '/notifications'
@@ -839,6 +944,34 @@ declare module '@tanstack/react-router' {
       fullPath: '/parent/schools/$id'
       preLoaderRoute: typeof ParentSchoolsIdRouteImport
       parentRoute: typeof ParentSchoolsRoute
+    }
+    '/parent/scholarships/saved': {
+      id: '/parent/scholarships/saved'
+      path: '/saved'
+      fullPath: '/parent/scholarships/saved'
+      preLoaderRoute: typeof ParentScholarshipsSavedRouteImport
+      parentRoute: typeof ParentScholarshipsRoute
+    }
+    '/parent/scholarships/$id': {
+      id: '/parent/scholarships/$id'
+      path: '/$id'
+      fullPath: '/parent/scholarships/$id'
+      preLoaderRoute: typeof ParentScholarshipsIdRouteImport
+      parentRoute: typeof ParentScholarshipsRoute
+    }
+    '/parent/receipts/$id': {
+      id: '/parent/receipts/$id'
+      path: '/$id'
+      fullPath: '/parent/receipts/$id'
+      preLoaderRoute: typeof ParentReceiptsIdRouteImport
+      parentRoute: typeof ParentReceiptsRoute
+    }
+    '/parent/payments/pay': {
+      id: '/parent/payments/pay'
+      path: '/pay'
+      fullPath: '/parent/payments/pay'
+      preLoaderRoute: typeof ParentPaymentsPayRouteImport
+      parentRoute: typeof ParentPaymentsRoute
     }
     '/parent/children/new': {
       id: '/parent/children/new'
@@ -898,6 +1031,43 @@ const ParentChildrenRouteWithChildren = ParentChildrenRoute._addFileChildren(
   ParentChildrenRouteChildren,
 )
 
+interface ParentPaymentsRouteChildren {
+  ParentPaymentsPayRoute: typeof ParentPaymentsPayRoute
+}
+
+const ParentPaymentsRouteChildren: ParentPaymentsRouteChildren = {
+  ParentPaymentsPayRoute: ParentPaymentsPayRoute,
+}
+
+const ParentPaymentsRouteWithChildren = ParentPaymentsRoute._addFileChildren(
+  ParentPaymentsRouteChildren,
+)
+
+interface ParentReceiptsRouteChildren {
+  ParentReceiptsIdRoute: typeof ParentReceiptsIdRoute
+}
+
+const ParentReceiptsRouteChildren: ParentReceiptsRouteChildren = {
+  ParentReceiptsIdRoute: ParentReceiptsIdRoute,
+}
+
+const ParentReceiptsRouteWithChildren = ParentReceiptsRoute._addFileChildren(
+  ParentReceiptsRouteChildren,
+)
+
+interface ParentScholarshipsRouteChildren {
+  ParentScholarshipsIdRoute: typeof ParentScholarshipsIdRoute
+  ParentScholarshipsSavedRoute: typeof ParentScholarshipsSavedRoute
+}
+
+const ParentScholarshipsRouteChildren: ParentScholarshipsRouteChildren = {
+  ParentScholarshipsIdRoute: ParentScholarshipsIdRoute,
+  ParentScholarshipsSavedRoute: ParentScholarshipsSavedRoute,
+}
+
+const ParentScholarshipsRouteWithChildren =
+  ParentScholarshipsRoute._addFileChildren(ParentScholarshipsRouteChildren)
+
 interface ParentSchoolsRouteChildren {
   ParentSchoolsIdRoute: typeof ParentSchoolsIdRoute
 }
@@ -917,6 +1087,9 @@ interface ParentRouteChildren {
   ParentDocumentsRoute: typeof ParentDocumentsRoute
   ParentFeesRoute: typeof ParentFeesRoute
   ParentNotificationsRoute: typeof ParentNotificationsRoute
+  ParentPaymentsRoute: typeof ParentPaymentsRouteWithChildren
+  ParentReceiptsRoute: typeof ParentReceiptsRouteWithChildren
+  ParentScholarshipsRoute: typeof ParentScholarshipsRouteWithChildren
   ParentSchoolsRoute: typeof ParentSchoolsRouteWithChildren
   ParentSettingsRoute: typeof ParentSettingsRoute
   ParentIndexRoute: typeof ParentIndexRoute
@@ -929,6 +1102,9 @@ const ParentRouteChildren: ParentRouteChildren = {
   ParentDocumentsRoute: ParentDocumentsRoute,
   ParentFeesRoute: ParentFeesRoute,
   ParentNotificationsRoute: ParentNotificationsRoute,
+  ParentPaymentsRoute: ParentPaymentsRouteWithChildren,
+  ParentReceiptsRoute: ParentReceiptsRouteWithChildren,
+  ParentScholarshipsRoute: ParentScholarshipsRouteWithChildren,
   ParentSchoolsRoute: ParentSchoolsRouteWithChildren,
   ParentSettingsRoute: ParentSettingsRoute,
   ParentIndexRoute: ParentIndexRoute,
