@@ -14,6 +14,7 @@ import { Route as SchoolsRouteImport } from './routes/schools'
 import { Route as SchoolRouteImport } from './routes/school'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as ParentRouteImport } from './routes/parent'
+import { Route as MarketplaceRouteImport } from './routes/marketplace'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as GetStartedRouteImport } from './routes/get-started'
 import { Route as IndexRouteImport } from './routes/index'
@@ -21,6 +22,7 @@ import { Route as StudentIndexRouteImport } from './routes/student.index'
 import { Route as SchoolsIndexRouteImport } from './routes/schools.index'
 import { Route as SchoolIndexRouteImport } from './routes/school.index'
 import { Route as ParentIndexRouteImport } from './routes/parent.index'
+import { Route as MarketplaceIndexRouteImport } from './routes/marketplace.index'
 import { Route as StudentUniformsRouteImport } from './routes/student.uniforms'
 import { Route as StudentSchoolsRouteImport } from './routes/student.schools'
 import { Route as StudentScholarshipsRouteImport } from './routes/student.scholarships'
@@ -57,6 +59,8 @@ import { Route as ParentDocumentsRouteImport } from './routes/parent.documents'
 import { Route as ParentChildrenRouteImport } from './routes/parent.children'
 import { Route as ParentApplyRouteImport } from './routes/parent.apply'
 import { Route as ParentApplicationsRouteImport } from './routes/parent.applications'
+import { Route as MarketplaceCheckoutRouteImport } from './routes/marketplace.checkout'
+import { Route as MarketplaceCartRouteImport } from './routes/marketplace.cart'
 import { Route as StudentScholarshipsSavedRouteImport } from './routes/student.scholarships.saved'
 import { Route as StudentScholarshipsIdRouteImport } from './routes/student.scholarships.$id'
 import { Route as StudentOrdersIdRouteImport } from './routes/student.orders.$id'
@@ -71,6 +75,7 @@ import { Route as ParentChildrenNewRouteImport } from './routes/parent.children.
 import { Route as ParentChildrenLinkRouteImport } from './routes/parent.children.link'
 import { Route as ParentChildrenIdRouteImport } from './routes/parent.children.$id'
 import { Route as ParentApplicationsIdRouteImport } from './routes/parent.applications.$id'
+import { Route as MarketplaceProductsIdRouteImport } from './routes/marketplace.products.$id'
 
 const StudentRoute = StudentRouteImport.update({
   id: '/student',
@@ -95,6 +100,11 @@ const RegisterRoute = RegisterRouteImport.update({
 const ParentRoute = ParentRouteImport.update({
   id: '/parent',
   path: '/parent',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MarketplaceRoute = MarketplaceRouteImport.update({
+  id: '/marketplace',
+  path: '/marketplace',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -131,6 +141,11 @@ const ParentIndexRoute = ParentIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => ParentRoute,
+} as any)
+const MarketplaceIndexRoute = MarketplaceIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => MarketplaceRoute,
 } as any)
 const StudentUniformsRoute = StudentUniformsRouteImport.update({
   id: '/uniforms',
@@ -312,6 +327,16 @@ const ParentApplicationsRoute = ParentApplicationsRouteImport.update({
   path: '/applications',
   getParentRoute: () => ParentRoute,
 } as any)
+const MarketplaceCheckoutRoute = MarketplaceCheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
+  getParentRoute: () => MarketplaceRoute,
+} as any)
+const MarketplaceCartRoute = MarketplaceCartRouteImport.update({
+  id: '/cart',
+  path: '/cart',
+  getParentRoute: () => MarketplaceRoute,
+} as any)
 const StudentScholarshipsSavedRoute =
   StudentScholarshipsSavedRouteImport.update({
     id: '/saved',
@@ -383,16 +408,24 @@ const ParentApplicationsIdRoute = ParentApplicationsIdRouteImport.update({
   path: '/$id',
   getParentRoute: () => ParentApplicationsRoute,
 } as any)
+const MarketplaceProductsIdRoute = MarketplaceProductsIdRouteImport.update({
+  id: '/products/$id',
+  path: '/products/$id',
+  getParentRoute: () => MarketplaceRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/get-started': typeof GetStartedRoute
   '/login': typeof LoginRoute
+  '/marketplace': typeof MarketplaceRouteWithChildren
   '/parent': typeof ParentRouteWithChildren
   '/register': typeof RegisterRoute
   '/school': typeof SchoolRouteWithChildren
   '/schools': typeof SchoolsRouteWithChildren
   '/student': typeof StudentRouteWithChildren
+  '/marketplace/cart': typeof MarketplaceCartRoute
+  '/marketplace/checkout': typeof MarketplaceCheckoutRoute
   '/parent/applications': typeof ParentApplicationsRouteWithChildren
   '/parent/apply': typeof ParentApplyRoute
   '/parent/children': typeof ParentChildrenRouteWithChildren
@@ -429,10 +462,12 @@ export interface FileRoutesByFullPath {
   '/student/scholarships': typeof StudentScholarshipsRouteWithChildren
   '/student/schools': typeof StudentSchoolsRoute
   '/student/uniforms': typeof StudentUniformsRoute
+  '/marketplace/': typeof MarketplaceIndexRoute
   '/parent/': typeof ParentIndexRoute
   '/school/': typeof SchoolIndexRoute
   '/schools/': typeof SchoolsIndexRoute
   '/student/': typeof StudentIndexRoute
+  '/marketplace/products/$id': typeof MarketplaceProductsIdRoute
   '/parent/applications/$id': typeof ParentApplicationsIdRoute
   '/parent/children/$id': typeof ParentChildrenIdRoute
   '/parent/children/link': typeof ParentChildrenLinkRoute
@@ -453,6 +488,8 @@ export interface FileRoutesByTo {
   '/get-started': typeof GetStartedRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/marketplace/cart': typeof MarketplaceCartRoute
+  '/marketplace/checkout': typeof MarketplaceCheckoutRoute
   '/parent/applications': typeof ParentApplicationsRouteWithChildren
   '/parent/apply': typeof ParentApplyRoute
   '/parent/children': typeof ParentChildrenRouteWithChildren
@@ -489,10 +526,12 @@ export interface FileRoutesByTo {
   '/student/scholarships': typeof StudentScholarshipsRouteWithChildren
   '/student/schools': typeof StudentSchoolsRoute
   '/student/uniforms': typeof StudentUniformsRoute
+  '/marketplace': typeof MarketplaceIndexRoute
   '/parent': typeof ParentIndexRoute
   '/school': typeof SchoolIndexRoute
   '/schools': typeof SchoolsIndexRoute
   '/student': typeof StudentIndexRoute
+  '/marketplace/products/$id': typeof MarketplaceProductsIdRoute
   '/parent/applications/$id': typeof ParentApplicationsIdRoute
   '/parent/children/$id': typeof ParentChildrenIdRoute
   '/parent/children/link': typeof ParentChildrenLinkRoute
@@ -513,11 +552,14 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/get-started': typeof GetStartedRoute
   '/login': typeof LoginRoute
+  '/marketplace': typeof MarketplaceRouteWithChildren
   '/parent': typeof ParentRouteWithChildren
   '/register': typeof RegisterRoute
   '/school': typeof SchoolRouteWithChildren
   '/schools': typeof SchoolsRouteWithChildren
   '/student': typeof StudentRouteWithChildren
+  '/marketplace/cart': typeof MarketplaceCartRoute
+  '/marketplace/checkout': typeof MarketplaceCheckoutRoute
   '/parent/applications': typeof ParentApplicationsRouteWithChildren
   '/parent/apply': typeof ParentApplyRoute
   '/parent/children': typeof ParentChildrenRouteWithChildren
@@ -554,10 +596,12 @@ export interface FileRoutesById {
   '/student/scholarships': typeof StudentScholarshipsRouteWithChildren
   '/student/schools': typeof StudentSchoolsRoute
   '/student/uniforms': typeof StudentUniformsRoute
+  '/marketplace/': typeof MarketplaceIndexRoute
   '/parent/': typeof ParentIndexRoute
   '/school/': typeof SchoolIndexRoute
   '/schools/': typeof SchoolsIndexRoute
   '/student/': typeof StudentIndexRoute
+  '/marketplace/products/$id': typeof MarketplaceProductsIdRoute
   '/parent/applications/$id': typeof ParentApplicationsIdRoute
   '/parent/children/$id': typeof ParentChildrenIdRoute
   '/parent/children/link': typeof ParentChildrenLinkRoute
@@ -579,11 +623,14 @@ export interface FileRouteTypes {
     | '/'
     | '/get-started'
     | '/login'
+    | '/marketplace'
     | '/parent'
     | '/register'
     | '/school'
     | '/schools'
     | '/student'
+    | '/marketplace/cart'
+    | '/marketplace/checkout'
     | '/parent/applications'
     | '/parent/apply'
     | '/parent/children'
@@ -620,10 +667,12 @@ export interface FileRouteTypes {
     | '/student/scholarships'
     | '/student/schools'
     | '/student/uniforms'
+    | '/marketplace/'
     | '/parent/'
     | '/school/'
     | '/schools/'
     | '/student/'
+    | '/marketplace/products/$id'
     | '/parent/applications/$id'
     | '/parent/children/$id'
     | '/parent/children/link'
@@ -644,6 +693,8 @@ export interface FileRouteTypes {
     | '/get-started'
     | '/login'
     | '/register'
+    | '/marketplace/cart'
+    | '/marketplace/checkout'
     | '/parent/applications'
     | '/parent/apply'
     | '/parent/children'
@@ -680,10 +731,12 @@ export interface FileRouteTypes {
     | '/student/scholarships'
     | '/student/schools'
     | '/student/uniforms'
+    | '/marketplace'
     | '/parent'
     | '/school'
     | '/schools'
     | '/student'
+    | '/marketplace/products/$id'
     | '/parent/applications/$id'
     | '/parent/children/$id'
     | '/parent/children/link'
@@ -703,11 +756,14 @@ export interface FileRouteTypes {
     | '/'
     | '/get-started'
     | '/login'
+    | '/marketplace'
     | '/parent'
     | '/register'
     | '/school'
     | '/schools'
     | '/student'
+    | '/marketplace/cart'
+    | '/marketplace/checkout'
     | '/parent/applications'
     | '/parent/apply'
     | '/parent/children'
@@ -744,10 +800,12 @@ export interface FileRouteTypes {
     | '/student/scholarships'
     | '/student/schools'
     | '/student/uniforms'
+    | '/marketplace/'
     | '/parent/'
     | '/school/'
     | '/schools/'
     | '/student/'
+    | '/marketplace/products/$id'
     | '/parent/applications/$id'
     | '/parent/children/$id'
     | '/parent/children/link'
@@ -768,6 +826,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   GetStartedRoute: typeof GetStartedRoute
   LoginRoute: typeof LoginRoute
+  MarketplaceRoute: typeof MarketplaceRouteWithChildren
   ParentRoute: typeof ParentRouteWithChildren
   RegisterRoute: typeof RegisterRoute
   SchoolRoute: typeof SchoolRouteWithChildren
@@ -810,6 +869,13 @@ declare module '@tanstack/react-router' {
       path: '/parent'
       fullPath: '/parent'
       preLoaderRoute: typeof ParentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/marketplace': {
+      id: '/marketplace'
+      path: '/marketplace'
+      fullPath: '/marketplace'
+      preLoaderRoute: typeof MarketplaceRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -860,6 +926,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/parent/'
       preLoaderRoute: typeof ParentIndexRouteImport
       parentRoute: typeof ParentRoute
+    }
+    '/marketplace/': {
+      id: '/marketplace/'
+      path: '/'
+      fullPath: '/marketplace/'
+      preLoaderRoute: typeof MarketplaceIndexRouteImport
+      parentRoute: typeof MarketplaceRoute
     }
     '/student/uniforms': {
       id: '/student/uniforms'
@@ -1113,6 +1186,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ParentApplicationsRouteImport
       parentRoute: typeof ParentRoute
     }
+    '/marketplace/checkout': {
+      id: '/marketplace/checkout'
+      path: '/checkout'
+      fullPath: '/marketplace/checkout'
+      preLoaderRoute: typeof MarketplaceCheckoutRouteImport
+      parentRoute: typeof MarketplaceRoute
+    }
+    '/marketplace/cart': {
+      id: '/marketplace/cart'
+      path: '/cart'
+      fullPath: '/marketplace/cart'
+      preLoaderRoute: typeof MarketplaceCartRouteImport
+      parentRoute: typeof MarketplaceRoute
+    }
     '/student/scholarships/saved': {
       id: '/student/scholarships/saved'
       path: '/saved'
@@ -1211,8 +1298,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ParentApplicationsIdRouteImport
       parentRoute: typeof ParentApplicationsRoute
     }
+    '/marketplace/products/$id': {
+      id: '/marketplace/products/$id'
+      path: '/products/$id'
+      fullPath: '/marketplace/products/$id'
+      preLoaderRoute: typeof MarketplaceProductsIdRouteImport
+      parentRoute: typeof MarketplaceRoute
+    }
   }
 }
+
+interface MarketplaceRouteChildren {
+  MarketplaceCartRoute: typeof MarketplaceCartRoute
+  MarketplaceCheckoutRoute: typeof MarketplaceCheckoutRoute
+  MarketplaceIndexRoute: typeof MarketplaceIndexRoute
+  MarketplaceProductsIdRoute: typeof MarketplaceProductsIdRoute
+}
+
+const MarketplaceRouteChildren: MarketplaceRouteChildren = {
+  MarketplaceCartRoute: MarketplaceCartRoute,
+  MarketplaceCheckoutRoute: MarketplaceCheckoutRoute,
+  MarketplaceIndexRoute: MarketplaceIndexRoute,
+  MarketplaceProductsIdRoute: MarketplaceProductsIdRoute,
+}
+
+const MarketplaceRouteWithChildren = MarketplaceRoute._addFileChildren(
+  MarketplaceRouteChildren,
+)
 
 interface ParentApplicationsRouteChildren {
   ParentApplicationsIdRoute: typeof ParentApplicationsIdRoute
@@ -1458,6 +1570,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   GetStartedRoute: GetStartedRoute,
   LoginRoute: LoginRoute,
+  MarketplaceRoute: MarketplaceRouteWithChildren,
   ParentRoute: ParentRouteWithChildren,
   RegisterRoute: RegisterRoute,
   SchoolRoute: SchoolRouteWithChildren,
