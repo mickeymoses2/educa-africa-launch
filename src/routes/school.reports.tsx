@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Download, Inbox, CheckCircle2, Clock, XCircle, BarChart3 } from "lucide-react";
+import { Download, Inbox, CheckCircle2, Clock, XCircle, BarChart3, Wallet, Shirt } from "lucide-react";
 import { DashboardShell } from "@/components/educa/DashboardShell";
 import { SummaryCard } from "@/components/educa/SummaryCard";
-import { applications, countByStatus, pipelineStages } from "@/data/educa";
+import { applications, countByStatus, pipelineStages, feeStructures, orders } from "@/data/educa";
 
 export const Route = createFileRoute("/school/reports")({
   head: () => ({ meta: [{ title: "Reports · EDUCA" }] }),
@@ -89,6 +89,32 @@ function Reports() {
           ))}
         </ul>
       </section>
+
+      <div className="mt-6 grid lg:grid-cols-2 gap-6">
+        <section className="rounded-2xl bg-card border border-border shadow-soft p-6">
+          <div className="flex items-center justify-between">
+            <h3 className="font-display font-semibold text-navy flex items-center gap-2"><Wallet className="h-4 w-4 text-primary" /> Fee structures by class</h3>
+          </div>
+          <div className="mt-4 divide-y divide-border">
+            {feeStructures.map((f) => (
+              <div key={f.id} className="py-3 flex items-center justify-between text-sm">
+                <span className="font-semibold text-navy">{f.grade}</span>
+                <span>KES {(f.tuition + f.boarding + f.activity + f.transport + f.other).toLocaleString()}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+        <section className="rounded-2xl bg-card border border-border shadow-soft p-6">
+          <div className="flex items-center justify-between">
+            <h3 className="font-display font-semibold text-navy flex items-center gap-2"><Shirt className="h-4 w-4 text-primary" /> Uniform order activity</h3>
+          </div>
+          <div className="mt-4 grid grid-cols-3 gap-3 text-center">
+            <div className="rounded-xl bg-muted/40 p-3"><p className="text-2xl font-display font-bold text-navy">{orders.length}</p><p className="text-[11px] uppercase tracking-wider text-muted-foreground">Orders</p></div>
+            <div className="rounded-xl bg-muted/40 p-3"><p className="text-2xl font-display font-bold text-navy">{orders.filter((o) => o.status === "Delivered").length}</p><p className="text-[11px] uppercase tracking-wider text-muted-foreground">Delivered</p></div>
+            <div className="rounded-xl bg-muted/40 p-3"><p className="text-2xl font-display font-bold text-navy">{orders.filter((o) => o.status !== "Delivered").length}</p><p className="text-[11px] uppercase tracking-wider text-muted-foreground">In Flight</p></div>
+          </div>
+        </section>
+      </div>
     </DashboardShell>
   );
 }
