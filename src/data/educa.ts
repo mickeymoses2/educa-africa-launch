@@ -236,3 +236,271 @@ export const documents: DocumentItem[] = [
   { id: "d5", name: "Transfer Letter", description: "Letter of release from current school.", required: false, status: "Missing" },
   { id: "d6", name: "Other Supporting Document", description: "Any extra document the school may request.", required: false, status: "Missing" },
 ];
+
+/* ============================================================
+ * Phase 2 — EDUCA Pay, Scholarships, Marketplace, Suppliers
+ * ============================================================ */
+
+export type PayStatus = "Paid" | "Pending" | "Overdue" | "Partially Paid";
+
+export interface PaymentItem {
+  id: string;
+  title: string;
+  type: "School Fees" | "Application Fee" | "Uniform Order" | "Marketplace Order";
+  student: string;
+  school: string;
+  amount: number;
+  dueDate: string;
+  status: PayStatus;
+  reference: string;
+}
+
+export const payments: PaymentItem[] = [
+  { id: "pay-001", title: "Term 2 School Fees", type: "School Fees", student: "Brian Mwangi", school: "Kilimani Academy", amount: 35000, dueDate: "30 Jun 2026", status: "Pending", reference: "FEE-KA-20451" },
+  { id: "pay-002", title: "Application Fee", type: "Application Fee", student: "Brian Mwangi", school: "Mwangaza Boarding", amount: 1500, dueDate: "22 Jun 2026", status: "Overdue", reference: "APF-MB-20452" },
+  { id: "pay-003", title: "Term 2 School Fees", type: "School Fees", student: "Amani Mwangi", school: "Savannah Heights School", amount: 65000, dueDate: "12 Jun 2026", status: "Paid", reference: "FEE-SH-20453" },
+  { id: "pay-004", title: "Uniform Order #UO-3012", type: "Uniform Order", student: "Brian Mwangi", school: "Kilimani Academy", amount: 8400, dueDate: "—", status: "Pending", reference: "UO-3012" },
+  { id: "pay-005", title: "Marketplace Order #MO-9101", type: "Marketplace Order", student: "Amani Mwangi", school: "—", amount: 2100, dueDate: "—", status: "Paid", reference: "MO-9101" },
+];
+
+export interface Receipt {
+  id: string;
+  number: string;
+  transactionCode: string;
+  date: string;
+  paidBy: string;
+  student: string;
+  party: string;
+  purpose: string;
+  amount: number;
+  method: "M-Pesa";
+  status: "Paid";
+}
+
+export const receipts: Receipt[] = [
+  { id: "rc-001", number: "RCPT-2026-0001", transactionCode: "RJK7H2L9X1", date: "12 Jun 2026 · 10:42", paidBy: "Grace Mwangi", student: "Amani Mwangi", party: "Savannah Heights School", purpose: "Term 2 School Fees", amount: 65000, method: "M-Pesa", status: "Paid" },
+  { id: "rc-002", number: "RCPT-2026-0002", transactionCode: "RBM4K0W8Q2", date: "08 Jun 2026 · 16:11", paidBy: "Grace Mwangi", student: "Brian Mwangi", party: "Kilimani Academy", purpose: "Application Fee", amount: 1500, method: "M-Pesa", status: "Paid" },
+  { id: "rc-003", number: "RCPT-2026-0003", transactionCode: "RZP1L9N7T6", date: "02 Jun 2026 · 09:05", paidBy: "Grace Mwangi", student: "Amani Mwangi", party: "Asili Uniforms Ltd", purpose: "Marketplace Order MO-9101", amount: 2100, method: "M-Pesa", status: "Paid" },
+];
+
+export interface Scholarship {
+  id: string;
+  title: string;
+  provider: string;
+  level: "Primary" | "Secondary" | "Tertiary" | "All Levels";
+  fundingType: "Full" | "Partial" | "Bursary" | "Grant";
+  deadline: string;
+  country: string;
+  amount?: string;
+  eligibility: string;
+  description: string;
+  documents: string[];
+  instructions: string;
+  saved?: boolean;
+}
+
+export const scholarships: Scholarship[] = [
+  { id: "sch-001", title: "Equity Wings to Fly Scholarship", provider: "Equity Group Foundation", level: "Secondary", fundingType: "Full", deadline: "30 Sep 2026", country: "Kenya", amount: "Full tuition + stipend", eligibility: "KCPE top performers from low-income households.", description: "Comprehensive secondary scholarship covering tuition, boarding, books and mentorship.", documents: ["KCPE result slip", "Birth certificate", "Parent/Guardian ID", "Recommendation letter"], instructions: "Apply via the Equity Foundation website before the deadline. Shortlisted applicants will be invited for interviews.", saved: true },
+  { id: "sch-002", title: "MasterCard Foundation Scholars Program", provider: "MasterCard Foundation", level: "Tertiary", fundingType: "Full", deadline: "15 Jan 2027", country: "Pan-African", amount: "Full tuition + living costs", eligibility: "Academically talented African students with leadership potential.", description: "Undergraduate scholarship at partner universities across Africa and abroad.", documents: ["Transcripts", "National ID/Passport", "Personal essay", "Two references"], instructions: "Applications open via partner universities each year." },
+  { id: "sch-003", title: "Elimu Trust Primary Bursary", provider: "Elimu Trust Kenya", level: "Primary", fundingType: "Bursary", deadline: "10 Aug 2026", country: "Kenya", amount: "KES 25,000 per year", eligibility: "Pupils in Grades 4–6 from vulnerable families.", description: "Termly bursary supporting tuition, uniform and learning materials.", documents: ["Recent report card", "Chief's letter", "Parent ID"], instructions: "Submit a completed bursary form to your sub-county education office." },
+  { id: "sch-004", title: "Africa Code Week STEM Grant", provider: "SAP Africa Code Week", level: "Secondary", fundingType: "Grant", deadline: "05 Oct 2026", country: "Pan-African", amount: "Up to USD 1,500", eligibility: "Students passionate about coding, robotics and STEM clubs.", description: "Grant for individuals or school clubs running STEM initiatives.", documents: ["Project proposal", "Teacher endorsement"], instructions: "Submit a project proposal via the Africa Code Week portal." },
+  { id: "sch-005", title: "Aga Khan Academies Scholarship", provider: "Aga Khan Academies", level: "Secondary", fundingType: "Partial", deadline: "20 Nov 2026", country: "Kenya · Uganda · Tanzania", amount: "Up to 100% tuition (means-tested)", eligibility: "Top academic performers admitted to Aga Khan Academies.", description: "Need- and merit-based financial aid for the IB Diploma Programme.", documents: ["Academic records", "Family income statement", "References"], instructions: "Apply through the Aga Khan Academies admissions portal." },
+  { id: "sch-006", title: "Nation Media Scholarship", provider: "Nation Media Group", level: "Secondary", fundingType: "Full", deadline: "12 Jul 2026", country: "Kenya", amount: "Full secondary tuition", eligibility: "KCPE candidates scoring 380+ with demonstrated financial need.", description: "Full scholarship to attend partner national schools.", documents: ["KCPE certificate", "Letter from school head", "Guardian ID"], instructions: "Submit the application form published in the Daily Nation newspaper.", saved: true },
+];
+
+/* Marketplace */
+
+export type ProductCategory =
+  | "Uniforms"
+  | "Books"
+  | "Stationery"
+  | "School Bags"
+  | "Shoes"
+  | "Sportswear"
+  | "Learning Materials"
+  | "School Accessories";
+
+export const productCategories: { key: ProductCategory; description: string; emoji: string }[] = [
+  { key: "Uniforms", description: "School-approved uniform sets", emoji: "👕" },
+  { key: "Books", description: "Course books & readers", emoji: "📚" },
+  { key: "Stationery", description: "Pens, notebooks, geometry sets", emoji: "✏️" },
+  { key: "School Bags", description: "Backpacks & satchels", emoji: "🎒" },
+  { key: "Shoes", description: "Black, brown & sports shoes", emoji: "👟" },
+  { key: "Sportswear", description: "PE kits & sports gear", emoji: "🏃" },
+  { key: "Learning Materials", description: "Charts, kits & flashcards", emoji: "🧠" },
+  { key: "School Accessories", description: "Ties, belts, socks & more", emoji: "🎀" },
+];
+
+export interface Product {
+  id: string;
+  name: string;
+  category: ProductCategory;
+  supplier: string;
+  supplierId: string;
+  price: number;
+  stock: number;
+  rating: number;
+  reviews: number;
+  sizes: string[];
+  description: string;
+  featured?: boolean;
+  schoolApproved?: boolean;
+  gradient: string;
+}
+
+export const products: Product[] = [
+  { id: "p-001", name: "Boys Cotton School Shirt", category: "Uniforms", supplier: "Asili Uniforms Ltd", supplierId: "sup-001", price: 850, stock: 142, rating: 4.7, reviews: 128, sizes: ["S","M","L","XL"], description: "Premium-grade cotton white shirt, breathable and easy-care. School-approved by 30+ institutions.", featured: true, schoolApproved: true, gradient: "from-primary to-teal" },
+  { id: "p-002", name: "Girls Pleated Skirt", category: "Uniforms", supplier: "Asili Uniforms Ltd", supplierId: "sup-001", price: 1200, stock: 88, rating: 4.6, reviews: 96, sizes: ["S","M","L","XL"], description: "Durable pleated tartan skirt in school colours.", featured: true, schoolApproved: true, gradient: "from-teal to-gold" },
+  { id: "p-003", name: "School Sweater · Navy", category: "Uniforms", supplier: "Threadworks Africa", supplierId: "sup-002", price: 1800, stock: 64, rating: 4.5, reviews: 72, sizes: ["S","M","L","XL"], description: "Cotton-blend pullover with embroidered crest placeholder.", featured: true, gradient: "from-navy to-primary" },
+  { id: "p-004", name: "CBC Grade 6 Mathematics Coursebook", category: "Books", supplier: "Pamoja Publishers", supplierId: "sup-003", price: 650, stock: 220, rating: 4.8, reviews: 410, sizes: [], description: "Approved CBC coursebook with worked examples and assessments.", featured: true, gradient: "from-info to-primary" },
+  { id: "p-005", name: "Geometry Set · 9-piece", category: "Stationery", supplier: "Pamoja Publishers", supplierId: "sup-003", price: 350, stock: 540, rating: 4.4, reviews: 180, sizes: [], description: "Sturdy geometry set for primary and secondary students.", gradient: "from-gold to-teal" },
+  { id: "p-006", name: "Sahara Backpack 28L", category: "School Bags", supplier: "Jongo Gear", supplierId: "sup-004", price: 2400, stock: 96, rating: 4.6, reviews: 142, sizes: ["One Size"], description: "Water-resistant backpack with padded laptop sleeve.", featured: true, gradient: "from-primary to-info" },
+  { id: "p-007", name: "Black Leather School Shoes", category: "Shoes", supplier: "Sokoni Footwear", supplierId: "sup-005", price: 2100, stock: 78, rating: 4.5, reviews: 88, sizes: ["35","36","37","38","39","40","41","42"], description: "Genuine leather lace-ups with comfort sole.", gradient: "from-navy to-teal" },
+  { id: "p-008", name: "PE Tracksuit · Boys & Girls", category: "Sportswear", supplier: "Asili Uniforms Ltd", supplierId: "sup-001", price: 2600, stock: 54, rating: 4.7, reviews: 67, sizes: ["S","M","L","XL"], description: "Stretch-knit tracksuit set for PE and games.", schoolApproved: true, gradient: "from-teal to-primary" },
+  { id: "p-009", name: "Wall Map of Africa", category: "Learning Materials", supplier: "Pamoja Publishers", supplierId: "sup-003", price: 1100, stock: 36, rating: 4.6, reviews: 41, sizes: [], description: "High-detail laminated map suitable for classrooms.", gradient: "from-gold to-primary" },
+  { id: "p-010", name: "School Tie · Striped", category: "School Accessories", supplier: "Threadworks Africa", supplierId: "sup-002", price: 320, stock: 240, rating: 4.3, reviews: 55, sizes: [], description: "Pre-knot school tie in standard length.", gradient: "from-navy to-gold" },
+];
+
+export interface Supplier {
+  id: string;
+  name: string;
+  category: string;
+  location: string;
+  rating: number;
+  productsCount: number;
+  status: "Active" | "Pending" | "Inactive";
+  official?: boolean;
+  description: string;
+  initials: string;
+  delivery: string;
+}
+
+export const suppliers: Supplier[] = [
+  { id: "sup-001", name: "Asili Uniforms Ltd", category: "Uniforms · Sportswear", location: "Nairobi, Kenya", rating: 4.7, productsCount: 42, status: "Active", official: true, description: "Official uniform supplier for 30+ schools across East Africa.", initials: "AU", delivery: "2–3 days" },
+  { id: "sup-002", name: "Threadworks Africa", category: "Uniforms · Accessories", location: "Mombasa, Kenya", rating: 4.5, productsCount: 28, status: "Active", official: true, description: "Bespoke uniform manufacturing with school-branded crests.", initials: "TA", delivery: "3–5 days" },
+  { id: "sup-003", name: "Pamoja Publishers", category: "Books · Learning Materials", location: "Nairobi, Kenya", rating: 4.8, productsCount: 156, status: "Active", description: "Leading publisher of CBC and IGCSE coursebooks.", initials: "PP", delivery: "1–2 days" },
+  { id: "sup-004", name: "Jongo Gear", category: "School Bags · Accessories", location: "Kampala, Uganda", rating: 4.4, productsCount: 18, status: "Active", description: "Durable bags engineered for African school routes.", initials: "JG", delivery: "4–7 days" },
+  { id: "sup-005", name: "Sokoni Footwear", category: "Shoes", location: "Eldoret, Kenya", rating: 4.5, productsCount: 22, status: "Pending", description: "Quality leather school shoes at fair prices.", initials: "SF", delivery: "3–5 days" },
+];
+
+/* Orders */
+
+export type OrderStatus =
+  | "Pending Payment"
+  | "Payment Received"
+  | "Processing"
+  | "Ready for Pickup"
+  | "Out for Delivery"
+  | "Delivered"
+  | "Cancelled";
+
+export const orderStages: OrderStatus[] = [
+  "Pending Payment",
+  "Payment Received",
+  "Processing",
+  "Ready for Pickup",
+  "Out for Delivery",
+  "Delivered",
+];
+
+export interface OrderLine {
+  productId: string;
+  name: string;
+  quantity: number;
+  size?: string;
+  price: number;
+  gradient: string;
+}
+
+export interface Order {
+  id: string;
+  number: string;
+  date: string;
+  customer: string;
+  student: string;
+  school: string;
+  supplier: string;
+  supplierId: string;
+  items: OrderLine[];
+  amount: number;
+  status: OrderStatus;
+  delivery: "Home Delivery" | "School Pickup" | "Supplier Pickup";
+  address?: string;
+}
+
+export const orders: Order[] = [
+  { id: "ord-001", number: "ORD-9201", date: "20 Jun 2026", customer: "Grace Mwangi", student: "Brian Mwangi", school: "Kilimani Academy", supplier: "Asili Uniforms Ltd", supplierId: "sup-001", items: [
+    { productId: "p-001", name: "Boys Cotton School Shirt", quantity: 3, size: "M", price: 850, gradient: "from-primary to-teal" },
+    { productId: "p-008", name: "PE Tracksuit · Boys & Girls", quantity: 1, size: "M", price: 2600, gradient: "from-teal to-primary" },
+  ], amount: 5150, status: "Out for Delivery", delivery: "Home Delivery", address: "Apt 4B, Kilimani, Nairobi" },
+  { id: "ord-002", number: "ORD-9202", date: "18 Jun 2026", customer: "Grace Mwangi", student: "Amani Mwangi", school: "Savannah Heights School", supplier: "Pamoja Publishers", supplierId: "sup-003", items: [
+    { productId: "p-004", name: "CBC Grade 6 Mathematics Coursebook", quantity: 1, price: 650, gradient: "from-info to-primary" },
+    { productId: "p-005", name: "Geometry Set · 9-piece", quantity: 2, price: 350, gradient: "from-gold to-teal" },
+  ], amount: 1350, status: "Delivered", delivery: "School Pickup" },
+  { id: "ord-003", number: "ORD-9203", date: "16 Jun 2026", customer: "Grace Mwangi", student: "Brian Mwangi", school: "Kilimani Academy", supplier: "Sokoni Footwear", supplierId: "sup-005", items: [
+    { productId: "p-007", name: "Black Leather School Shoes", quantity: 1, size: "38", price: 2100, gradient: "from-navy to-teal" },
+  ], amount: 2100, status: "Processing", delivery: "Supplier Pickup" },
+  { id: "ord-004", number: "ORD-9204", date: "15 Jun 2026", customer: "Grace Mwangi", student: "Brian Mwangi", school: "Kilimani Academy", supplier: "Asili Uniforms Ltd", supplierId: "sup-001", items: [
+    { productId: "p-002", name: "Girls Pleated Skirt", quantity: 2, size: "M", price: 1200, gradient: "from-teal to-gold" },
+  ], amount: 2400, status: "Pending Payment", delivery: "Home Delivery" },
+];
+
+/* Uniform requirements per class */
+
+export interface UniformItem {
+  id: string;
+  classGrade: string;
+  item: string;
+  required: boolean;
+  gender: "All" | "Boys" | "Girls";
+  quantity: number;
+  notes?: string;
+}
+
+export const uniformRequirements: UniformItem[] = [
+  { id: "ur-1", classGrade: "Grade 1 – 3", item: "White Shirt", required: true, gender: "All", quantity: 3 },
+  { id: "ur-2", classGrade: "Grade 1 – 3", item: "Grey Trouser", required: true, gender: "Boys", quantity: 2 },
+  { id: "ur-3", classGrade: "Grade 1 – 3", item: "Tartan Skirt", required: true, gender: "Girls", quantity: 2 },
+  { id: "ur-4", classGrade: "Grade 1 – 3", item: "Navy Sweater", required: true, gender: "All", quantity: 1 },
+  { id: "ur-5", classGrade: "Form 1 – 4", item: "School Blazer", required: true, gender: "All", quantity: 1, notes: "With embroidered crest" },
+  { id: "ur-6", classGrade: "Form 1 – 4", item: "Striped Tie", required: true, gender: "All", quantity: 1 },
+  { id: "ur-7", classGrade: "Form 1 – 4", item: "PE Tracksuit", required: false, gender: "All", quantity: 1 },
+  { id: "ur-8", classGrade: "Form 1 – 4", item: "Black Leather Shoes", required: true, gender: "All", quantity: 1 },
+];
+
+/* Fee structures (school-side) */
+
+export interface FeeStructure {
+  id: string;
+  grade: string;
+  tuition: number;
+  boarding: number;
+  activity: number;
+  transport: number;
+  other: number;
+  termYear: string;
+}
+
+export const feeStructures: FeeStructure[] = [
+  { id: "fs-1", grade: "Grade 1 – 3", tuition: 55000, boarding: 0, activity: 3000, transport: 8000, other: 4000, termYear: "Term 2 · 2026" },
+  { id: "fs-2", grade: "Grade 4 – 6", tuition: 65000, boarding: 0, activity: 4000, transport: 8000, other: 5000, termYear: "Term 2 · 2026" },
+  { id: "fs-3", grade: "Form 1 – 2", tuition: 85000, boarding: 35000, activity: 6000, transport: 0, other: 7500, termYear: "Term 2 · 2026" },
+  { id: "fs-4", grade: "Form 3 – 4", tuition: 95000, boarding: 38000, activity: 7000, transport: 0, other: 8500, termYear: "Term 2 · 2026" },
+];
+
+export const orderStatusBadge: Record<OrderStatus, string> = {
+  "Pending Payment": "bg-warning/15 text-warning-foreground",
+  "Payment Received": "bg-info/10 text-info",
+  "Processing": "bg-primary/10 text-primary",
+  "Ready for Pickup": "bg-teal/15 text-teal-foreground",
+  "Out for Delivery": "bg-gold/20 text-gold-foreground",
+  "Delivered": "bg-success/15 text-success-foreground",
+  "Cancelled": "bg-destructive/10 text-destructive",
+};
+
+export const payStatusBadge: Record<PayStatus, string> = {
+  Paid: "bg-success/15 text-success-foreground",
+  Pending: "bg-warning/15 text-warning-foreground",
+  Overdue: "bg-destructive/10 text-destructive",
+  "Partially Paid": "bg-info/10 text-info",
+};
