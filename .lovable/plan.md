@@ -1,102 +1,103 @@
+# Phase 2 Upgrade — Marketplace, Wallet & Logistics
 
-# EDUCA Africa — Phase 2 Build Plan
+Major upgrade keeping the existing EDUCA visual identity (navy/gold/teal, rounded cards, soft shadows). Mock data only — no real M-Pesa, no real logistics APIs.
 
-Phase 2 layers commercial features on top of MVP 1 without redesigning anything. All new screens reuse the existing design tokens (navy hero, gold CTAs, teal accents, rounded cards, soft shadows) and the existing `PortalShell` / `DashboardShell` patterns. Mock data only — no real M-Pesa, no backend.
+## 1. Data layer (`src/data/educa.ts`)
 
-## 1. Data & shared components
+Extend with:
+- `bundles[]` — id, name, school, class, items count, price, gradient
+- `categoriesFeatured[]` — uniforms/books/stationery/shoes/bags/sportswear/tech/special-needs
+- `schoolsShoppable[]` — for "Shop By School" (reuse existing schools data)
+- `deals[]` — back-to-school offers
+- `walletBalances` — keyed by role (parent/student/school/supplier/logistics) with available, pending, recent fields
+- `walletTransactions[]` — id, date, type, description, amount, status
+- `logisticsPartners[]` — name, distance, eta, fee, vehicle, rating, coverage, gradient
+- `deliveries[]` — id, orderRef, supplier, customer, pickup, dropoff, status, fee, items, timeline
+- `deliveryRequests[]` — pending requests for logistics dashboard
 
-Extend `src/data/educa.ts` with mock data:
-- `payments`, `transactions`, `receipts`
-- `scholarships`
-- `products`, `categories`, `suppliers`, `orders`, `cartItems`
-- `uniformRequirements`, `feeStructures`
-- Types for each + helper getters
+## 2. Shared components (`src/components/educa/`)
 
-New shared components in `src/components/educa/`:
-- `PaymentCard.tsx` — amount, due date, status badge, Pay CTA
-- `ReceiptCard.tsx` + `ReceiptDocument.tsx` (printable receipt layout)
-- `ScholarshipCard.tsx`
-- `ProductCard.tsx`
-- `OrderCard.tsx` + `OrderTimeline.tsx`
-- `MpesaStepper.tsx` (reuses existing `Stepper`)
-- `StatCard.tsx` (small KPI card — if not already covered by `SummaryCard`)
+New:
+- `WalletCard.tsx` — top-of-dashboard balance card with role variants (parent/student/school/supplier/logistics), deposit/payout buttons
+- `AccountTopBar.tsx` — slim header row: name + role + balance + deposit + notifications
+- `TransactionRow.tsx` + `TxStatusBadge.tsx`
+- `BundleCard.tsx`
+- `CategoryTile.tsx`
+- `SupplierCard.tsx`
+- `DealCard.tsx`
+- `LogisticsPartnerCard.tsx` — selectable at checkout
+- `DeliveryRequestCard.tsx`
+- `LogisticsShell.tsx` — dashboard layout (mirrors SupplierShell styling)
+- `DepositStepper.tsx` — reuses existing `Stepper`
+- Enhance `ProductCard.tsx` — add wishlist icon, quick view, delivery badge, old-price strike-through, best-seller/low-stock badges
 
-## 2. Navigation updates
+## 3. Marketplace upgrades
 
-Update `PortalShell.tsx`:
-- **Parent nav additions:** Payments, Receipts, Scholarships, Marketplace, Uniforms, Orders
-- **Student nav additions:** Scholarships, Marketplace, Orders
-- Keep mobile bottom-nav at 5 tabs — swap "Docs" item for "Pay" (parent) / keep core, surface new sections via dashboard quick actions and sidebar.
+- `marketplace.index.tsx` — full hero with image bg + dark overlay, gold CTAs (Start Shopping / Shop By School / Become A Supplier), integrated search, horizontal-scroll category chips. Below: Shop By School, Bundles, Featured Categories, Recommended For Your Child, Approved Suppliers, Deals, "Deliver With EDUCA" CTA block
+- `marketplace.bundles.tsx` — bundle grid + detail-style cards
+- `marketplace.categories.$category.tsx` — category listing
+- `marketplace.products.$id.tsx` — gallery, variants, qty, tabs (Description, School Compatibility, Supplier Details, Delivery Options, Reviews), wishlist
+- `marketplace.checkout.tsx` — rebuild as 6-step stepper: Cart Review → Customer/Student → Delivery Option → Logistics Partner → Payment → Review. Logistics partner selection only for Home/Scheduled delivery. Payment shows EDUCA Wallet balance + insufficient state with "Deposit Money" CTA. Footer line about verified partners
+- Generate one marketplace hero image via `imagegen` (premium school shopping scene)
 
-Update `DashboardShell.tsx` (school):
-- Add Payments, Fee Structures (already partially), Uniform Requirements, Approved Suppliers, Reports (enhance existing).
+## 4. EDUCA Wallet (all roles)
 
-New `SupplierShell.tsx` in `src/components/educa/`:
-- Mirrors `DashboardShell` styling. Sidebar items: Dashboard, Products, Orders, Inventory, Sales, Settings. User badge "Supplier".
+Wallet pages (each with balance card, deposit/payout buttons, 4-step deposit flow, transactions list):
+- `parent.wallet.tsx`, `parent.wallet.deposit.tsx`
+- `student.wallet.tsx`, `student.wallet.deposit.tsx`
+- `school.wallet.tsx`, `school.wallet.deposit.tsx`
+- `supplier.wallet.tsx`, `supplier.wallet.deposit.tsx`
+- `logistics.wallet.tsx`, `logistics.wallet.deposit.tsx`
 
-## 3. New routes (file-based, dot-separated)
+Deposit stepper: Amount → Method (M-Pesa/Bank/Card) → Phone → Confirmation (with Simulate Success/Failed mock buttons).
 
-**Parent (`/parent/*`)**
-- `parent.payments.tsx` — KPIs + recent transactions + payment cards
-- `parent.payments.pay.tsx` — 5-step M-Pesa flow with `?step=` search param
-- `parent.receipts.tsx` + `parent.receipts.$id.tsx`
-- `parent.scholarships.tsx`, `parent.scholarships.$id.tsx`, `parent.scholarships.saved.tsx`
-- `parent.uniforms.tsx` — 7-step stepper
-- `parent.orders.tsx` + `parent.orders.$id.tsx`
+Inject `WalletCard` at top of each dashboard index (`parent.index.tsx`, `student.index.tsx`, `school.index.tsx`, `supplier.index.tsx`, new `logistics.index.tsx`).
 
-**Student (`/student/*`)**
-- `student.payments.tsx` (read-only summary)
-- `student.receipts.tsx`
-- `student.scholarships.tsx`, `student.scholarships.$id.tsx`, `student.scholarships.saved.tsx`
-- `student.uniforms.tsx`
-- `student.orders.tsx` + `student.orders.$id.tsx`
+## 5. Logistics partner system (new role)
 
-**Marketplace (public, `/marketplace/*`)**
-- `marketplace.tsx` (layout `<Outlet />`)
-- `marketplace.index.tsx` (hero, categories, featured, recommended)
-- `marketplace.products.$id.tsx` (gallery, variants, add to cart)
-- `marketplace.cart.tsx`
-- `marketplace.checkout.tsx` + success state
+New shell + routes:
+- `logistics.tsx` (layout w/ `LogisticsShell`)
+- `logistics.index.tsx` — wallet card, stat cards, available requests, active deliveries, earnings summary
+- `logistics.register.tsx` — full registration form with benefit cards
+- `logistics.deliveries.tsx` — list (available/active/completed tabs)
+- `logistics.deliveries.$id.tsx` — pickup/dropoff details, status actions (Accept/Picked Up/In Transit/Delivered/Issue), timeline, POD upload placeholder
+- `logistics.routes.tsx` — coverage areas
+- `logistics.earnings.tsx` — stat cards + transaction list
+- `logistics.settings.tsx`
 
-**School (`/school/*`)**
-- Extend existing `school.fees.tsx` with add/edit fee structures + application fee setup
-- `school.uniforms.tsx` — uniform requirements table
-- `school.suppliers.tsx` — approved suppliers
-- `school.payments.tsx` — incoming payments summary
-- Enhance existing `school.reports.tsx`
+Add to `get-started.tsx` and `login.tsx`: Logistics Partner role tile.
+Add `register.tsx` logistics search variant.
 
-**Supplier portal (`/supplier/*`)** — new
-- `supplier.tsx` (layout using `SupplierShell`)
-- `supplier.index.tsx` (KPIs + low stock)
-- `supplier.products.tsx`, `supplier.products.new.tsx`
-- `supplier.orders.tsx`, `supplier.orders.$id.tsx`
-- `supplier.inventory.tsx`
-- `supplier.sales.tsx`
-- `supplier.settings.tsx`
+Supplier:
+- `supplier.logistics.tsx` — nearby partners, active partners, performance, recent pickups
+- Update supplier order detail to show selected partner + pickup status
 
-## 4. M-Pesa flow detail
+## 6. Order tracking with logistics
 
-Single route `parent.payments.pay.tsx` driven by `validateSearch` (`step: 1-5`, `type`, `amount`, `ref`). Uses `Stepper`. Mock buttons "Simulate Success / Failed" advance to step 4 or 5. Success links to receipt detail. Trustworthy financial visual: dark navy summary card, green success state, gold CTAs, M-Pesa green accent line.
+Update `parent.orders.$id.tsx` and `student.orders.$id.tsx`:
+- Add logistics partner card (name/vehicle/rating/contact placeholder)
+- Extend `OrderTimeline` stages to include "Logistics partner assigned", "Package picked up", "In transit"
 
-## 5. Cart state
+## 7. Navigation updates
 
-Lightweight in-memory store via a small `useCart` hook backed by `localStorage` for session continuity in the prototype. No backend.
+- `PortalShell.tsx` — add Wallet link for parent/student
+- `DashboardShell.tsx` — add Wallet link for school
+- `SupplierShell.tsx` — add Wallet + Logistics links
+- New `LogisticsShell.tsx` — Dashboard, Deliveries, Routes, Earnings, Wallet, Settings
+- `Navbar.tsx` — add Logistics partner link in role switcher area
+- `index.tsx` (homepage) — add "Become A Logistics Partner" CTA in ecosystem area
 
-## 6. Reports enhancements
+## 8. Reports
 
-Use simple stat cards + tables (no chart libs). Parent dashboard gets a "Phase 2 quick actions" row (Pay Fees, Order Uniform, Browse Marketplace, Find Scholarship).
+Extend existing `school.reports.tsx`; add lightweight stats panels on each wallet page (no chart libs — stat pills + simple tables).
 
-## 7. Empty & success states
-
-Reuse `EmptyState` everywhere; add gold-CTA success cards on payment success, order placed, scholarship saved, etc.
-
-## 8. Out of scope (explicitly skipped)
-
-AI matching, learning hub, exams, teacher dashboard, jobs, transport, accommodation, research, gov dashboard, real M-Pesa API, real backend, heavy analytics, EDUCA TV, forums, insurance.
+## Out of scope (label "Coming Soon" if referenced)
+AI, learning hub, exams, teacher dashboard, jobs, accommodation, research, gov, insurance, TV, forums, heavy analytics, real M-Pesa, real GPS tracking, real backend.
 
 ## Technical notes
-
-- TanStack Router file-based routes only; update `routeTree.gen.ts` to register new routes.
-- Tailwind v4 tokens already configured — no `styles.css` changes needed.
-- All new routes mobile-first; supplier portal optimized for desktop but usable on mobile.
-- No new npm packages required.
+- TanStack Router file-based dot-separated routes only
+- No new npm packages
+- All steppers reuse existing `Stepper.tsx`
+- All status badges follow existing badge pattern
+- Wallet balance reads from mock object in `educa.ts`; deposit flow updates UI-only via `useState`
+- Mobile-first: wallet cards stack, transactions become cards, hero search stacks under headline, category chips horizontal-scroll
