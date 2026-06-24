@@ -504,3 +504,272 @@ export const payStatusBadge: Record<PayStatus, string> = {
   Overdue: "bg-destructive/10 text-destructive",
   "Partially Paid": "bg-info/10 text-info",
 };
+
+/* ============================================================
+ * Phase 2 (v2) — Wallet, Logistics, Bundles, Deals
+ * ============================================================ */
+
+export type Role = "parent" | "student" | "school" | "supplier" | "logistics";
+
+export interface WalletBalance {
+  title: string;
+  accountName: string;
+  accountType: string;
+  available: number;
+  pending: number;
+  extraLabel: string;
+  extraValue: string;
+  linkedLabel?: string;
+  linkedValue?: string;
+  gradient: string;
+}
+
+export const walletBalances: Record<Role, WalletBalance> = {
+  parent: {
+    title: "EDUCA Wallet",
+    accountName: "Grace Mwangi",
+    accountType: "Parent Account",
+    available: 12500,
+    pending: 4000,
+    extraLabel: "Recent Deposit",
+    extraValue: "KES 5,000",
+    linkedLabel: "Linked Students",
+    linkedValue: "2",
+    gradient: "from-navy via-primary to-teal",
+  },
+  student: {
+    title: "My EDUCA Balance",
+    accountName: "Brian Mwangi",
+    accountType: "Student Account",
+    available: 2300,
+    pending: 0,
+    extraLabel: "Education Allowance",
+    extraValue: "KES 1,500/wk",
+    linkedLabel: "EDUCA ID",
+    linkedValue: "EDUCA-STU-000123",
+    gradient: "from-teal via-primary to-navy",
+  },
+  school: {
+    title: "School Account Balance",
+    accountName: "Kilimani Academy",
+    accountType: "School Account",
+    available: 84000,
+    pending: 12000,
+    extraLabel: "Collected Fees (Term)",
+    extraValue: "KES 4.2M",
+    linkedLabel: "Application Fees",
+    linkedValue: "KES 48,000",
+    gradient: "from-navy via-primary to-gold",
+  },
+  supplier: {
+    title: "Supplier Wallet",
+    accountName: "Asili Uniforms Ltd",
+    accountType: "Supplier Account",
+    available: 46800,
+    pending: 18200,
+    extraLabel: "Sales Balance",
+    extraValue: "KES 142K",
+    linkedLabel: "Pending Orders",
+    linkedValue: "7",
+    gradient: "from-navy via-teal to-primary",
+  },
+  logistics: {
+    title: "Delivery Earnings",
+    accountName: "SwiftEdu Deliveries",
+    accountType: "Logistics Partner",
+    available: 18400,
+    pending: 4200,
+    extraLabel: "Completed Deliveries",
+    extraValue: "126 · 30d",
+    linkedLabel: "Pending Deliveries",
+    linkedValue: "5",
+    gradient: "from-navy via-primary to-teal",
+  },
+};
+
+export type TxType =
+  | "Deposit"
+  | "Payment"
+  | "Refund"
+  | "Order Payment"
+  | "Fee Payment"
+  | "Supplier Sale"
+  | "Delivery Earning"
+  | "Payout Request";
+
+export type TxStatus = "Successful" | "Pending" | "Failed" | "Reversed";
+
+export interface WalletTransaction {
+  id: string;
+  date: string;
+  type: TxType;
+  description: string;
+  amount: number; // negative for outflow
+  status: TxStatus;
+}
+
+export const walletTransactions: Record<Role, WalletTransaction[]> = {
+  parent: [
+    { id: "TX-9001", date: "23 Jun 2026 · 09:12", type: "Deposit", description: "M-Pesa deposit from +254 722 110 220", amount: 5000, status: "Successful" },
+    { id: "TX-9000", date: "20 Jun 2026 · 14:08", type: "Order Payment", description: "Marketplace Order ORD-9201 · Asili Uniforms", amount: -5150, status: "Successful" },
+    { id: "TX-8995", date: "18 Jun 2026 · 11:31", type: "Fee Payment", description: "Term 2 Fees · Savannah Heights School", amount: -65000, status: "Successful" },
+    { id: "TX-8990", date: "15 Jun 2026 · 10:05", type: "Deposit", description: "M-Pesa deposit", amount: 20000, status: "Successful" },
+    { id: "TX-8987", date: "14 Jun 2026 · 16:22", type: "Refund", description: "Refund for ORD-9180 (cancelled)", amount: 1800, status: "Successful" },
+    { id: "TX-8980", date: "12 Jun 2026 · 08:47", type: "Order Payment", description: "Marketplace Order ORD-9180 · Pamoja Publishers", amount: -1800, status: "Reversed" },
+  ],
+  student: [
+    { id: "TX-7012", date: "22 Jun 2026 · 12:00", type: "Deposit", description: "Top-up from parent (Grace Mwangi)", amount: 1500, status: "Successful" },
+    { id: "TX-7008", date: "19 Jun 2026 · 09:30", type: "Order Payment", description: "Marketplace Order ORD-9205 · Stationery", amount: -800, status: "Successful" },
+    { id: "TX-7003", date: "15 Jun 2026 · 10:00", type: "Deposit", description: "Education allowance · Weekly", amount: 1500, status: "Successful" },
+  ],
+  school: [
+    { id: "TX-5301", date: "22 Jun 2026 · 16:11", type: "Fee Payment", description: "Term 2 Fees · Amani Mwangi", amount: 65000, status: "Successful" },
+    { id: "TX-5298", date: "21 Jun 2026 · 14:55", type: "Fee Payment", description: "Term 2 Fees · Brian Mwangi (partial)", amount: 20000, status: "Successful" },
+    { id: "TX-5290", date: "18 Jun 2026 · 09:20", type: "Payout Request", description: "Payout to school bank account", amount: -50000, status: "Pending" },
+    { id: "TX-5285", date: "15 Jun 2026 · 11:00", type: "Fee Payment", description: "Application fees x 24", amount: 36000, status: "Successful" },
+  ],
+  supplier: [
+    { id: "TX-4101", date: "20 Jun 2026 · 18:32", type: "Supplier Sale", description: "Order ORD-9201 · 4 items", amount: 5150, status: "Successful" },
+    { id: "TX-4098", date: "19 Jun 2026 · 12:14", type: "Supplier Sale", description: "Order ORD-9198 · 2 items", amount: 3200, status: "Successful" },
+    { id: "TX-4095", date: "17 Jun 2026 · 10:00", type: "Payout Request", description: "Bank payout · KCB", amount: -25000, status: "Pending" },
+  ],
+  logistics: [
+    { id: "TX-3210", date: "22 Jun 2026 · 17:45", type: "Delivery Earning", description: "Delivery DLV-2204 · ORD-9201", amount: 250, status: "Successful" },
+    { id: "TX-3208", date: "22 Jun 2026 · 14:10", type: "Delivery Earning", description: "Delivery DLV-2203 · ORD-9198", amount: 320, status: "Successful" },
+    { id: "TX-3200", date: "20 Jun 2026 · 09:00", type: "Payout Request", description: "Bank payout · Equity", amount: -10000, status: "Successful" },
+  ],
+};
+
+export const txStatusBadge: Record<TxStatus, string> = {
+  Successful: "bg-success/15 text-success-foreground",
+  Pending: "bg-warning/15 text-warning-foreground",
+  Failed: "bg-destructive/10 text-destructive",
+  Reversed: "bg-muted text-muted-foreground",
+};
+
+/* Bundles */
+
+export interface Bundle {
+  id: string;
+  name: string;
+  classGrade: string;
+  schoolHint: string;
+  itemsCount: number;
+  price: number;
+  oldPrice?: number;
+  gradient: string;
+  description: string;
+}
+
+export const bundles: Bundle[] = [
+  { id: "b-001", name: "Form 1 Starter Pack", classGrade: "Form 1", schoolHint: "Boarding & Day Schools", itemsCount: 14, price: 12800, oldPrice: 14200, gradient: "from-navy to-primary", description: "Complete uniform set, books and stationery to start secondary school strong." },
+  { id: "b-002", name: "Grade 1 Back-to-School Pack", classGrade: "Grade 1", schoolHint: "Primary Schools", itemsCount: 11, price: 7400, gradient: "from-teal to-primary", description: "Everything a first-grader needs — uniforms, books, bag and stationery." },
+  { id: "b-003", name: "Boarding School Essentials", classGrade: "Form 1 – 4", schoolHint: "Boarding Secondary", itemsCount: 22, price: 18600, oldPrice: 21000, gradient: "from-primary to-info", description: "Bedding, toiletries, uniform and study kit for boarders." },
+  { id: "b-004", name: "Sports & PE Kit", classGrade: "All Levels", schoolHint: "All Schools", itemsCount: 6, price: 4800, gradient: "from-gold to-teal", description: "Tracksuit, PE shirt, shorts, sports shoes and water bottle." },
+  { id: "b-005", name: "Stationery Pack", classGrade: "Grade 4 – 8", schoolHint: "All Schools", itemsCount: 18, price: 2400, gradient: "from-info to-primary", description: "Notebooks, pens, geometry set and exam-day essentials." },
+  { id: "b-006", name: "Full Uniform Set", classGrade: "Grade 1 – 6", schoolHint: "Primary Schools", itemsCount: 9, price: 6800, gradient: "from-navy to-teal", description: "Shirts, trousers/skirts, sweater, tie, socks and shoes." },
+];
+
+/* Featured / Deals */
+
+export interface Deal {
+  id: string;
+  title: string;
+  description: string;
+  badge: string;
+  gradient: string;
+}
+
+export const deals: Deal[] = [
+  { id: "d-001", title: "10% off Stationery Bundles", description: "Save on stationery packs from Pamoja Publishers.", badge: "10% OFF", gradient: "from-primary to-info" },
+  { id: "d-002", title: "Free Delivery · Asili Uniforms", description: "Free home delivery for orders over KES 3,000.", badge: "FREE DELIVERY", gradient: "from-teal to-primary" },
+  { id: "d-003", title: "Uniform Combo Deals", description: "Buy 3 shirts and a sweater — save 15%.", badge: "15% OFF", gradient: "from-gold to-teal" },
+  { id: "d-004", title: "Book Set Discounts", description: "Grade-level book sets up to 20% off.", badge: "UP TO 20% OFF", gradient: "from-navy to-primary" },
+];
+
+/* Logistics partners */
+
+export interface LogisticsPartner {
+  id: string;
+  name: string;
+  initials: string;
+  location: string;
+  distanceKm: number;
+  eta: string;
+  fee: number;
+  vehicle: "Motorbike" | "Van" | "Van / Bike" | "Bicycle";
+  rating: number;
+  coverage: string;
+  riders: number;
+  capacity: string;
+  gradient: string;
+  official?: boolean;
+}
+
+export const logisticsPartners: LogisticsPartner[] = [
+  { id: "lp-001", name: "SwiftEdu Deliveries", initials: "SE", location: "Westlands, Nairobi", distanceKm: 1.4, eta: "Same day", fee: 250, vehicle: "Motorbike", rating: 4.8, coverage: "Nairobi · Kiambu", riders: 12, capacity: "Up to 15kg per trip", gradient: "from-primary to-teal", official: true },
+  { id: "lp-002", name: "ScholarExpress Logistics", initials: "SX", location: "Industrial Area, Nairobi", distanceKm: 2.2, eta: "Next day", fee: 180, vehicle: "Van / Bike", rating: 4.6, coverage: "Nairobi · Machakos · Thika", riders: 24, capacity: "Up to 200kg per trip", gradient: "from-teal to-primary" },
+  { id: "lp-003", name: "Nairobi School Runs", initials: "NS", location: "Karen, Nairobi", distanceKm: 3.8, eta: "Scheduled", fee: 300, vehicle: "Van", rating: 4.5, coverage: "Nairobi metro · Schools", riders: 8, capacity: "Up to 500kg per trip", gradient: "from-navy to-primary" },
+  { id: "lp-004", name: "Sambaza Riders", initials: "SR", location: "Kilimani, Nairobi", distanceKm: 2.6, eta: "Same day", fee: 220, vehicle: "Motorbike", rating: 4.4, coverage: "Nairobi CBD · Kilimani · Lavington", riders: 18, capacity: "Up to 10kg per trip", gradient: "from-gold to-primary" },
+];
+
+/* Deliveries (for logistics dashboard) */
+
+export type DeliveryStatus =
+  | "Pending Assignment"
+  | "Assigned"
+  | "Picked Up"
+  | "In Transit"
+  | "Delivered"
+  | "Failed";
+
+export const deliveryStages: DeliveryStatus[] = [
+  "Assigned",
+  "Picked Up",
+  "In Transit",
+  "Delivered",
+];
+
+export interface Delivery {
+  id: string;
+  number: string;
+  orderRef: string;
+  customer: string;
+  customerPhone: string;
+  supplier: string;
+  supplierPhone: string;
+  pickup: string;
+  dropoff: string;
+  distanceKm: number;
+  fee: number;
+  packageType: string;
+  itemsSummary: string;
+  status: DeliveryStatus;
+  eta: string;
+  assignedDate: string;
+}
+
+export const deliveries: Delivery[] = [
+  { id: "dlv-001", number: "DLV-2210", orderRef: "ORD-9201", customer: "Grace Mwangi", customerPhone: "+254 722 110 220", supplier: "Asili Uniforms Ltd", supplierPhone: "+254 733 880 110", pickup: "Industrial Area, Nairobi", dropoff: "Apt 4B, Kilimani, Nairobi", distanceKm: 6.4, fee: 250, packageType: "Uniform package · Medium", itemsSummary: "3 shirts · 1 tracksuit", status: "In Transit", eta: "Today · 4:30 PM", assignedDate: "22 Jun 2026" },
+  { id: "dlv-002", number: "DLV-2209", orderRef: "ORD-9203", customer: "Grace Mwangi", customerPhone: "+254 722 110 220", supplier: "Sokoni Footwear", supplierPhone: "+254 720 220 808", pickup: "Eldoret CBD", dropoff: "Pickup at supplier", distanceKm: 0, fee: 0, packageType: "Shoes · Small", itemsSummary: "1 pair leather shoes", status: "Picked Up", eta: "Tomorrow", assignedDate: "21 Jun 2026" },
+  { id: "dlv-003", number: "DLV-2208", orderRef: "ORD-9202", customer: "Grace Mwangi", customerPhone: "+254 722 110 220", supplier: "Pamoja Publishers", supplierPhone: "+254 711 991 002", pickup: "Westlands, Nairobi", dropoff: "Savannah Heights School (Pickup)", distanceKm: 4.1, fee: 180, packageType: "Books · Small", itemsSummary: "1 coursebook · 2 geometry sets", status: "Delivered", eta: "Delivered", assignedDate: "18 Jun 2026" },
+  { id: "dlv-004", number: "DLV-2211", orderRef: "ORD-9204", customer: "Grace Mwangi", customerPhone: "+254 722 110 220", supplier: "Asili Uniforms Ltd", supplierPhone: "+254 733 880 110", pickup: "Industrial Area, Nairobi", dropoff: "Apt 4B, Kilimani, Nairobi", distanceKm: 6.4, fee: 250, packageType: "Uniform · Small", itemsSummary: "2 pleated skirts", status: "Pending Assignment", eta: "Awaiting acceptance", assignedDate: "23 Jun 2026" },
+  { id: "dlv-005", number: "DLV-2212", orderRef: "ORD-9220", customer: "James Otieno", customerPhone: "+254 700 100 200", supplier: "Threadworks Africa", supplierPhone: "+254 733 410 220", pickup: "Mombasa Rd", dropoff: "Brookside, Nairobi", distanceKm: 11.2, fee: 380, packageType: "Uniform package · Large", itemsSummary: "Blazer · tie · 4 shirts", status: "Pending Assignment", eta: "Awaiting acceptance", assignedDate: "23 Jun 2026" },
+];
+
+export const deliveryStatusBadge: Record<DeliveryStatus, string> = {
+  "Pending Assignment": "bg-warning/15 text-warning-foreground",
+  Assigned: "bg-info/10 text-info",
+  "Picked Up": "bg-primary/10 text-primary",
+  "In Transit": "bg-gold/20 text-gold-foreground",
+  Delivered: "bg-success/15 text-success-foreground",
+  Failed: "bg-destructive/10 text-destructive",
+};
+
+/* Shop-by-school list */
+export const shopSchools = [
+  { id: "ss-1", name: "Green Valley Academy", town: "Karen, Nairobi", initials: "GV", gradient: "from-primary to-teal" },
+  { id: "ss-2", name: "Nairobi Hills School", town: "Lavington, Nairobi", initials: "NH", gradient: "from-teal to-gold" },
+  { id: "ss-3", name: "St. Mary's Junior School", town: "Westlands, Nairobi", initials: "SM", gradient: "from-navy to-primary" },
+  { id: "ss-4", name: "Brookside Preparatory", town: "Brookside, Nairobi", initials: "BP", gradient: "from-info to-primary" },
+];
