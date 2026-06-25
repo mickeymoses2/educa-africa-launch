@@ -12,9 +12,11 @@ import {
   TrendingUp,
 } from "lucide-react";
 import { DashboardShell } from "@/components/educa/DashboardShell";
+import { WalletCard } from "@/components/educa/WalletCard";
 import { SummaryCard } from "@/components/educa/SummaryCard";
 import { StatusBadge } from "@/components/educa/StatusBadge";
-import { applications, countByStatus } from "@/data/educa";
+import { applications, countByStatus, walletBalances } from "@/data/educa";
+import { Send, Receipt } from "lucide-react";
 
 export const Route = createFileRoute("/school/")({
   head: () => ({ meta: [{ title: "Overview · EDUCA School Workspace" }] }),
@@ -44,6 +46,17 @@ function SchoolOverview() {
         </>
       }
     >
+      {/* School Wallet */}
+      <div className="mb-6">
+        <WalletCard
+          data={walletBalances.school}
+          actions={[
+            { label: "Request Payout", to: "/school/wallet/deposit", icon: Send },
+            { label: "View Payments", to: "/school/payments", icon: Receipt, variant: "ghost" },
+          ]}
+        />
+      </div>
+
       {/* Profile completion */}
       <div className="rounded-2xl bg-gradient-to-r from-navy to-primary text-white p-6 sm:p-7 shadow-card mb-6">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
