@@ -1,12 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, FileText, Inbox, Search, Sparkles, CheckCircle2 } from "lucide-react";
+import { ArrowRight, FileText, Inbox, Search, Sparkles, CheckCircle2, Send, ShoppingBag } from "lucide-react";
 import { PortalShell } from "@/components/educa/PortalShell";
+import { WalletCard } from "@/components/educa/WalletCard";
 import { StudentIdCard } from "@/components/educa/StudentIdCard";
 import { SummaryCard } from "@/components/educa/SummaryCard";
 import { ApplicationCard } from "@/components/educa/ApplicationCard";
 import { SchoolCard } from "@/components/educa/SchoolCard";
 import { NotificationCard } from "@/components/educa/NotificationCard";
-import { children, myApplications, notifications, featuredSchools, documents } from "@/data/educa";
+import { children, myApplications, notifications, featuredSchools, documents, walletBalances } from "@/data/educa";
 
 export const Route = createFileRoute("/student/")({
   head: () => ({ meta: [{ title: "Student Dashboard · EDUCA" }] }),
@@ -24,6 +25,17 @@ function StudentDashboard() {
       title={`Hi, ${me.name.split(" ")[0]}`}
       subtitle="Track your applications, manage documents and explore schools — all from your EDUCA workspace."
     >
+      {/* EDUCA Balance */}
+      <div className="mb-8">
+        <WalletCard
+          data={walletBalances.student}
+          actions={[
+            { label: "Request Top-Up", to: "/student/wallet/deposit", icon: Send },
+            { label: "Use Balance", to: "/marketplace", icon: ShoppingBag, variant: "ghost" },
+          ]}
+        />
+      </div>
+
       {/* Top grid: ID card + summary */}
       <div className="grid lg:grid-cols-[420px_1fr] gap-5 mb-8 items-start">
         <StudentIdCard child={me} />
