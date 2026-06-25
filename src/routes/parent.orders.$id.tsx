@@ -1,9 +1,9 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ArrowLeft, Truck, Store } from "lucide-react";
+import { ArrowLeft, Truck, Store, Phone, Star } from "lucide-react";
 import { PortalShell } from "@/components/educa/PortalShell";
 import { OrderStatusBadge } from "@/components/educa/OrderStatusBadge";
 import { OrderTimeline } from "@/components/educa/OrderTimeline";
-import { orders } from "@/data/educa";
+import { orders, logisticsPartners } from "@/data/educa";
 
 export const Route = createFileRoute("/parent/orders/$id")({
   head: () => ({ meta: [{ title: "Order · EDUCA" }] }),
@@ -14,6 +14,7 @@ function OrderDetail() {
   const { id } = Route.useParams();
   const o = orders.find((x) => x.id === id);
   if (!o) throw notFound();
+  const partner = o.delivery === "Home Delivery" || o.delivery === "School Pickup" ? logisticsPartners[0] : null;
   return (
     <PortalShell role="parent" title={`Order ${o.number}`} subtitle={`${o.supplier} · ${o.date}`} actions={<OrderStatusBadge status={o.status} />}>
       <Link to="/parent/orders" className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary mb-5"><ArrowLeft className="h-4 w-4" /> Back to Orders</Link>
@@ -53,6 +54,20 @@ function OrderDetail() {
             <div className="flex items-center gap-2 text-primary"><Truck className="h-4 w-4" /> <span className="font-semibold">{o.delivery}</span></div>
             {o.address && <p className="mt-2 text-muted-foreground">{o.address}</p>}
           </div>
+          {partner && (
+            <div className="rounded-2xl bg-card border border-border shadow-soft p-5 text-sm">
+              <p className="text-[10px] uppercase tracking-wider font-semibold text-muted-foreground">Delivery Partner</p>
+              <div className="mt-2 flex items-center gap-3">
+                <div className={`h-11 w-11 rounded-2xl bg-gradient-to-br ${partner.gradient} grid place-items-center text-white font-display font-semibold`}>{partner.initials}</div>
+                <div className="min-w-0">
+                  <p className="font-display font-semibold text-navy">{partner.name}</p>
+                  <p className="text-xs text-muted-foreground">{partner.vehicle} · <Star className="inline h-3 w-3 fill-gold text-gold" /> {partner.rating}</p>
+                </div>
+              </div>
+              <button className="mt-3 w-full inline-flex items-center justify-center gap-1.5 rounded-xl bg-muted text-navy font-semibold py-2 text-xs"><Phone className="h-3 w-3" /> Contact Delivery Partner</button>
+              <p className="mt-2 text-[10px] text-muted-foreground text-center">Tracking & contact placeholder · ETA varies</p>
+            </div>
+          )}
           <div className="rounded-2xl bg-navy text-white p-5 text-sm">
             <div className="flex items-center gap-2 text-gold"><Store className="h-4 w-4" /> <span className="font-semibold">Payment</span></div>
             <p className="mt-2 text-white/80">Paid via M-Pesa</p>
