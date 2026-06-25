@@ -30,6 +30,7 @@ const nav = [
   { label: "Classes & Levels", to: "/school/classes" as const, icon: GraduationCap },
   { label: "Applications", to: "/school/applications" as const, icon: Inbox, badge: 12 },
   { label: "Fee Structures", to: "/school/fees" as const, icon: BarChart3 },
+  { label: "School Wallet", to: "/school/wallet" as const, icon: Wallet },
   { label: "Payments", to: "/school/payments" as const, icon: Wallet },
   { label: "Uniform Requirements", to: "/school/uniforms" as const, icon: Shirt },
   { label: "Approved Suppliers", to: "/school/suppliers" as const, icon: Store },

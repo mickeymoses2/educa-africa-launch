@@ -16,6 +16,7 @@ import { Route as SchoolRouteImport } from './routes/school'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as ParentRouteImport } from './routes/parent'
 import { Route as MarketplaceRouteImport } from './routes/marketplace'
+import { Route as LogisticsRouteImport } from './routes/logistics'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as GetStartedRouteImport } from './routes/get-started'
 import { Route as IndexRouteImport } from './routes/index'
@@ -25,11 +26,15 @@ import { Route as SchoolsIndexRouteImport } from './routes/schools.index'
 import { Route as SchoolIndexRouteImport } from './routes/school.index'
 import { Route as ParentIndexRouteImport } from './routes/parent.index'
 import { Route as MarketplaceIndexRouteImport } from './routes/marketplace.index'
+import { Route as LogisticsIndexRouteImport } from './routes/logistics.index'
+import { Route as SupplierWalletRouteImport } from './routes/supplier.wallet'
 import { Route as SupplierSettingsRouteImport } from './routes/supplier.settings'
 import { Route as SupplierSalesRouteImport } from './routes/supplier.sales'
 import { Route as SupplierProductsRouteImport } from './routes/supplier.products'
 import { Route as SupplierOrdersRouteImport } from './routes/supplier.orders'
+import { Route as SupplierLogisticsRouteImport } from './routes/supplier.logistics'
 import { Route as SupplierInventoryRouteImport } from './routes/supplier.inventory'
+import { Route as StudentWalletRouteImport } from './routes/student.wallet'
 import { Route as StudentUniformsRouteImport } from './routes/student.uniforms'
 import { Route as StudentSchoolsRouteImport } from './routes/student.schools'
 import { Route as StudentScholarshipsRouteImport } from './routes/student.scholarships'
@@ -42,6 +47,7 @@ import { Route as StudentFeesRouteImport } from './routes/student.fees'
 import { Route as StudentDocumentsRouteImport } from './routes/student.documents'
 import { Route as StudentApplicationsRouteImport } from './routes/student.applications'
 import { Route as SchoolsIdRouteImport } from './routes/schools.$id'
+import { Route as SchoolWalletRouteImport } from './routes/school.wallet'
 import { Route as SchoolUniformsRouteImport } from './routes/school.uniforms'
 import { Route as SchoolSuppliersRouteImport } from './routes/school.suppliers'
 import { Route as SchoolSettingsRouteImport } from './routes/school.settings'
@@ -56,6 +62,7 @@ import { Route as SchoolGalleryRouteImport } from './routes/school.gallery'
 import { Route as SchoolFeesRouteImport } from './routes/school.fees'
 import { Route as SchoolClassesRouteImport } from './routes/school.classes'
 import { Route as SchoolApplicationsRouteImport } from './routes/school.applications'
+import { Route as ParentWalletRouteImport } from './routes/parent.wallet'
 import { Route as ParentUniformsRouteImport } from './routes/parent.uniforms'
 import { Route as ParentSettingsRouteImport } from './routes/parent.settings'
 import { Route as ParentSchoolsRouteImport } from './routes/parent.schools'
@@ -71,12 +78,23 @@ import { Route as ParentApplyRouteImport } from './routes/parent.apply'
 import { Route as ParentApplicationsRouteImport } from './routes/parent.applications'
 import { Route as MarketplaceCheckoutRouteImport } from './routes/marketplace.checkout'
 import { Route as MarketplaceCartRouteImport } from './routes/marketplace.cart'
+import { Route as MarketplaceBundlesRouteImport } from './routes/marketplace.bundles'
+import { Route as LogisticsWalletRouteImport } from './routes/logistics.wallet'
+import { Route as LogisticsSettingsRouteImport } from './routes/logistics.settings'
+import { Route as LogisticsRoutesRouteImport } from './routes/logistics.routes'
+import { Route as LogisticsRegisterRouteImport } from './routes/logistics.register'
+import { Route as LogisticsEarningsRouteImport } from './routes/logistics.earnings'
+import { Route as LogisticsDeliveriesRouteImport } from './routes/logistics.deliveries'
+import { Route as SupplierWalletDepositRouteImport } from './routes/supplier.wallet.deposit'
 import { Route as SupplierProductsNewRouteImport } from './routes/supplier.products.new'
 import { Route as SupplierOrdersIdRouteImport } from './routes/supplier.orders.$id'
+import { Route as StudentWalletDepositRouteImport } from './routes/student.wallet.deposit'
 import { Route as StudentScholarshipsSavedRouteImport } from './routes/student.scholarships.saved'
 import { Route as StudentScholarshipsIdRouteImport } from './routes/student.scholarships.$id'
 import { Route as StudentOrdersIdRouteImport } from './routes/student.orders.$id'
+import { Route as SchoolWalletDepositRouteImport } from './routes/school.wallet.deposit'
 import { Route as SchoolApplicationsIdRouteImport } from './routes/school.applications.$id'
+import { Route as ParentWalletDepositRouteImport } from './routes/parent.wallet.deposit'
 import { Route as ParentSchoolsIdRouteImport } from './routes/parent.schools.$id'
 import { Route as ParentScholarshipsSavedRouteImport } from './routes/parent.scholarships.saved'
 import { Route as ParentScholarshipsIdRouteImport } from './routes/parent.scholarships.$id'
@@ -88,6 +106,8 @@ import { Route as ParentChildrenLinkRouteImport } from './routes/parent.children
 import { Route as ParentChildrenIdRouteImport } from './routes/parent.children.$id'
 import { Route as ParentApplicationsIdRouteImport } from './routes/parent.applications.$id'
 import { Route as MarketplaceProductsIdRouteImport } from './routes/marketplace.products.$id'
+import { Route as LogisticsWalletDepositRouteImport } from './routes/logistics.wallet.deposit'
+import { Route as LogisticsDeliveriesIdRouteImport } from './routes/logistics.deliveries.$id'
 
 const SupplierRoute = SupplierRouteImport.update({
   id: '/supplier',
@@ -122,6 +142,11 @@ const ParentRoute = ParentRouteImport.update({
 const MarketplaceRoute = MarketplaceRouteImport.update({
   id: '/marketplace',
   path: '/marketplace',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LogisticsRoute = LogisticsRouteImport.update({
+  id: '/logistics',
+  path: '/logistics',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -169,6 +194,16 @@ const MarketplaceIndexRoute = MarketplaceIndexRouteImport.update({
   path: '/',
   getParentRoute: () => MarketplaceRoute,
 } as any)
+const LogisticsIndexRoute = LogisticsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => LogisticsRoute,
+} as any)
+const SupplierWalletRoute = SupplierWalletRouteImport.update({
+  id: '/wallet',
+  path: '/wallet',
+  getParentRoute: () => SupplierRoute,
+} as any)
 const SupplierSettingsRoute = SupplierSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
@@ -189,10 +224,20 @@ const SupplierOrdersRoute = SupplierOrdersRouteImport.update({
   path: '/orders',
   getParentRoute: () => SupplierRoute,
 } as any)
+const SupplierLogisticsRoute = SupplierLogisticsRouteImport.update({
+  id: '/logistics',
+  path: '/logistics',
+  getParentRoute: () => SupplierRoute,
+} as any)
 const SupplierInventoryRoute = SupplierInventoryRouteImport.update({
   id: '/inventory',
   path: '/inventory',
   getParentRoute: () => SupplierRoute,
+} as any)
+const StudentWalletRoute = StudentWalletRouteImport.update({
+  id: '/wallet',
+  path: '/wallet',
+  getParentRoute: () => StudentRoute,
 } as any)
 const StudentUniformsRoute = StudentUniformsRouteImport.update({
   id: '/uniforms',
@@ -253,6 +298,11 @@ const SchoolsIdRoute = SchoolsIdRouteImport.update({
   id: '/$id',
   path: '/$id',
   getParentRoute: () => SchoolsRoute,
+} as any)
+const SchoolWalletRoute = SchoolWalletRouteImport.update({
+  id: '/wallet',
+  path: '/wallet',
+  getParentRoute: () => SchoolRoute,
 } as any)
 const SchoolUniformsRoute = SchoolUniformsRouteImport.update({
   id: '/uniforms',
@@ -323,6 +373,11 @@ const SchoolApplicationsRoute = SchoolApplicationsRouteImport.update({
   id: '/applications',
   path: '/applications',
   getParentRoute: () => SchoolRoute,
+} as any)
+const ParentWalletRoute = ParentWalletRouteImport.update({
+  id: '/wallet',
+  path: '/wallet',
+  getParentRoute: () => ParentRoute,
 } as any)
 const ParentUniformsRoute = ParentUniformsRouteImport.update({
   id: '/uniforms',
@@ -399,6 +454,46 @@ const MarketplaceCartRoute = MarketplaceCartRouteImport.update({
   path: '/cart',
   getParentRoute: () => MarketplaceRoute,
 } as any)
+const MarketplaceBundlesRoute = MarketplaceBundlesRouteImport.update({
+  id: '/bundles',
+  path: '/bundles',
+  getParentRoute: () => MarketplaceRoute,
+} as any)
+const LogisticsWalletRoute = LogisticsWalletRouteImport.update({
+  id: '/wallet',
+  path: '/wallet',
+  getParentRoute: () => LogisticsRoute,
+} as any)
+const LogisticsSettingsRoute = LogisticsSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => LogisticsRoute,
+} as any)
+const LogisticsRoutesRoute = LogisticsRoutesRouteImport.update({
+  id: '/routes',
+  path: '/routes',
+  getParentRoute: () => LogisticsRoute,
+} as any)
+const LogisticsRegisterRoute = LogisticsRegisterRouteImport.update({
+  id: '/register',
+  path: '/register',
+  getParentRoute: () => LogisticsRoute,
+} as any)
+const LogisticsEarningsRoute = LogisticsEarningsRouteImport.update({
+  id: '/earnings',
+  path: '/earnings',
+  getParentRoute: () => LogisticsRoute,
+} as any)
+const LogisticsDeliveriesRoute = LogisticsDeliveriesRouteImport.update({
+  id: '/deliveries',
+  path: '/deliveries',
+  getParentRoute: () => LogisticsRoute,
+} as any)
+const SupplierWalletDepositRoute = SupplierWalletDepositRouteImport.update({
+  id: '/deposit',
+  path: '/deposit',
+  getParentRoute: () => SupplierWalletRoute,
+} as any)
 const SupplierProductsNewRoute = SupplierProductsNewRouteImport.update({
   id: '/new',
   path: '/new',
@@ -408,6 +503,11 @@ const SupplierOrdersIdRoute = SupplierOrdersIdRouteImport.update({
   id: '/$id',
   path: '/$id',
   getParentRoute: () => SupplierOrdersRoute,
+} as any)
+const StudentWalletDepositRoute = StudentWalletDepositRouteImport.update({
+  id: '/deposit',
+  path: '/deposit',
+  getParentRoute: () => StudentWalletRoute,
 } as any)
 const StudentScholarshipsSavedRoute =
   StudentScholarshipsSavedRouteImport.update({
@@ -425,10 +525,20 @@ const StudentOrdersIdRoute = StudentOrdersIdRouteImport.update({
   path: '/$id',
   getParentRoute: () => StudentOrdersRoute,
 } as any)
+const SchoolWalletDepositRoute = SchoolWalletDepositRouteImport.update({
+  id: '/deposit',
+  path: '/deposit',
+  getParentRoute: () => SchoolWalletRoute,
+} as any)
 const SchoolApplicationsIdRoute = SchoolApplicationsIdRouteImport.update({
   id: '/$id',
   path: '/$id',
   getParentRoute: () => SchoolApplicationsRoute,
+} as any)
+const ParentWalletDepositRoute = ParentWalletDepositRouteImport.update({
+  id: '/deposit',
+  path: '/deposit',
+  getParentRoute: () => ParentWalletRoute,
 } as any)
 const ParentSchoolsIdRoute = ParentSchoolsIdRouteImport.update({
   id: '/$id',
@@ -485,11 +595,22 @@ const MarketplaceProductsIdRoute = MarketplaceProductsIdRouteImport.update({
   path: '/products/$id',
   getParentRoute: () => MarketplaceRoute,
 } as any)
+const LogisticsWalletDepositRoute = LogisticsWalletDepositRouteImport.update({
+  id: '/deposit',
+  path: '/deposit',
+  getParentRoute: () => LogisticsWalletRoute,
+} as any)
+const LogisticsDeliveriesIdRoute = LogisticsDeliveriesIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => LogisticsDeliveriesRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/get-started': typeof GetStartedRoute
   '/login': typeof LoginRoute
+  '/logistics': typeof LogisticsRouteWithChildren
   '/marketplace': typeof MarketplaceRouteWithChildren
   '/parent': typeof ParentRouteWithChildren
   '/register': typeof RegisterRoute
@@ -497,6 +618,13 @@ export interface FileRoutesByFullPath {
   '/schools': typeof SchoolsRouteWithChildren
   '/student': typeof StudentRouteWithChildren
   '/supplier': typeof SupplierRouteWithChildren
+  '/logistics/deliveries': typeof LogisticsDeliveriesRouteWithChildren
+  '/logistics/earnings': typeof LogisticsEarningsRoute
+  '/logistics/register': typeof LogisticsRegisterRoute
+  '/logistics/routes': typeof LogisticsRoutesRoute
+  '/logistics/settings': typeof LogisticsSettingsRoute
+  '/logistics/wallet': typeof LogisticsWalletRouteWithChildren
+  '/marketplace/bundles': typeof MarketplaceBundlesRoute
   '/marketplace/cart': typeof MarketplaceCartRoute
   '/marketplace/checkout': typeof MarketplaceCheckoutRoute
   '/parent/applications': typeof ParentApplicationsRouteWithChildren
@@ -512,6 +640,7 @@ export interface FileRoutesByFullPath {
   '/parent/schools': typeof ParentSchoolsRouteWithChildren
   '/parent/settings': typeof ParentSettingsRoute
   '/parent/uniforms': typeof ParentUniformsRoute
+  '/parent/wallet': typeof ParentWalletRouteWithChildren
   '/school/applications': typeof SchoolApplicationsRouteWithChildren
   '/school/classes': typeof SchoolClassesRoute
   '/school/fees': typeof SchoolFeesRoute
@@ -526,6 +655,7 @@ export interface FileRoutesByFullPath {
   '/school/settings': typeof SchoolSettingsRoute
   '/school/suppliers': typeof SchoolSuppliersRoute
   '/school/uniforms': typeof SchoolUniformsRoute
+  '/school/wallet': typeof SchoolWalletRouteWithChildren
   '/schools/$id': typeof SchoolsIdRoute
   '/student/applications': typeof StudentApplicationsRoute
   '/student/documents': typeof StudentDocumentsRoute
@@ -538,17 +668,23 @@ export interface FileRoutesByFullPath {
   '/student/scholarships': typeof StudentScholarshipsRouteWithChildren
   '/student/schools': typeof StudentSchoolsRoute
   '/student/uniforms': typeof StudentUniformsRoute
+  '/student/wallet': typeof StudentWalletRouteWithChildren
   '/supplier/inventory': typeof SupplierInventoryRoute
+  '/supplier/logistics': typeof SupplierLogisticsRoute
   '/supplier/orders': typeof SupplierOrdersRouteWithChildren
   '/supplier/products': typeof SupplierProductsRouteWithChildren
   '/supplier/sales': typeof SupplierSalesRoute
   '/supplier/settings': typeof SupplierSettingsRoute
+  '/supplier/wallet': typeof SupplierWalletRouteWithChildren
+  '/logistics/': typeof LogisticsIndexRoute
   '/marketplace/': typeof MarketplaceIndexRoute
   '/parent/': typeof ParentIndexRoute
   '/school/': typeof SchoolIndexRoute
   '/schools/': typeof SchoolsIndexRoute
   '/student/': typeof StudentIndexRoute
   '/supplier/': typeof SupplierIndexRoute
+  '/logistics/deliveries/$id': typeof LogisticsDeliveriesIdRoute
+  '/logistics/wallet/deposit': typeof LogisticsWalletDepositRoute
   '/marketplace/products/$id': typeof MarketplaceProductsIdRoute
   '/parent/applications/$id': typeof ParentApplicationsIdRoute
   '/parent/children/$id': typeof ParentChildrenIdRoute
@@ -560,18 +696,29 @@ export interface FileRoutesByFullPath {
   '/parent/scholarships/$id': typeof ParentScholarshipsIdRoute
   '/parent/scholarships/saved': typeof ParentScholarshipsSavedRoute
   '/parent/schools/$id': typeof ParentSchoolsIdRoute
+  '/parent/wallet/deposit': typeof ParentWalletDepositRoute
   '/school/applications/$id': typeof SchoolApplicationsIdRoute
+  '/school/wallet/deposit': typeof SchoolWalletDepositRoute
   '/student/orders/$id': typeof StudentOrdersIdRoute
   '/student/scholarships/$id': typeof StudentScholarshipsIdRoute
   '/student/scholarships/saved': typeof StudentScholarshipsSavedRoute
+  '/student/wallet/deposit': typeof StudentWalletDepositRoute
   '/supplier/orders/$id': typeof SupplierOrdersIdRoute
   '/supplier/products/new': typeof SupplierProductsNewRoute
+  '/supplier/wallet/deposit': typeof SupplierWalletDepositRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/get-started': typeof GetStartedRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/logistics/deliveries': typeof LogisticsDeliveriesRouteWithChildren
+  '/logistics/earnings': typeof LogisticsEarningsRoute
+  '/logistics/register': typeof LogisticsRegisterRoute
+  '/logistics/routes': typeof LogisticsRoutesRoute
+  '/logistics/settings': typeof LogisticsSettingsRoute
+  '/logistics/wallet': typeof LogisticsWalletRouteWithChildren
+  '/marketplace/bundles': typeof MarketplaceBundlesRoute
   '/marketplace/cart': typeof MarketplaceCartRoute
   '/marketplace/checkout': typeof MarketplaceCheckoutRoute
   '/parent/applications': typeof ParentApplicationsRouteWithChildren
@@ -587,6 +734,7 @@ export interface FileRoutesByTo {
   '/parent/schools': typeof ParentSchoolsRouteWithChildren
   '/parent/settings': typeof ParentSettingsRoute
   '/parent/uniforms': typeof ParentUniformsRoute
+  '/parent/wallet': typeof ParentWalletRouteWithChildren
   '/school/applications': typeof SchoolApplicationsRouteWithChildren
   '/school/classes': typeof SchoolClassesRoute
   '/school/fees': typeof SchoolFeesRoute
@@ -601,6 +749,7 @@ export interface FileRoutesByTo {
   '/school/settings': typeof SchoolSettingsRoute
   '/school/suppliers': typeof SchoolSuppliersRoute
   '/school/uniforms': typeof SchoolUniformsRoute
+  '/school/wallet': typeof SchoolWalletRouteWithChildren
   '/schools/$id': typeof SchoolsIdRoute
   '/student/applications': typeof StudentApplicationsRoute
   '/student/documents': typeof StudentDocumentsRoute
@@ -613,17 +762,23 @@ export interface FileRoutesByTo {
   '/student/scholarships': typeof StudentScholarshipsRouteWithChildren
   '/student/schools': typeof StudentSchoolsRoute
   '/student/uniforms': typeof StudentUniformsRoute
+  '/student/wallet': typeof StudentWalletRouteWithChildren
   '/supplier/inventory': typeof SupplierInventoryRoute
+  '/supplier/logistics': typeof SupplierLogisticsRoute
   '/supplier/orders': typeof SupplierOrdersRouteWithChildren
   '/supplier/products': typeof SupplierProductsRouteWithChildren
   '/supplier/sales': typeof SupplierSalesRoute
   '/supplier/settings': typeof SupplierSettingsRoute
+  '/supplier/wallet': typeof SupplierWalletRouteWithChildren
+  '/logistics': typeof LogisticsIndexRoute
   '/marketplace': typeof MarketplaceIndexRoute
   '/parent': typeof ParentIndexRoute
   '/school': typeof SchoolIndexRoute
   '/schools': typeof SchoolsIndexRoute
   '/student': typeof StudentIndexRoute
   '/supplier': typeof SupplierIndexRoute
+  '/logistics/deliveries/$id': typeof LogisticsDeliveriesIdRoute
+  '/logistics/wallet/deposit': typeof LogisticsWalletDepositRoute
   '/marketplace/products/$id': typeof MarketplaceProductsIdRoute
   '/parent/applications/$id': typeof ParentApplicationsIdRoute
   '/parent/children/$id': typeof ParentChildrenIdRoute
@@ -635,18 +790,23 @@ export interface FileRoutesByTo {
   '/parent/scholarships/$id': typeof ParentScholarshipsIdRoute
   '/parent/scholarships/saved': typeof ParentScholarshipsSavedRoute
   '/parent/schools/$id': typeof ParentSchoolsIdRoute
+  '/parent/wallet/deposit': typeof ParentWalletDepositRoute
   '/school/applications/$id': typeof SchoolApplicationsIdRoute
+  '/school/wallet/deposit': typeof SchoolWalletDepositRoute
   '/student/orders/$id': typeof StudentOrdersIdRoute
   '/student/scholarships/$id': typeof StudentScholarshipsIdRoute
   '/student/scholarships/saved': typeof StudentScholarshipsSavedRoute
+  '/student/wallet/deposit': typeof StudentWalletDepositRoute
   '/supplier/orders/$id': typeof SupplierOrdersIdRoute
   '/supplier/products/new': typeof SupplierProductsNewRoute
+  '/supplier/wallet/deposit': typeof SupplierWalletDepositRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/get-started': typeof GetStartedRoute
   '/login': typeof LoginRoute
+  '/logistics': typeof LogisticsRouteWithChildren
   '/marketplace': typeof MarketplaceRouteWithChildren
   '/parent': typeof ParentRouteWithChildren
   '/register': typeof RegisterRoute
@@ -654,6 +814,13 @@ export interface FileRoutesById {
   '/schools': typeof SchoolsRouteWithChildren
   '/student': typeof StudentRouteWithChildren
   '/supplier': typeof SupplierRouteWithChildren
+  '/logistics/deliveries': typeof LogisticsDeliveriesRouteWithChildren
+  '/logistics/earnings': typeof LogisticsEarningsRoute
+  '/logistics/register': typeof LogisticsRegisterRoute
+  '/logistics/routes': typeof LogisticsRoutesRoute
+  '/logistics/settings': typeof LogisticsSettingsRoute
+  '/logistics/wallet': typeof LogisticsWalletRouteWithChildren
+  '/marketplace/bundles': typeof MarketplaceBundlesRoute
   '/marketplace/cart': typeof MarketplaceCartRoute
   '/marketplace/checkout': typeof MarketplaceCheckoutRoute
   '/parent/applications': typeof ParentApplicationsRouteWithChildren
@@ -669,6 +836,7 @@ export interface FileRoutesById {
   '/parent/schools': typeof ParentSchoolsRouteWithChildren
   '/parent/settings': typeof ParentSettingsRoute
   '/parent/uniforms': typeof ParentUniformsRoute
+  '/parent/wallet': typeof ParentWalletRouteWithChildren
   '/school/applications': typeof SchoolApplicationsRouteWithChildren
   '/school/classes': typeof SchoolClassesRoute
   '/school/fees': typeof SchoolFeesRoute
@@ -683,6 +851,7 @@ export interface FileRoutesById {
   '/school/settings': typeof SchoolSettingsRoute
   '/school/suppliers': typeof SchoolSuppliersRoute
   '/school/uniforms': typeof SchoolUniformsRoute
+  '/school/wallet': typeof SchoolWalletRouteWithChildren
   '/schools/$id': typeof SchoolsIdRoute
   '/student/applications': typeof StudentApplicationsRoute
   '/student/documents': typeof StudentDocumentsRoute
@@ -695,17 +864,23 @@ export interface FileRoutesById {
   '/student/scholarships': typeof StudentScholarshipsRouteWithChildren
   '/student/schools': typeof StudentSchoolsRoute
   '/student/uniforms': typeof StudentUniformsRoute
+  '/student/wallet': typeof StudentWalletRouteWithChildren
   '/supplier/inventory': typeof SupplierInventoryRoute
+  '/supplier/logistics': typeof SupplierLogisticsRoute
   '/supplier/orders': typeof SupplierOrdersRouteWithChildren
   '/supplier/products': typeof SupplierProductsRouteWithChildren
   '/supplier/sales': typeof SupplierSalesRoute
   '/supplier/settings': typeof SupplierSettingsRoute
+  '/supplier/wallet': typeof SupplierWalletRouteWithChildren
+  '/logistics/': typeof LogisticsIndexRoute
   '/marketplace/': typeof MarketplaceIndexRoute
   '/parent/': typeof ParentIndexRoute
   '/school/': typeof SchoolIndexRoute
   '/schools/': typeof SchoolsIndexRoute
   '/student/': typeof StudentIndexRoute
   '/supplier/': typeof SupplierIndexRoute
+  '/logistics/deliveries/$id': typeof LogisticsDeliveriesIdRoute
+  '/logistics/wallet/deposit': typeof LogisticsWalletDepositRoute
   '/marketplace/products/$id': typeof MarketplaceProductsIdRoute
   '/parent/applications/$id': typeof ParentApplicationsIdRoute
   '/parent/children/$id': typeof ParentChildrenIdRoute
@@ -717,12 +892,16 @@ export interface FileRoutesById {
   '/parent/scholarships/$id': typeof ParentScholarshipsIdRoute
   '/parent/scholarships/saved': typeof ParentScholarshipsSavedRoute
   '/parent/schools/$id': typeof ParentSchoolsIdRoute
+  '/parent/wallet/deposit': typeof ParentWalletDepositRoute
   '/school/applications/$id': typeof SchoolApplicationsIdRoute
+  '/school/wallet/deposit': typeof SchoolWalletDepositRoute
   '/student/orders/$id': typeof StudentOrdersIdRoute
   '/student/scholarships/$id': typeof StudentScholarshipsIdRoute
   '/student/scholarships/saved': typeof StudentScholarshipsSavedRoute
+  '/student/wallet/deposit': typeof StudentWalletDepositRoute
   '/supplier/orders/$id': typeof SupplierOrdersIdRoute
   '/supplier/products/new': typeof SupplierProductsNewRoute
+  '/supplier/wallet/deposit': typeof SupplierWalletDepositRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -730,6 +909,7 @@ export interface FileRouteTypes {
     | '/'
     | '/get-started'
     | '/login'
+    | '/logistics'
     | '/marketplace'
     | '/parent'
     | '/register'
@@ -737,6 +917,13 @@ export interface FileRouteTypes {
     | '/schools'
     | '/student'
     | '/supplier'
+    | '/logistics/deliveries'
+    | '/logistics/earnings'
+    | '/logistics/register'
+    | '/logistics/routes'
+    | '/logistics/settings'
+    | '/logistics/wallet'
+    | '/marketplace/bundles'
     | '/marketplace/cart'
     | '/marketplace/checkout'
     | '/parent/applications'
@@ -752,6 +939,7 @@ export interface FileRouteTypes {
     | '/parent/schools'
     | '/parent/settings'
     | '/parent/uniforms'
+    | '/parent/wallet'
     | '/school/applications'
     | '/school/classes'
     | '/school/fees'
@@ -766,6 +954,7 @@ export interface FileRouteTypes {
     | '/school/settings'
     | '/school/suppliers'
     | '/school/uniforms'
+    | '/school/wallet'
     | '/schools/$id'
     | '/student/applications'
     | '/student/documents'
@@ -778,17 +967,23 @@ export interface FileRouteTypes {
     | '/student/scholarships'
     | '/student/schools'
     | '/student/uniforms'
+    | '/student/wallet'
     | '/supplier/inventory'
+    | '/supplier/logistics'
     | '/supplier/orders'
     | '/supplier/products'
     | '/supplier/sales'
     | '/supplier/settings'
+    | '/supplier/wallet'
+    | '/logistics/'
     | '/marketplace/'
     | '/parent/'
     | '/school/'
     | '/schools/'
     | '/student/'
     | '/supplier/'
+    | '/logistics/deliveries/$id'
+    | '/logistics/wallet/deposit'
     | '/marketplace/products/$id'
     | '/parent/applications/$id'
     | '/parent/children/$id'
@@ -800,18 +995,29 @@ export interface FileRouteTypes {
     | '/parent/scholarships/$id'
     | '/parent/scholarships/saved'
     | '/parent/schools/$id'
+    | '/parent/wallet/deposit'
     | '/school/applications/$id'
+    | '/school/wallet/deposit'
     | '/student/orders/$id'
     | '/student/scholarships/$id'
     | '/student/scholarships/saved'
+    | '/student/wallet/deposit'
     | '/supplier/orders/$id'
     | '/supplier/products/new'
+    | '/supplier/wallet/deposit'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/get-started'
     | '/login'
     | '/register'
+    | '/logistics/deliveries'
+    | '/logistics/earnings'
+    | '/logistics/register'
+    | '/logistics/routes'
+    | '/logistics/settings'
+    | '/logistics/wallet'
+    | '/marketplace/bundles'
     | '/marketplace/cart'
     | '/marketplace/checkout'
     | '/parent/applications'
@@ -827,6 +1033,7 @@ export interface FileRouteTypes {
     | '/parent/schools'
     | '/parent/settings'
     | '/parent/uniforms'
+    | '/parent/wallet'
     | '/school/applications'
     | '/school/classes'
     | '/school/fees'
@@ -841,6 +1048,7 @@ export interface FileRouteTypes {
     | '/school/settings'
     | '/school/suppliers'
     | '/school/uniforms'
+    | '/school/wallet'
     | '/schools/$id'
     | '/student/applications'
     | '/student/documents'
@@ -853,17 +1061,23 @@ export interface FileRouteTypes {
     | '/student/scholarships'
     | '/student/schools'
     | '/student/uniforms'
+    | '/student/wallet'
     | '/supplier/inventory'
+    | '/supplier/logistics'
     | '/supplier/orders'
     | '/supplier/products'
     | '/supplier/sales'
     | '/supplier/settings'
+    | '/supplier/wallet'
+    | '/logistics'
     | '/marketplace'
     | '/parent'
     | '/school'
     | '/schools'
     | '/student'
     | '/supplier'
+    | '/logistics/deliveries/$id'
+    | '/logistics/wallet/deposit'
     | '/marketplace/products/$id'
     | '/parent/applications/$id'
     | '/parent/children/$id'
@@ -875,17 +1089,22 @@ export interface FileRouteTypes {
     | '/parent/scholarships/$id'
     | '/parent/scholarships/saved'
     | '/parent/schools/$id'
+    | '/parent/wallet/deposit'
     | '/school/applications/$id'
+    | '/school/wallet/deposit'
     | '/student/orders/$id'
     | '/student/scholarships/$id'
     | '/student/scholarships/saved'
+    | '/student/wallet/deposit'
     | '/supplier/orders/$id'
     | '/supplier/products/new'
+    | '/supplier/wallet/deposit'
   id:
     | '__root__'
     | '/'
     | '/get-started'
     | '/login'
+    | '/logistics'
     | '/marketplace'
     | '/parent'
     | '/register'
@@ -893,6 +1112,13 @@ export interface FileRouteTypes {
     | '/schools'
     | '/student'
     | '/supplier'
+    | '/logistics/deliveries'
+    | '/logistics/earnings'
+    | '/logistics/register'
+    | '/logistics/routes'
+    | '/logistics/settings'
+    | '/logistics/wallet'
+    | '/marketplace/bundles'
     | '/marketplace/cart'
     | '/marketplace/checkout'
     | '/parent/applications'
@@ -908,6 +1134,7 @@ export interface FileRouteTypes {
     | '/parent/schools'
     | '/parent/settings'
     | '/parent/uniforms'
+    | '/parent/wallet'
     | '/school/applications'
     | '/school/classes'
     | '/school/fees'
@@ -922,6 +1149,7 @@ export interface FileRouteTypes {
     | '/school/settings'
     | '/school/suppliers'
     | '/school/uniforms'
+    | '/school/wallet'
     | '/schools/$id'
     | '/student/applications'
     | '/student/documents'
@@ -934,17 +1162,23 @@ export interface FileRouteTypes {
     | '/student/scholarships'
     | '/student/schools'
     | '/student/uniforms'
+    | '/student/wallet'
     | '/supplier/inventory'
+    | '/supplier/logistics'
     | '/supplier/orders'
     | '/supplier/products'
     | '/supplier/sales'
     | '/supplier/settings'
+    | '/supplier/wallet'
+    | '/logistics/'
     | '/marketplace/'
     | '/parent/'
     | '/school/'
     | '/schools/'
     | '/student/'
     | '/supplier/'
+    | '/logistics/deliveries/$id'
+    | '/logistics/wallet/deposit'
     | '/marketplace/products/$id'
     | '/parent/applications/$id'
     | '/parent/children/$id'
@@ -956,18 +1190,23 @@ export interface FileRouteTypes {
     | '/parent/scholarships/$id'
     | '/parent/scholarships/saved'
     | '/parent/schools/$id'
+    | '/parent/wallet/deposit'
     | '/school/applications/$id'
+    | '/school/wallet/deposit'
     | '/student/orders/$id'
     | '/student/scholarships/$id'
     | '/student/scholarships/saved'
+    | '/student/wallet/deposit'
     | '/supplier/orders/$id'
     | '/supplier/products/new'
+    | '/supplier/wallet/deposit'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   GetStartedRoute: typeof GetStartedRoute
   LoginRoute: typeof LoginRoute
+  LogisticsRoute: typeof LogisticsRouteWithChildren
   MarketplaceRoute: typeof MarketplaceRouteWithChildren
   ParentRoute: typeof ParentRouteWithChildren
   RegisterRoute: typeof RegisterRoute
@@ -1026,6 +1265,13 @@ declare module '@tanstack/react-router' {
       path: '/marketplace'
       fullPath: '/marketplace'
       preLoaderRoute: typeof MarketplaceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/logistics': {
+      id: '/logistics'
+      path: '/logistics'
+      fullPath: '/logistics'
+      preLoaderRoute: typeof LogisticsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -1091,6 +1337,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MarketplaceIndexRouteImport
       parentRoute: typeof MarketplaceRoute
     }
+    '/logistics/': {
+      id: '/logistics/'
+      path: '/'
+      fullPath: '/logistics/'
+      preLoaderRoute: typeof LogisticsIndexRouteImport
+      parentRoute: typeof LogisticsRoute
+    }
+    '/supplier/wallet': {
+      id: '/supplier/wallet'
+      path: '/wallet'
+      fullPath: '/supplier/wallet'
+      preLoaderRoute: typeof SupplierWalletRouteImport
+      parentRoute: typeof SupplierRoute
+    }
     '/supplier/settings': {
       id: '/supplier/settings'
       path: '/settings'
@@ -1119,12 +1379,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SupplierOrdersRouteImport
       parentRoute: typeof SupplierRoute
     }
+    '/supplier/logistics': {
+      id: '/supplier/logistics'
+      path: '/logistics'
+      fullPath: '/supplier/logistics'
+      preLoaderRoute: typeof SupplierLogisticsRouteImport
+      parentRoute: typeof SupplierRoute
+    }
     '/supplier/inventory': {
       id: '/supplier/inventory'
       path: '/inventory'
       fullPath: '/supplier/inventory'
       preLoaderRoute: typeof SupplierInventoryRouteImport
       parentRoute: typeof SupplierRoute
+    }
+    '/student/wallet': {
+      id: '/student/wallet'
+      path: '/wallet'
+      fullPath: '/student/wallet'
+      preLoaderRoute: typeof StudentWalletRouteImport
+      parentRoute: typeof StudentRoute
     }
     '/student/uniforms': {
       id: '/student/uniforms'
@@ -1209,6 +1483,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/schools/$id'
       preLoaderRoute: typeof SchoolsIdRouteImport
       parentRoute: typeof SchoolsRoute
+    }
+    '/school/wallet': {
+      id: '/school/wallet'
+      path: '/wallet'
+      fullPath: '/school/wallet'
+      preLoaderRoute: typeof SchoolWalletRouteImport
+      parentRoute: typeof SchoolRoute
     }
     '/school/uniforms': {
       id: '/school/uniforms'
@@ -1307,6 +1588,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/school/applications'
       preLoaderRoute: typeof SchoolApplicationsRouteImport
       parentRoute: typeof SchoolRoute
+    }
+    '/parent/wallet': {
+      id: '/parent/wallet'
+      path: '/wallet'
+      fullPath: '/parent/wallet'
+      preLoaderRoute: typeof ParentWalletRouteImport
+      parentRoute: typeof ParentRoute
     }
     '/parent/uniforms': {
       id: '/parent/uniforms'
@@ -1413,6 +1701,62 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MarketplaceCartRouteImport
       parentRoute: typeof MarketplaceRoute
     }
+    '/marketplace/bundles': {
+      id: '/marketplace/bundles'
+      path: '/bundles'
+      fullPath: '/marketplace/bundles'
+      preLoaderRoute: typeof MarketplaceBundlesRouteImport
+      parentRoute: typeof MarketplaceRoute
+    }
+    '/logistics/wallet': {
+      id: '/logistics/wallet'
+      path: '/wallet'
+      fullPath: '/logistics/wallet'
+      preLoaderRoute: typeof LogisticsWalletRouteImport
+      parentRoute: typeof LogisticsRoute
+    }
+    '/logistics/settings': {
+      id: '/logistics/settings'
+      path: '/settings'
+      fullPath: '/logistics/settings'
+      preLoaderRoute: typeof LogisticsSettingsRouteImport
+      parentRoute: typeof LogisticsRoute
+    }
+    '/logistics/routes': {
+      id: '/logistics/routes'
+      path: '/routes'
+      fullPath: '/logistics/routes'
+      preLoaderRoute: typeof LogisticsRoutesRouteImport
+      parentRoute: typeof LogisticsRoute
+    }
+    '/logistics/register': {
+      id: '/logistics/register'
+      path: '/register'
+      fullPath: '/logistics/register'
+      preLoaderRoute: typeof LogisticsRegisterRouteImport
+      parentRoute: typeof LogisticsRoute
+    }
+    '/logistics/earnings': {
+      id: '/logistics/earnings'
+      path: '/earnings'
+      fullPath: '/logistics/earnings'
+      preLoaderRoute: typeof LogisticsEarningsRouteImport
+      parentRoute: typeof LogisticsRoute
+    }
+    '/logistics/deliveries': {
+      id: '/logistics/deliveries'
+      path: '/deliveries'
+      fullPath: '/logistics/deliveries'
+      preLoaderRoute: typeof LogisticsDeliveriesRouteImport
+      parentRoute: typeof LogisticsRoute
+    }
+    '/supplier/wallet/deposit': {
+      id: '/supplier/wallet/deposit'
+      path: '/deposit'
+      fullPath: '/supplier/wallet/deposit'
+      preLoaderRoute: typeof SupplierWalletDepositRouteImport
+      parentRoute: typeof SupplierWalletRoute
+    }
     '/supplier/products/new': {
       id: '/supplier/products/new'
       path: '/new'
@@ -1426,6 +1770,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/supplier/orders/$id'
       preLoaderRoute: typeof SupplierOrdersIdRouteImport
       parentRoute: typeof SupplierOrdersRoute
+    }
+    '/student/wallet/deposit': {
+      id: '/student/wallet/deposit'
+      path: '/deposit'
+      fullPath: '/student/wallet/deposit'
+      preLoaderRoute: typeof StudentWalletDepositRouteImport
+      parentRoute: typeof StudentWalletRoute
     }
     '/student/scholarships/saved': {
       id: '/student/scholarships/saved'
@@ -1448,12 +1799,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StudentOrdersIdRouteImport
       parentRoute: typeof StudentOrdersRoute
     }
+    '/school/wallet/deposit': {
+      id: '/school/wallet/deposit'
+      path: '/deposit'
+      fullPath: '/school/wallet/deposit'
+      preLoaderRoute: typeof SchoolWalletDepositRouteImport
+      parentRoute: typeof SchoolWalletRoute
+    }
     '/school/applications/$id': {
       id: '/school/applications/$id'
       path: '/$id'
       fullPath: '/school/applications/$id'
       preLoaderRoute: typeof SchoolApplicationsIdRouteImport
       parentRoute: typeof SchoolApplicationsRoute
+    }
+    '/parent/wallet/deposit': {
+      id: '/parent/wallet/deposit'
+      path: '/deposit'
+      fullPath: '/parent/wallet/deposit'
+      preLoaderRoute: typeof ParentWalletDepositRouteImport
+      parentRoute: typeof ParentWalletRoute
     }
     '/parent/schools/$id': {
       id: '/parent/schools/$id'
@@ -1532,10 +1897,72 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MarketplaceProductsIdRouteImport
       parentRoute: typeof MarketplaceRoute
     }
+    '/logistics/wallet/deposit': {
+      id: '/logistics/wallet/deposit'
+      path: '/deposit'
+      fullPath: '/logistics/wallet/deposit'
+      preLoaderRoute: typeof LogisticsWalletDepositRouteImport
+      parentRoute: typeof LogisticsWalletRoute
+    }
+    '/logistics/deliveries/$id': {
+      id: '/logistics/deliveries/$id'
+      path: '/$id'
+      fullPath: '/logistics/deliveries/$id'
+      preLoaderRoute: typeof LogisticsDeliveriesIdRouteImport
+      parentRoute: typeof LogisticsDeliveriesRoute
+    }
   }
 }
 
+interface LogisticsDeliveriesRouteChildren {
+  LogisticsDeliveriesIdRoute: typeof LogisticsDeliveriesIdRoute
+}
+
+const LogisticsDeliveriesRouteChildren: LogisticsDeliveriesRouteChildren = {
+  LogisticsDeliveriesIdRoute: LogisticsDeliveriesIdRoute,
+}
+
+const LogisticsDeliveriesRouteWithChildren =
+  LogisticsDeliveriesRoute._addFileChildren(LogisticsDeliveriesRouteChildren)
+
+interface LogisticsWalletRouteChildren {
+  LogisticsWalletDepositRoute: typeof LogisticsWalletDepositRoute
+}
+
+const LogisticsWalletRouteChildren: LogisticsWalletRouteChildren = {
+  LogisticsWalletDepositRoute: LogisticsWalletDepositRoute,
+}
+
+const LogisticsWalletRouteWithChildren = LogisticsWalletRoute._addFileChildren(
+  LogisticsWalletRouteChildren,
+)
+
+interface LogisticsRouteChildren {
+  LogisticsDeliveriesRoute: typeof LogisticsDeliveriesRouteWithChildren
+  LogisticsEarningsRoute: typeof LogisticsEarningsRoute
+  LogisticsRegisterRoute: typeof LogisticsRegisterRoute
+  LogisticsRoutesRoute: typeof LogisticsRoutesRoute
+  LogisticsSettingsRoute: typeof LogisticsSettingsRoute
+  LogisticsWalletRoute: typeof LogisticsWalletRouteWithChildren
+  LogisticsIndexRoute: typeof LogisticsIndexRoute
+}
+
+const LogisticsRouteChildren: LogisticsRouteChildren = {
+  LogisticsDeliveriesRoute: LogisticsDeliveriesRouteWithChildren,
+  LogisticsEarningsRoute: LogisticsEarningsRoute,
+  LogisticsRegisterRoute: LogisticsRegisterRoute,
+  LogisticsRoutesRoute: LogisticsRoutesRoute,
+  LogisticsSettingsRoute: LogisticsSettingsRoute,
+  LogisticsWalletRoute: LogisticsWalletRouteWithChildren,
+  LogisticsIndexRoute: LogisticsIndexRoute,
+}
+
+const LogisticsRouteWithChildren = LogisticsRoute._addFileChildren(
+  LogisticsRouteChildren,
+)
+
 interface MarketplaceRouteChildren {
+  MarketplaceBundlesRoute: typeof MarketplaceBundlesRoute
   MarketplaceCartRoute: typeof MarketplaceCartRoute
   MarketplaceCheckoutRoute: typeof MarketplaceCheckoutRoute
   MarketplaceIndexRoute: typeof MarketplaceIndexRoute
@@ -1543,6 +1970,7 @@ interface MarketplaceRouteChildren {
 }
 
 const MarketplaceRouteChildren: MarketplaceRouteChildren = {
+  MarketplaceBundlesRoute: MarketplaceBundlesRoute,
   MarketplaceCartRoute: MarketplaceCartRoute,
   MarketplaceCheckoutRoute: MarketplaceCheckoutRoute,
   MarketplaceIndexRoute: MarketplaceIndexRoute,
@@ -1641,6 +2069,18 @@ const ParentSchoolsRouteWithChildren = ParentSchoolsRoute._addFileChildren(
   ParentSchoolsRouteChildren,
 )
 
+interface ParentWalletRouteChildren {
+  ParentWalletDepositRoute: typeof ParentWalletDepositRoute
+}
+
+const ParentWalletRouteChildren: ParentWalletRouteChildren = {
+  ParentWalletDepositRoute: ParentWalletDepositRoute,
+}
+
+const ParentWalletRouteWithChildren = ParentWalletRoute._addFileChildren(
+  ParentWalletRouteChildren,
+)
+
 interface ParentRouteChildren {
   ParentApplicationsRoute: typeof ParentApplicationsRouteWithChildren
   ParentApplyRoute: typeof ParentApplyRoute
@@ -1655,6 +2095,7 @@ interface ParentRouteChildren {
   ParentSchoolsRoute: typeof ParentSchoolsRouteWithChildren
   ParentSettingsRoute: typeof ParentSettingsRoute
   ParentUniformsRoute: typeof ParentUniformsRoute
+  ParentWalletRoute: typeof ParentWalletRouteWithChildren
   ParentIndexRoute: typeof ParentIndexRoute
 }
 
@@ -1672,6 +2113,7 @@ const ParentRouteChildren: ParentRouteChildren = {
   ParentSchoolsRoute: ParentSchoolsRouteWithChildren,
   ParentSettingsRoute: ParentSettingsRoute,
   ParentUniformsRoute: ParentUniformsRoute,
+  ParentWalletRoute: ParentWalletRouteWithChildren,
   ParentIndexRoute: ParentIndexRoute,
 }
 
@@ -1689,6 +2131,18 @@ const SchoolApplicationsRouteChildren: SchoolApplicationsRouteChildren = {
 const SchoolApplicationsRouteWithChildren =
   SchoolApplicationsRoute._addFileChildren(SchoolApplicationsRouteChildren)
 
+interface SchoolWalletRouteChildren {
+  SchoolWalletDepositRoute: typeof SchoolWalletDepositRoute
+}
+
+const SchoolWalletRouteChildren: SchoolWalletRouteChildren = {
+  SchoolWalletDepositRoute: SchoolWalletDepositRoute,
+}
+
+const SchoolWalletRouteWithChildren = SchoolWalletRoute._addFileChildren(
+  SchoolWalletRouteChildren,
+)
+
 interface SchoolRouteChildren {
   SchoolApplicationsRoute: typeof SchoolApplicationsRouteWithChildren
   SchoolClassesRoute: typeof SchoolClassesRoute
@@ -1704,6 +2158,7 @@ interface SchoolRouteChildren {
   SchoolSettingsRoute: typeof SchoolSettingsRoute
   SchoolSuppliersRoute: typeof SchoolSuppliersRoute
   SchoolUniformsRoute: typeof SchoolUniformsRoute
+  SchoolWalletRoute: typeof SchoolWalletRouteWithChildren
   SchoolIndexRoute: typeof SchoolIndexRoute
 }
 
@@ -1722,6 +2177,7 @@ const SchoolRouteChildren: SchoolRouteChildren = {
   SchoolSettingsRoute: SchoolSettingsRoute,
   SchoolSuppliersRoute: SchoolSuppliersRoute,
   SchoolUniformsRoute: SchoolUniformsRoute,
+  SchoolWalletRoute: SchoolWalletRouteWithChildren,
   SchoolIndexRoute: SchoolIndexRoute,
 }
 
@@ -1766,6 +2222,18 @@ const StudentScholarshipsRouteChildren: StudentScholarshipsRouteChildren = {
 const StudentScholarshipsRouteWithChildren =
   StudentScholarshipsRoute._addFileChildren(StudentScholarshipsRouteChildren)
 
+interface StudentWalletRouteChildren {
+  StudentWalletDepositRoute: typeof StudentWalletDepositRoute
+}
+
+const StudentWalletRouteChildren: StudentWalletRouteChildren = {
+  StudentWalletDepositRoute: StudentWalletDepositRoute,
+}
+
+const StudentWalletRouteWithChildren = StudentWalletRoute._addFileChildren(
+  StudentWalletRouteChildren,
+)
+
 interface StudentRouteChildren {
   StudentApplicationsRoute: typeof StudentApplicationsRoute
   StudentDocumentsRoute: typeof StudentDocumentsRoute
@@ -1778,6 +2246,7 @@ interface StudentRouteChildren {
   StudentScholarshipsRoute: typeof StudentScholarshipsRouteWithChildren
   StudentSchoolsRoute: typeof StudentSchoolsRoute
   StudentUniformsRoute: typeof StudentUniformsRoute
+  StudentWalletRoute: typeof StudentWalletRouteWithChildren
   StudentIndexRoute: typeof StudentIndexRoute
 }
 
@@ -1793,6 +2262,7 @@ const StudentRouteChildren: StudentRouteChildren = {
   StudentScholarshipsRoute: StudentScholarshipsRouteWithChildren,
   StudentSchoolsRoute: StudentSchoolsRoute,
   StudentUniformsRoute: StudentUniformsRoute,
+  StudentWalletRoute: StudentWalletRouteWithChildren,
   StudentIndexRoute: StudentIndexRoute,
 }
 
@@ -1822,21 +2292,37 @@ const SupplierProductsRouteChildren: SupplierProductsRouteChildren = {
 const SupplierProductsRouteWithChildren =
   SupplierProductsRoute._addFileChildren(SupplierProductsRouteChildren)
 
+interface SupplierWalletRouteChildren {
+  SupplierWalletDepositRoute: typeof SupplierWalletDepositRoute
+}
+
+const SupplierWalletRouteChildren: SupplierWalletRouteChildren = {
+  SupplierWalletDepositRoute: SupplierWalletDepositRoute,
+}
+
+const SupplierWalletRouteWithChildren = SupplierWalletRoute._addFileChildren(
+  SupplierWalletRouteChildren,
+)
+
 interface SupplierRouteChildren {
   SupplierInventoryRoute: typeof SupplierInventoryRoute
+  SupplierLogisticsRoute: typeof SupplierLogisticsRoute
   SupplierOrdersRoute: typeof SupplierOrdersRouteWithChildren
   SupplierProductsRoute: typeof SupplierProductsRouteWithChildren
   SupplierSalesRoute: typeof SupplierSalesRoute
   SupplierSettingsRoute: typeof SupplierSettingsRoute
+  SupplierWalletRoute: typeof SupplierWalletRouteWithChildren
   SupplierIndexRoute: typeof SupplierIndexRoute
 }
 
 const SupplierRouteChildren: SupplierRouteChildren = {
   SupplierInventoryRoute: SupplierInventoryRoute,
+  SupplierLogisticsRoute: SupplierLogisticsRoute,
   SupplierOrdersRoute: SupplierOrdersRouteWithChildren,
   SupplierProductsRoute: SupplierProductsRouteWithChildren,
   SupplierSalesRoute: SupplierSalesRoute,
   SupplierSettingsRoute: SupplierSettingsRoute,
+  SupplierWalletRoute: SupplierWalletRouteWithChildren,
   SupplierIndexRoute: SupplierIndexRoute,
 }
 
@@ -1848,6 +2334,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   GetStartedRoute: GetStartedRoute,
   LoginRoute: LoginRoute,
+  LogisticsRoute: LogisticsRouteWithChildren,
   MarketplaceRoute: MarketplaceRouteWithChildren,
   ParentRoute: ParentRouteWithChildren,
   RegisterRoute: RegisterRoute,
@@ -1859,13 +2346,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

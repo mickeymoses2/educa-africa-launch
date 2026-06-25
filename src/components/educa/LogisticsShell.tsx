@@ -1,36 +1,19 @@
 import { useState, type ReactNode } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
-import {
-  LayoutDashboard,
-  Package,
-  ClipboardList,
-  Boxes,
-  TrendingUp,
-  Settings,
-  Menu,
-  X,
-  Bell,
-  Search,
-  ChevronDown,
-  Plus,
-  Wallet,
-  Truck,
-} from "lucide-react";
+import { LayoutDashboard, Truck, Map, DollarSign, Settings, Menu, X, Bell, Search, ChevronDown, Wallet } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Logo } from "./Logo";
 
 const nav = [
-  { label: "Dashboard", to: "/supplier" as const, icon: LayoutDashboard, exact: true },
-  { label: "Products", to: "/supplier/products" as const, icon: Package },
-  { label: "Orders", to: "/supplier/orders" as const, icon: ClipboardList, badge: 3 },
-  { label: "Inventory", to: "/supplier/inventory" as const, icon: Boxes },
-  { label: "Sales", to: "/supplier/sales" as const, icon: TrendingUp },
-  { label: "Wallet", to: "/supplier/wallet" as const, icon: Wallet },
-  { label: "Logistics", to: "/supplier/logistics" as const, icon: Truck },
-  { label: "Settings", to: "/supplier/settings" as const, icon: Settings },
+  { label: "Dashboard", to: "/logistics" as const, icon: LayoutDashboard, exact: true },
+  { label: "Deliveries", to: "/logistics/deliveries" as const, icon: Truck, badge: 2 },
+  { label: "Routes", to: "/logistics/routes" as const, icon: Map },
+  { label: "Earnings", to: "/logistics/earnings" as const, icon: DollarSign },
+  { label: "Wallet", to: "/logistics/wallet" as const, icon: Wallet },
+  { label: "Settings", to: "/logistics/settings" as const, icon: Settings },
 ];
 
-export function SupplierShell({ title, subtitle, actions, children }: { title: string; subtitle?: string; actions?: ReactNode; children: ReactNode }) {
+export function LogisticsShell({ title, subtitle, actions, children }: { title: string; subtitle?: string; actions?: ReactNode; children: ReactNode }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const [open, setOpen] = useState(false);
 
@@ -54,7 +37,7 @@ export function SupplierShell({ title, subtitle, actions, children }: { title: s
             <button onClick={() => setOpen(true)} className="lg:hidden h-9 w-9 grid place-items-center rounded-lg bg-muted"><Menu className="h-5 w-5" /></button>
             <div className="hidden md:flex flex-1 max-w-md relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <input placeholder="Search products, orders…" className="w-full h-10 rounded-xl bg-muted/60 border border-transparent focus:border-primary focus:bg-white outline-none pl-9 pr-3 text-sm transition" />
+              <input placeholder="Search deliveries, orders…" className="w-full h-10 rounded-xl bg-muted/60 border border-transparent focus:border-primary focus:bg-white outline-none pl-9 pr-3 text-sm transition" />
             </div>
             <div className="flex-1 md:hidden" />
             <button className="h-10 w-10 grid place-items-center rounded-xl hover:bg-muted relative">
@@ -62,10 +45,10 @@ export function SupplierShell({ title, subtitle, actions, children }: { title: s
               <span className="absolute top-2 right-2 h-2 w-2 rounded-full bg-gold ring-2 ring-white" />
             </button>
             <div className="hidden sm:flex items-center gap-2 pl-2 ml-1 border-l border-border">
-              <div className="h-9 w-9 rounded-full bg-gradient-to-br from-primary to-teal grid place-items-center text-white text-sm font-semibold">AU</div>
+              <div className="h-9 w-9 rounded-full bg-gradient-to-br from-primary to-teal grid place-items-center text-white text-sm font-semibold">SE</div>
               <div className="leading-tight">
-                <p className="text-sm font-semibold text-navy">Asili Uniforms Ltd</p>
-                <p className="text-[11px] text-muted-foreground">Supplier · Nairobi</p>
+                <p className="text-sm font-semibold text-navy">SwiftEdu Deliveries</p>
+                <p className="text-[11px] text-muted-foreground">Logistics Partner · Nairobi</p>
               </div>
               <ChevronDown className="h-4 w-4 text-muted-foreground" />
             </div>
@@ -91,12 +74,12 @@ function Inner({ pathname, onNavigate }: { pathname: string; onNavigate?: () => 
     <>
       <div className="h-16 flex items-center px-6 border-b border-sidebar-border"><Logo tone="light" /></div>
       <div className="px-4 py-5">
-        <Link to="/supplier/products/new" onClick={onNavigate} className="flex items-center justify-center gap-2 w-full rounded-xl bg-gold text-gold-foreground font-semibold text-sm py-2.5 hover:brightness-105 transition">
-          <Plus className="h-4 w-4" /> Add Product
+        <Link to="/logistics/deliveries" onClick={onNavigate} className="flex items-center justify-center gap-2 w-full rounded-xl bg-gold text-gold-foreground font-semibold text-sm py-2.5 hover:brightness-105 transition">
+          <Truck className="h-4 w-4" /> Available Deliveries
         </Link>
       </div>
       <nav className="flex-1 overflow-y-auto px-3 pb-6 space-y-0.5">
-        <p className="px-3 pt-2 pb-2 text-[11px] uppercase tracking-wider text-white/40 font-semibold">Supplier Workspace</p>
+        <p className="px-3 pt-2 pb-2 text-[11px] uppercase tracking-wider text-white/40 font-semibold">Logistics Workspace</p>
         {nav.map((item) => {
           const active = item.exact ? pathname === item.to : pathname.startsWith(item.to);
           const Icon = item.icon;
@@ -110,8 +93,8 @@ function Inner({ pathname, onNavigate }: { pathname: string; onNavigate?: () => 
         })}
       </nav>
       <div className="m-4 p-4 rounded-2xl bg-white/5 border border-white/10">
-        <p className="text-xs font-semibold text-gold">Supplier Tip</p>
-        <p className="text-xs text-white/70 mt-1 leading-relaxed">Keep inventory up to date — products with stock rank higher in school recommendations.</p>
+        <p className="text-xs font-semibold text-gold">Partner Tip</p>
+        <p className="text-xs text-white/70 mt-1 leading-relaxed">Accept deliveries quickly to rank higher in supplier recommendations.</p>
       </div>
     </>
   );

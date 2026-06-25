@@ -10,8 +10,12 @@ import {
   Bell,
   ArrowRight,
   Sparkles,
+  Plus,
+  Receipt,
+  ShoppingBag,
 } from "lucide-react";
 import { PortalShell } from "@/components/educa/PortalShell";
+import { WalletCard } from "@/components/educa/WalletCard";
 import { SummaryCard } from "@/components/educa/SummaryCard";
 import { QuickActionCard } from "@/components/educa/QuickActionCard";
 import { ChildCard } from "@/components/educa/ChildCard";
@@ -23,6 +27,7 @@ import {
   myApplications,
   notifications,
   featuredSchools,
+  walletBalances,
 } from "@/data/educa";
 
 export const Route = createFileRoute("/parent/")({
@@ -46,6 +51,18 @@ function ParentDashboard() {
         </Link>
       }
     >
+      {/* EDUCA Wallet */}
+      <div className="mb-8">
+        <WalletCard
+          data={walletBalances.parent}
+          actions={[
+            { label: "Deposit Money", to: "/parent/wallet/deposit", icon: Plus },
+            { label: "Pay Fees", to: "/parent/payments", icon: Receipt, variant: "ghost" },
+            { label: "Shop Now", to: "/marketplace", icon: ShoppingBag, variant: "ghost" },
+          ]}
+        />
+      </div>
+
       {/* Search hero */}
       <div className="relative overflow-hidden rounded-3xl bg-navy text-white p-6 sm:p-8 mb-8">
         <div aria-hidden className="absolute inset-0 pointer-events-none">
