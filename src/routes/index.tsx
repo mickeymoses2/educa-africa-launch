@@ -423,6 +423,12 @@ function CtaBanner() {
             <button className="inline-flex items-center gap-2 rounded-full bg-white text-navy px-6 py-3.5 text-sm font-semibold hover:bg-white/90 transition">
               Find a School
             </button>
+            <Link to="/logistics/register" className="inline-flex items-center gap-2 rounded-full ring-1 ring-white/30 hover:bg-white/10 text-white px-6 py-3.5 text-sm font-semibold transition">
+              Become a Logistics Partner
+            </Link>
+            <Link to="/supplier" className="inline-flex items-center gap-2 rounded-full ring-1 ring-white/30 hover:bg-white/10 text-white px-6 py-3.5 text-sm font-semibold transition">
+              Become a Supplier
+            </Link>
           </div>
         </div>
       </div>
