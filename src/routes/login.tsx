@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { ArrowLeft, ArrowRight, Building2, GraduationCap, Users, ShieldCheck, Sparkles } from "lucide-react";
+import { ArrowLeft, ArrowRight, Building2, GraduationCap, Users, ShieldCheck, Sparkles, Store, Truck } from "lucide-react";
 import { Logo } from "@/components/educa/Logo";
 
 export const Route = createFileRoute("/login")({
@@ -13,12 +13,14 @@ export const Route = createFileRoute("/login")({
   component: LoginPage,
 });
 
-type Role = "parent" | "student" | "school";
+type Role = "parent" | "student" | "school" | "supplier" | "logistics";
 
 const roleCards: { id: Role; icon: typeof Users; title: string; desc: string; redirect: string }[] = [
   { id: "parent", icon: Users, title: "Parent / Guardian", desc: "Manage children, applications and fees.", redirect: "/parent" },
   { id: "student", icon: GraduationCap, title: "Student", desc: "Your EDUCA ID, profile and applications.", redirect: "/student" },
   { id: "school", icon: Building2, title: "School", desc: "Admissions workspace and school profile.", redirect: "/school" },
+  { id: "supplier", icon: Store, title: "Supplier", desc: "Manage products, orders and marketplace sales.", redirect: "/supplier" },
+  { id: "logistics", icon: Truck, title: "Logistics Partner", desc: "Accept and track school deliveries.", redirect: "/logistics" },
 ];
 
 function LoginPage() {
