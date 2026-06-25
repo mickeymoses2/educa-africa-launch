@@ -78,6 +78,7 @@ import { Route as ParentApplyRouteImport } from './routes/parent.apply'
 import { Route as ParentApplicationsRouteImport } from './routes/parent.applications'
 import { Route as MarketplaceCheckoutRouteImport } from './routes/marketplace.checkout'
 import { Route as MarketplaceCartRouteImport } from './routes/marketplace.cart'
+import { Route as MarketplaceBundlesRouteImport } from './routes/marketplace.bundles'
 import { Route as LogisticsWalletRouteImport } from './routes/logistics.wallet'
 import { Route as LogisticsSettingsRouteImport } from './routes/logistics.settings'
 import { Route as LogisticsRoutesRouteImport } from './routes/logistics.routes'
@@ -453,6 +454,11 @@ const MarketplaceCartRoute = MarketplaceCartRouteImport.update({
   path: '/cart',
   getParentRoute: () => MarketplaceRoute,
 } as any)
+const MarketplaceBundlesRoute = MarketplaceBundlesRouteImport.update({
+  id: '/bundles',
+  path: '/bundles',
+  getParentRoute: () => MarketplaceRoute,
+} as any)
 const LogisticsWalletRoute = LogisticsWalletRouteImport.update({
   id: '/wallet',
   path: '/wallet',
@@ -618,6 +624,7 @@ export interface FileRoutesByFullPath {
   '/logistics/routes': typeof LogisticsRoutesRoute
   '/logistics/settings': typeof LogisticsSettingsRoute
   '/logistics/wallet': typeof LogisticsWalletRouteWithChildren
+  '/marketplace/bundles': typeof MarketplaceBundlesRoute
   '/marketplace/cart': typeof MarketplaceCartRoute
   '/marketplace/checkout': typeof MarketplaceCheckoutRoute
   '/parent/applications': typeof ParentApplicationsRouteWithChildren
@@ -711,6 +718,7 @@ export interface FileRoutesByTo {
   '/logistics/routes': typeof LogisticsRoutesRoute
   '/logistics/settings': typeof LogisticsSettingsRoute
   '/logistics/wallet': typeof LogisticsWalletRouteWithChildren
+  '/marketplace/bundles': typeof MarketplaceBundlesRoute
   '/marketplace/cart': typeof MarketplaceCartRoute
   '/marketplace/checkout': typeof MarketplaceCheckoutRoute
   '/parent/applications': typeof ParentApplicationsRouteWithChildren
@@ -812,6 +820,7 @@ export interface FileRoutesById {
   '/logistics/routes': typeof LogisticsRoutesRoute
   '/logistics/settings': typeof LogisticsSettingsRoute
   '/logistics/wallet': typeof LogisticsWalletRouteWithChildren
+  '/marketplace/bundles': typeof MarketplaceBundlesRoute
   '/marketplace/cart': typeof MarketplaceCartRoute
   '/marketplace/checkout': typeof MarketplaceCheckoutRoute
   '/parent/applications': typeof ParentApplicationsRouteWithChildren
@@ -914,6 +923,7 @@ export interface FileRouteTypes {
     | '/logistics/routes'
     | '/logistics/settings'
     | '/logistics/wallet'
+    | '/marketplace/bundles'
     | '/marketplace/cart'
     | '/marketplace/checkout'
     | '/parent/applications'
@@ -1007,6 +1017,7 @@ export interface FileRouteTypes {
     | '/logistics/routes'
     | '/logistics/settings'
     | '/logistics/wallet'
+    | '/marketplace/bundles'
     | '/marketplace/cart'
     | '/marketplace/checkout'
     | '/parent/applications'
@@ -1107,6 +1118,7 @@ export interface FileRouteTypes {
     | '/logistics/routes'
     | '/logistics/settings'
     | '/logistics/wallet'
+    | '/marketplace/bundles'
     | '/marketplace/cart'
     | '/marketplace/checkout'
     | '/parent/applications'
@@ -1689,6 +1701,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MarketplaceCartRouteImport
       parentRoute: typeof MarketplaceRoute
     }
+    '/marketplace/bundles': {
+      id: '/marketplace/bundles'
+      path: '/bundles'
+      fullPath: '/marketplace/bundles'
+      preLoaderRoute: typeof MarketplaceBundlesRouteImport
+      parentRoute: typeof MarketplaceRoute
+    }
     '/logistics/wallet': {
       id: '/logistics/wallet'
       path: '/wallet'
@@ -1943,6 +1962,7 @@ const LogisticsRouteWithChildren = LogisticsRoute._addFileChildren(
 )
 
 interface MarketplaceRouteChildren {
+  MarketplaceBundlesRoute: typeof MarketplaceBundlesRoute
   MarketplaceCartRoute: typeof MarketplaceCartRoute
   MarketplaceCheckoutRoute: typeof MarketplaceCheckoutRoute
   MarketplaceIndexRoute: typeof MarketplaceIndexRoute
@@ -1950,6 +1970,7 @@ interface MarketplaceRouteChildren {
 }
 
 const MarketplaceRouteChildren: MarketplaceRouteChildren = {
+  MarketplaceBundlesRoute: MarketplaceBundlesRoute,
   MarketplaceCartRoute: MarketplaceCartRoute,
   MarketplaceCheckoutRoute: MarketplaceCheckoutRoute,
   MarketplaceIndexRoute: MarketplaceIndexRoute,
