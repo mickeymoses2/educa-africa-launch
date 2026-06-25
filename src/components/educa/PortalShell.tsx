@@ -39,6 +39,7 @@ const parentNav: NavItem[] = [
   { label: "Find Schools", to: "/schools", icon: Search },
   { label: "Applications", to: "/parent/applications", icon: Inbox, badge: 3 },
   { label: "Documents", to: "/parent/documents", icon: FileText },
+  { label: "EDUCA Wallet", to: "/parent/wallet", icon: Wallet },
   { label: "Fees", to: "/parent/fees", icon: FileText },
   { label: "Payments", to: "/parent/payments", icon: Wallet, badge: 2 },
   { label: "Receipts", to: "/parent/receipts", icon: Receipt },
@@ -56,6 +57,7 @@ const studentNav: NavItem[] = [
   { label: "Find Schools", to: "/schools", icon: Search },
   { label: "Applications", to: "/student/applications", icon: Inbox },
   { label: "Documents", to: "/student/documents", icon: FileText },
+  { label: "My Balance", to: "/student/wallet", icon: Wallet },
   { label: "Fees", to: "/student/fees", icon: FileText },
   { label: "Scholarships", to: "/student/scholarships", icon: Award },
   { label: "Marketplace", to: "/marketplace", icon: ShoppingBag },
@@ -66,7 +68,7 @@ const studentNav: NavItem[] = [
 const parentMobileTabs: NavItem[] = [
   { label: "Home", to: "/parent", icon: Home, exact: true },
   { label: "Schools", to: "/schools", icon: Search },
-  { label: "Pay", to: "/parent/payments", icon: Wallet },
+  { label: "Wallet", to: "/parent/wallet", icon: Wallet },
   { label: "Shop", to: "/marketplace", icon: ShoppingBag },
   { label: "Profile", to: "/parent/settings", icon: Settings },
 ];
