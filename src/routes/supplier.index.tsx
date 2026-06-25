@@ -1,9 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Package, ClipboardList, CheckCircle2, TrendingUp, AlertTriangle, ArrowRight } from "lucide-react";
+import { Package, ClipboardList, CheckCircle2, TrendingUp, AlertTriangle, ArrowRight, Send } from "lucide-react";
 import { SupplierShell } from "@/components/educa/SupplierShell";
+import { WalletCard } from "@/components/educa/WalletCard";
 import { SummaryCard } from "@/components/educa/SummaryCard";
 import { OrderStatusBadge } from "@/components/educa/OrderStatusBadge";
-import { orders, products } from "@/data/educa";
+import { orders, products, walletBalances } from "@/data/educa";
 
 export const Route = createFileRoute("/supplier/")({
   head: () => ({ meta: [{ title: "Supplier Dashboard · EDUCA" }] }),
@@ -12,6 +13,15 @@ export const Route = createFileRoute("/supplier/")({
     const lowStock = products.filter((p) => p.stock < 80).slice(0, 4);
     return (
       <SupplierShell title="Welcome back, Asili Uniforms" subtitle="A quick view of your products, orders and sales on EDUCA Marketplace.">
+        <div className="mb-8">
+          <WalletCard
+            data={walletBalances.supplier}
+            actions={[
+              { label: "Request Payout", to: "/supplier/wallet/deposit", icon: Send },
+              { label: "View Sales", to: "/supplier/sales", icon: TrendingUp, variant: "ghost" },
+            ]}
+          />
+        </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           <SummaryCard label="Total Products" value={products.filter((p) => p.supplierId === "sup-001").length} icon={Package} tone="primary" />
           <SummaryCard label="Pending Orders" value={mine.filter((o) => ["Pending Payment","Payment Received","Processing"].includes(o.status)).length} icon={ClipboardList} tone="gold" />
