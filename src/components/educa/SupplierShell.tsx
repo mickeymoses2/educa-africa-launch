@@ -13,6 +13,8 @@ import {
   Search,
   ChevronDown,
   Plus,
+  Wallet,
+  Truck,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Logo } from "./Logo";
@@ -23,6 +25,8 @@ const nav = [
   { label: "Orders", to: "/supplier/orders" as const, icon: ClipboardList, badge: 3 },
   { label: "Inventory", to: "/supplier/inventory" as const, icon: Boxes },
   { label: "Sales", to: "/supplier/sales" as const, icon: TrendingUp },
+  { label: "Wallet", to: "/supplier/wallet" as const, icon: Wallet },
+  { label: "Logistics", to: "/supplier/logistics" as const, icon: Truck },
   { label: "Settings", to: "/supplier/settings" as const, icon: Settings },
 ];
 
