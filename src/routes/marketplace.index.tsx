@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { Search, Sparkles, Star, TrendingUp, ShoppingBag, Truck, ArrowRight, Package } from "lucide-react";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { Search, Sparkles, Star, TrendingUp, ShoppingBag, Truck, ArrowRight, Package, SlidersHorizontal } from "lucide-react";
 import { ProductCard } from "@/components/educa/ProductCard";
 import { BundleCard } from "@/components/educa/BundleCard";
 import { DealCard } from "@/components/educa/DealCard";
@@ -19,6 +19,7 @@ function MarketplaceHome() {
   const featured = products.filter((p) => p.featured);
   const popular = products.slice().sort((a, b) => b.reviews - a.reviews).slice(0, 4);
   const [selectedSchool, setSelectedSchool] = useState<string | null>("ss-1");
+  const navigate = useNavigate();
 
   return (
     <div className="space-y-14">
@@ -37,12 +38,28 @@ function MarketplaceHome() {
           <p className="mt-4 text-base sm:text-lg text-white/80 max-w-xl">
             Find uniforms, books, stationery, school bags, shoes and approved school supplies from trusted EDUCA suppliers.
           </p>
-          <div className="mt-6 relative max-w-2xl">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              const fd = new FormData(e.currentTarget);
+              navigate({ to: "/marketplace/search", search: { q: String(fd.get("q") ?? ""), category: "all", supplier: "all", school: "all", availability: "all", delivery: "all", min: 0, max: 0, sort: "popular" } });
+            }}
+            className="mt-6 relative max-w-2xl"
+          >
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-navy/60" />
             <input
+              name="q"
               placeholder="Search uniforms, books, stationery, bags, shoes or school supplies…"
-              className="w-full h-14 rounded-2xl bg-white text-navy pl-12 pr-4 text-sm font-medium outline-none focus:ring-2 focus:ring-gold shadow-card"
+              className="w-full h-14 rounded-2xl bg-white text-navy pl-12 pr-32 text-sm font-medium outline-none focus:ring-2 focus:ring-gold shadow-card"
             />
+            <button className="absolute right-2 top-1/2 -translate-y-1/2 rounded-xl bg-gold text-gold-foreground font-semibold px-4 py-2.5 text-sm inline-flex items-center gap-1.5">
+              <Search className="h-4 w-4" /> Search
+            </button>
+          </form>
+          <div className="mt-3">
+            <Link to="/marketplace/search" search={{ q: "", category: "all", supplier: "all", school: "all", availability: "all", delivery: "all", min: 0, max: 0, sort: "popular" }} className="inline-flex items-center gap-1.5 text-xs font-semibold text-white/85 hover:text-white">
+              <SlidersHorizontal className="h-3.5 w-3.5" /> Advanced filters — shop by school, supplier, delivery & more
+            </Link>
           </div>
           <div className="mt-5 flex flex-wrap gap-3">
             <Link to="/marketplace" className="inline-flex items-center gap-2 rounded-xl bg-gold text-gold-foreground font-semibold px-5 py-3 text-sm shadow-glow">
@@ -58,7 +75,14 @@ function MarketplaceHome() {
           <div className="mt-5 -mx-2 px-2 overflow-x-auto">
             <div className="flex gap-2 w-max">
               {quickChips.map((c) => (
-                <Link key={c} to="/marketplace" className="whitespace-nowrap rounded-full bg-white/10 ring-1 ring-white/15 backdrop-blur text-white px-4 py-2 text-xs font-semibold hover:bg-white/15">{c}</Link>
+                <Link
+                  key={c}
+                  to="/marketplace/search"
+                  search={{ q: "", category: c === "School Bags" ? "School Bags" : c === "Learning Materials" ? "Learning Materials" : c, supplier: "all", school: "all", availability: "all", delivery: "all", min: 0, max: 0, sort: "popular" }}
+                  className="whitespace-nowrap rounded-full bg-white/10 ring-1 ring-white/15 backdrop-blur text-white px-4 py-2 text-xs font-semibold hover:bg-white/15"
+                >
+                  {c}
+                </Link>
               ))}
             </div>
           </div>
