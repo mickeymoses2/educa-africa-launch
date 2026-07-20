@@ -73,7 +73,7 @@ function SearchPage() {
   const results = useMemo(() => filterProducts(products, s), [s]);
 
   const update = (patch: Partial<typeof s>) =>
-    navigate({ search: (prev) => ({ ...prev, ...patch }) });
+    navigate({ search: (prev: typeof s) => ({ ...prev, ...patch }) });
 
   const activeCount = [
     s.q,

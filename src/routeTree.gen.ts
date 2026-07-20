@@ -76,6 +76,7 @@ import { Route as ParentDocumentsRouteImport } from './routes/parent.documents'
 import { Route as ParentChildrenRouteImport } from './routes/parent.children'
 import { Route as ParentApplyRouteImport } from './routes/parent.apply'
 import { Route as ParentApplicationsRouteImport } from './routes/parent.applications'
+import { Route as MarketplaceSearchRouteImport } from './routes/marketplace.search'
 import { Route as MarketplaceCheckoutRouteImport } from './routes/marketplace.checkout'
 import { Route as MarketplaceCartRouteImport } from './routes/marketplace.cart'
 import { Route as MarketplaceBundlesRouteImport } from './routes/marketplace.bundles'
@@ -444,6 +445,11 @@ const ParentApplicationsRoute = ParentApplicationsRouteImport.update({
   path: '/applications',
   getParentRoute: () => ParentRoute,
 } as any)
+const MarketplaceSearchRoute = MarketplaceSearchRouteImport.update({
+  id: '/search',
+  path: '/search',
+  getParentRoute: () => MarketplaceRoute,
+} as any)
 const MarketplaceCheckoutRoute = MarketplaceCheckoutRouteImport.update({
   id: '/checkout',
   path: '/checkout',
@@ -627,6 +633,7 @@ export interface FileRoutesByFullPath {
   '/marketplace/bundles': typeof MarketplaceBundlesRoute
   '/marketplace/cart': typeof MarketplaceCartRoute
   '/marketplace/checkout': typeof MarketplaceCheckoutRoute
+  '/marketplace/search': typeof MarketplaceSearchRoute
   '/parent/applications': typeof ParentApplicationsRouteWithChildren
   '/parent/apply': typeof ParentApplyRoute
   '/parent/children': typeof ParentChildrenRouteWithChildren
@@ -721,6 +728,7 @@ export interface FileRoutesByTo {
   '/marketplace/bundles': typeof MarketplaceBundlesRoute
   '/marketplace/cart': typeof MarketplaceCartRoute
   '/marketplace/checkout': typeof MarketplaceCheckoutRoute
+  '/marketplace/search': typeof MarketplaceSearchRoute
   '/parent/applications': typeof ParentApplicationsRouteWithChildren
   '/parent/apply': typeof ParentApplyRoute
   '/parent/children': typeof ParentChildrenRouteWithChildren
@@ -823,6 +831,7 @@ export interface FileRoutesById {
   '/marketplace/bundles': typeof MarketplaceBundlesRoute
   '/marketplace/cart': typeof MarketplaceCartRoute
   '/marketplace/checkout': typeof MarketplaceCheckoutRoute
+  '/marketplace/search': typeof MarketplaceSearchRoute
   '/parent/applications': typeof ParentApplicationsRouteWithChildren
   '/parent/apply': typeof ParentApplyRoute
   '/parent/children': typeof ParentChildrenRouteWithChildren
@@ -926,6 +935,7 @@ export interface FileRouteTypes {
     | '/marketplace/bundles'
     | '/marketplace/cart'
     | '/marketplace/checkout'
+    | '/marketplace/search'
     | '/parent/applications'
     | '/parent/apply'
     | '/parent/children'
@@ -1020,6 +1030,7 @@ export interface FileRouteTypes {
     | '/marketplace/bundles'
     | '/marketplace/cart'
     | '/marketplace/checkout'
+    | '/marketplace/search'
     | '/parent/applications'
     | '/parent/apply'
     | '/parent/children'
@@ -1121,6 +1132,7 @@ export interface FileRouteTypes {
     | '/marketplace/bundles'
     | '/marketplace/cart'
     | '/marketplace/checkout'
+    | '/marketplace/search'
     | '/parent/applications'
     | '/parent/apply'
     | '/parent/children'
@@ -1687,6 +1699,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ParentApplicationsRouteImport
       parentRoute: typeof ParentRoute
     }
+    '/marketplace/search': {
+      id: '/marketplace/search'
+      path: '/search'
+      fullPath: '/marketplace/search'
+      preLoaderRoute: typeof MarketplaceSearchRouteImport
+      parentRoute: typeof MarketplaceRoute
+    }
     '/marketplace/checkout': {
       id: '/marketplace/checkout'
       path: '/checkout'
@@ -1965,6 +1984,7 @@ interface MarketplaceRouteChildren {
   MarketplaceBundlesRoute: typeof MarketplaceBundlesRoute
   MarketplaceCartRoute: typeof MarketplaceCartRoute
   MarketplaceCheckoutRoute: typeof MarketplaceCheckoutRoute
+  MarketplaceSearchRoute: typeof MarketplaceSearchRoute
   MarketplaceIndexRoute: typeof MarketplaceIndexRoute
   MarketplaceProductsIdRoute: typeof MarketplaceProductsIdRoute
 }
@@ -1973,6 +1993,7 @@ const MarketplaceRouteChildren: MarketplaceRouteChildren = {
   MarketplaceBundlesRoute: MarketplaceBundlesRoute,
   MarketplaceCartRoute: MarketplaceCartRoute,
   MarketplaceCheckoutRoute: MarketplaceCheckoutRoute,
+  MarketplaceSearchRoute: MarketplaceSearchRoute,
   MarketplaceIndexRoute: MarketplaceIndexRoute,
   MarketplaceProductsIdRoute: MarketplaceProductsIdRoute,
 }
