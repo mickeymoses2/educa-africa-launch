@@ -143,7 +143,7 @@ function MarketplaceHome() {
         <h2 className="font-display text-xl font-bold text-navy mb-4">Featured categories</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {productCategories.map((c) => (
-            <Link key={c.key} to="/marketplace" className="rounded-2xl bg-card border border-border shadow-soft p-4 hover:shadow-card transition flex flex-col gap-1">
+            <Link key={c.key} to="/marketplace/search" search={{ q: "", category: c.key, supplier: "all", school: "all", availability: "all", delivery: "all", min: 0, max: 0, sort: "popular" }} className="rounded-2xl bg-card border border-border shadow-soft p-4 hover:shadow-card transition flex flex-col gap-1">
               <span className="text-3xl">{c.emoji}</span>
               <p className="font-display font-semibold text-navy mt-1">{c.key}</p>
               <p className="text-xs text-muted-foreground">{c.description}</p>
